@@ -1,73 +1,58 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; 
 
-function StoreItem({ description, asset, imageUrl }) {
- return (
+const data = [
+  { id: 1, icon: 'ios-shirt', item: 'Áo thun', price: '$10' },
+];
+
+function renderItem({ item }) {
+  return (
     <Pressable
-      onPress={storePressHandler}
-      style={({ pressed }) => pressed && styles.pressed}
+      onPress={() => handlePress(item.id)}
+      style={({ pressed }) => [styles.item, pressed && styles.pressed]}
     >
-      <View style={styles.storeItem}>
-        <View style={styles.itemContent}>
-        </View>
-          <Image
-            source={{ uri: imageUrl }}
-            style={styles.image}
-            resizeMode="cover"
-          />
-        </View>
-          <View style={styles.itemText}>
-            <Text style={[styles.textBase, styles.description]}>
-              {description}
-            </Text>
-            <Text style={[styles.textBase, styles.asset]}>
-              {asset}
-            </Text>
-          
+      <View style={styles.itemContent}>
+        <Ionicons name={item.icon} size={24} color="black" />
+        <Text style={styles.text}>{item.item}</Text>
+        <Text style={styles.text}>{item.price}</Text>
       </View>
     </Pressable>
   );
 }
 
-export default StoreItem;
+function handlePress(id) {
+  console.log('Pressed item with ID:', id);
+  // Add navigation here
+}
+
+function StoreItem() {
+  return (
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id.toString()}
+    />
+  );
+}
 
 const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.75,
-  },
-  storeItem: {
-    padding: 12,
-    marginVertical: 8,
-    backgroundColor: 'white',
-    borderRadius: 6,
-    elevation: 3,
-    shadowColor: 'black',
-    shadowRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.4,
+  item: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
   itemContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 20,
   },
-  itemText: {
-    flex: 5, 
+  text: {
+    marginLeft: 10,
   },
-  textBase: {
-    color: 'black',
-  },
-  description: {
-    fontSize: 25,
-    marginBottom: 4,
-    fontWeight: 'bold',
-  },
-  asset: {
-    fontSize: 11,
-  },
-  image: {
-    flex: 1, 
-    aspectRatio: 1, 
-    borderRadius: 6, 
+  pressed: {
+    opacity: 0.5,
   },
 });
+
+export default StoreItem;
