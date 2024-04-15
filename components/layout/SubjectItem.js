@@ -55,8 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-<<<<<<< HEAD
 export default SubjectItem;
-=======
-export default SubjectList;
->>>>>>> 1c08b472100b534443d1a5ead0b18fb7fb16af4e
