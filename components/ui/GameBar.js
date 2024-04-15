@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-const ProgressBar = ({ progress, color, height, borderRadius }) => {
+const GameBar = ({ progress, color, height, borderRadius }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.progressContainer, { backgroundColor: color, height, borderRadius }]}>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProgressBar;
+export default GameBar;
