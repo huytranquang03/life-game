@@ -1,30 +1,36 @@
 import React from 'react';
-import { View, Text, StyleShee } from 'react-native';
-import ProgressBar from './components/ui/GameBar'; // Đường dẫn đến tệp ProgressBar
+import { View, Text, StyleSheet,StatusBar } from 'react-native';
+import ProgressBar from './components/ui/GameBar'; 
 import IconButton from './components/ui/IconButton';
+import NPCItem from './components/layout/NPCitem';
 
 export default function App() {
-  // Hàm xử lý sự kiện khi IconButton được nhấn
+ 
   const handlePress = () => {
     console.log('Icon button pressed!');
   };
 
   return (
     <View style={styles.container}>
-      {/* Thêm ProgressBar vào giao diện */}
+
+      <NPCItem data={[
+        { id: 1, icon: 'ios-person', item: 'NPC 1', progress: 50, color: 'blue', height: 10, borderRadius: 5 },
+        { id: 2, icon: 'ios-person', item: 'NPC 2', progress: 75, color: 'green', height: 10, borderRadius: 5 },
+      ]}/>
+    
       <ProgressBar
-        progress={50} // Giá trị tiến trình (phần trăm)
-        color="blue" // Màu sắc của tiến trình
-        height={10} // Chiều cao của thanh tiến trình
-        borderRadius={5} // Bo góc cho thanh tiến trình
+        progress={50} 
+        color="blue" 
+        height={10} 
+        borderRadius={5} 
       />
 
-      {/* Thêm IconButton vào giao diện */}
+      
       <IconButton
-        icon="add" // Biểu tượng Ionicons bạn muốn sử dụng
-        size={24} // Kích thước biểu tượng
-        color="blue" // Màu sắc biểu tượng
-        onPress={handlePress} // Hàm xử lý khi nút được nhấn
+        icon="add" 
+        size={24} 
+        color="blue" 
+        onPress={handlePress} 
       />
 
       <StatusBar style="auto" />

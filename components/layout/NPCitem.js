@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'; 
-import ProgressBar from './ProgressBar'; 
+import ProgressBar from '../ui/GameBar'; 
 
 const data = [
   { id: 1, icon: 'ios-person', item: 'NPC 1', progress: 50, color: 'blue', height: 10, borderRadius: 5 },
@@ -10,12 +10,12 @@ const data = [
 ];
 
 function NPCItem({ data }) {
-    const navigation = useNavigation(); 
-    const PressHandler = (id) => { 
-        navigation.navigate('NPCDetalScreen', {
-          npcId: id
-        });
-      }
+    // const navigation = useNavigation(); 
+    // const PressHandler = (id) => { 
+    //     navigation.navigate('NPCDetalScreen', {
+    //       npcId: id
+    //     });
+    //   }
     const renderItem = ({ item }) => (
     <Pressable
         onPress={() => PressHandler(item.id)} 
