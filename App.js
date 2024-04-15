@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleShee } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import ProgressBar from './components/ui/GameBar'; // Đường dẫn đến tệp ProgressBar
 import IconButton from './components/ui/IconButton';
 
