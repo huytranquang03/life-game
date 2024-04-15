@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ProgressBar from './components/ui/GameBar'; // Đường dẫn đến tệp ProgressBar
 import IconButton from './components/ui/IconButton';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   // Hàm xử lý sự kiện khi IconButton được nhấn
