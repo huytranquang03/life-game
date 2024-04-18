@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Button, StyleSheet,Text} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { View, Button, StyleSheet ,Text} from 'react-native';
 
-const MainGameScreen = ({ navigation }) => {
+const ContinueGameScreen = ({ navigation }) => {
    
     return (
         <View style={styles.container}>
-         <Text> main game screeen </Text>
+              <Text> continue game screen  </Text>
         
         </View>
     );
@@ -23,4 +22,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MainGameScreen ;
+export default ContinueGameScreen;
