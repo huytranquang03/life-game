@@ -17,7 +17,7 @@ const App = () => {
                     <Stack.Screen name = "MainMenuScreen" component={MainMenuScreen}/>
                     <Stack.Screen name="ContinueGameScreen" component={ContinueGameScreen} />
                     <Stack.Screen name="SetupScreen" component={SetupScreen} />
-                    <Stack.Screen name="MainGameScreen" component={MainGameScreen} />
+                    <Stack.Screen name="MainGameScreen" component={MainGameScreen} options={{headerShown: false}}/>
                    
                 </Stack.Navigator>
             </NavigationContainer>
