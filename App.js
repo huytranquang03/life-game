@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import ProgressBar from './components/ui/GameBar'; // Đường dẫn đến tệp ProgressBar
-import IconButton from './components/ui/IconButton';
-import { StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MainMenuScreen from './screens/MainMenuScreen'
+import ContinueGameScreen from './screens/ContinueGameScreen';
+import MainGameScreen from './screens/MainGameScreen';
+import SetupScreen from './screens/SetupScreen';
+import { UserProvider } from './store/UserContext'; 
+const Stack = createStackNavigator();
 
 const App = () => {
     return (
