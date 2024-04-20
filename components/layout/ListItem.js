@@ -35,6 +35,7 @@ function ListItem() {
 
 const styles = StyleSheet.create({
   item: {
+    width:700,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
@@ -44,7 +45,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   text: {
-    marginLeft: 10,
+    marginLeft: 20,
+    fontSize:30,
   },
   pressed: {
     opacity: 0.5,

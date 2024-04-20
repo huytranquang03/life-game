@@ -3,13 +3,13 @@ import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 
 const data = [
-  { id: 1, icon: 'ios-book', subject: 'Toán' },
+  { id: 1, icon: 'leaf', subject: 'Toán' },
   { id: 2, icon: 'ios-flask', subject: 'Hóa học' },
   { id: 3, icon: 'ios-leaf', subject: 'Sinh học' },
   // Add more subjects as needed
 ];
 
-function SubjectList() {
+function SubjectItem() {
   const renderItem = ({ item }) => (
     <Pressable
       onPress={() => handlePress(item.id)}
@@ -39,18 +39,20 @@ const styles = StyleSheet.create({
   item: {
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    width:700,
   },
   itemContent: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'left',
     padding: 20,
   },
   text: {
-    marginLeft: 10,
+    fontSize: 30,
+    marginLeft: 20,
   },
   pressed: {
     opacity: 0.5,
   },
 });
 
-export default SubjectList;
+export default SubjectItem;
