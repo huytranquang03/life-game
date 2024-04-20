@@ -1,90 +1,91 @@
-import React from "react";
+import React, { useContext } from 'react';
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 // import View from "../components/ui/View"; // Import View
 import PrimaryButton from "../components/ui/PrimaryButton"; // Import PrimaryButton
 import IconButton from "../components/ui/IconButton"; // Import IconButton
 import GameBar from "../components/ui/GameBar"; // Import GameBar
+import { UserContext } from '../store/UserContext';
 
 
 const MainGameScreen = ({ navigation }) => {
 
- 
-	const stats = [
-		{ name: "Health", progress: 50, color: "red" },
-		{ name: "Happiness", progress: 70, color: "pink" },
-		{ name: "Intelligence", progress: 70, color: "purple" },
-		{ name: "Appearance", progress: 70, color: "blue" },
-	];
+	const { stats, name, age, balance } = useContext(UserContext);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.topRow}>
-            <Pressable style={{padding: 20}} onPress={() => {navigation.navigate('PlayerStatsScreen')}}>
+				<Pressable style={{ padding: 20 }} onPress={() => { navigation.navigate('PlayerStatsScreen') }}>
 					<Image
 						source={{ uri: "https://picsum.photos/100/100" }}
 						style={{ width: 80, height: 80, borderRadius: 50 }}
 					/>
 				</Pressable>
-				<Pressable style={{padding: 1}} onPress={() => {navigation.navigate('PlayerStatsScreen')}}>
-					<Text style={{fontSize: 24}}>Player</Text>
+				<Pressable style={{ padding: 1 }} onPress={() => { navigation.navigate('PlayerStatsScreen') }}>
+					<Text style={{ fontSize: 24 }}>{name}</Text>
+					<Text style={styles.ageText}>Age: {age}</Text>
+
+				</Pressable>
+				<Pressable style={styles.balanceContainer} onPress={() => { navigation.navigate('FinanceScreen') }}>
+					<Text style={styles.balanceText}>$$$ {balance}</Text>
 				</Pressable>
 			</View>
-         <View style={styles.box}></View>
+			<View style={styles.box}></View>
 			<View style={styles.buttonRow}>
 				<View style={styles.View}>
-					<PrimaryButton onPress={() => {navigation.navigate('SchoolJobScreen')}} style={styles.primaryButton}>
+					<PrimaryButton onPress={() => { navigation.navigate('SchoolJobScreen') }} style={styles.primaryButton}>
 						<IconButton
 							icon="school"
 							size={16}
 							color="white"
-							onPress={() => {navigation.navigate('SchoolJobScreen')}}
+							onPress={() => { navigation.navigate('SchoolJobScreen') }}
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
 					<Text style={styles.ViewText}>School</Text>
 				</View>
 				<View style={styles.View}>
-					<PrimaryButton onPress={() => {navigation.navigate('FinanceScreen')}} style={styles.primaryButton}>
+					<PrimaryButton onPress={() => { navigation.navigate('FinanceScreen') }} style={styles.primaryButton}>
 						<IconButton
 							icon="add-outline"
 							size={16}
 							color="white"
-							onPress={() => {navigation.navigate('FinanceScreen')}}
+							onPress={() => { navigation.navigate('FinanceScreen') }}
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
 					<Text style={styles.ViewText}>Finance</Text>
 				</View>
 				<View style={styles.View}>
-					<PrimaryButton onPress={() => {}} style={styles.primaryButton}>
+					<PrimaryButton onPress={() => { }} style={styles.primaryButton}>
 						<IconButton
 							icon="calendar"
 							size={16}
 							color="white"
-							onPress={() => {}}
+							onPress={() => { }}
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
 					<Text style={styles.ViewText}>Age</Text>
 				</View>
 				<View style={styles.View}>
-					<PrimaryButton onPress={() => {navigation.navigate('RelationshipScreen')}} style={styles.primaryButton}>
+					<PrimaryButton onPress={() => { navigation.navigate('RelationshipScreen') }} style={styles.primaryButton}>
 						<IconButton
 							icon="heart"
 							size={16}
 							color="white"
-							onPress={() => {navigation.navigate('RelationshipScreen')}}
+							onPress={() => { navigation.navigate('RelationshipScreen') }}
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
 					<Text style={styles.ViewText}>Relationship</Text>
 				</View>
 				<View style={styles.View} >
-					<PrimaryButton onPress={() => {navigation.navigate('ActivitiesScreen')}} style={styles.primaryButton}>
+					<PrimaryButton onPress={() => { navigation.navigate('ActivitiesScreen') }} style={styles.primaryButton}>
 						<IconButton
 							icon="fitness"
 							size={16}
 							color="white"
-							onPress={() => {navigation.navigate('ActivitiesScreen')}}
+							onPress={() => { navigation.navigate('ActivitiesScreen') }}
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
@@ -93,14 +94,14 @@ const MainGameScreen = ({ navigation }) => {
 			</View>
 			<View style={styles.statsView} >
 				{stats.map((stat) => (
-					<Pressable key={stat.name} style={styles.statBar} onPress={() => {navigation.navigate('PlayerStatsScreen')}}>
+					<Pressable key={stat.name} style={styles.statBar} onPress={() => { navigation.navigate('PlayerStatsScreen') }}>
 						<Text style={styles.statLabel} >{stat.name}</Text>
 						<GameBar
 							progress={stat.progress}
 							color={stat.color}
 							height={10}
 							borderRadius={5}
-							
+
 						/>
 						<Text styles={styles.description}>{stat.description}</Text>
 					</Pressable>
@@ -117,18 +118,19 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	topRow: {
+		flex:1,
 		flexDirection: "row",
 		alignItems: "center",
 		width: "100%",
 		marginTop: 50,
 	},
-   box: {
-      width: '100%',
-      height: 300,
-      backgroundColor: "black",
-      marginTop: 20,
-      
-   },
+	box: {
+		width: '100%',
+		height: 300,
+		backgroundColor: "black",
+		marginTop: 20,
+
+	},
 	buttonRow: {
 		flexDirection: "row",
 		justifyContent: "space-around",
@@ -149,6 +151,21 @@ const styles = StyleSheet.create({
 		fontSize: 10, // Giảm kích thước font chữ
 		fontWeight: "bold",
 	},
+	ageText: {
+		fontSize: 16,
+		color: '#888',
+	},
+	balanceContainer: {
+		position: 'absolute',
+		right: 0, // Position the container at the outer right edge of the screen
+		padding: 10,
+	},
+	balanceText: {
+		fontSize: 20,
+		color: 'green',
+		fontWeight: 'bold',
+	},
+	
 	iconButton: {
 		width: 50, // Giảm kích thước của IconButton
 		height: 50, // Giảm kích thước của IconButton
