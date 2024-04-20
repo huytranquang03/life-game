@@ -20,7 +20,8 @@ const UserProvider = ({ children }) => {
     const [stats, setStats] = useState([
         { name: 'Health', progress: 50, color: 'red', description: "Your healthiness level. The lower the stats, the more likely it is to get sick" },
         { name: 'Happiness', progress: 70, color: 'pink', description: "Your happiness level. The lower the stats, the likely it is to get mental illnesses." },
-        { name: 'Appearance', progress: 70, color: 'blue', description: "Your looks. The higher it is, the more it would help with your relationships" }
+        { name: 'Appearance', progress: 70, color: 'blue', description: "Your looks. The higher it is, the more it would help with your relationships" },
+        { name: 'Intelligence', progress: 100, color: 'yellow' },
     ]);
 
     const updateStats = (newStats) => {
