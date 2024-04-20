@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet ,useContext} from 'react-native';
+import {React,useContext} from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import GameBar from '../components/ui/GameBar'; // Assuming your GameBar component is in a separate file
-import { UserContext } from '../store/UserContext'; 
+import { UserContext , intelStats,stats } from '../store/UserContext'; 
 
 
 const PlayerStatsScreen = () => {
@@ -11,6 +11,7 @@ const PlayerStatsScreen = () => {
     const avatarUrl = 'https://picsum.photos/200/200'; // Replace with your avatar URL
     const name = 'John Doe';
     const age = 30;
+
     // const intelStats = [
     //     { name: 'Intelligence', progress: 0, color: 'yellow' },
     //     { name: 'IQ', progress: 80, color: 'red', description: "Your problem solving ability\nNeeded for certain profession" },
@@ -22,14 +23,27 @@ const PlayerStatsScreen = () => {
     //     { name: 'Happiness', progress: 70, color: 'pink', description: "Your happiness level. The lower the stats, the likely it is to get mental illnesses." },
     //     { name: 'Appearance', progress: 70, color: 'blue', description: "Your looks. The higher it is, the more it would help with your relationships" },
     // ];
-    // const calculateAverageProgress = (arr) => {
-    //     const totalProgress = arr.reduce((acc, stat) => acc + stat.progress, 0);
-    //     return Math.round(totalProgress / arr.length); // Round the average
-    // };
 
+
+    // Function để tính trung bình tiến độ
+    const calculateAverageProgress = (arr) => {
+        const totalProgress = arr.reduce((acc, stat) => acc + stat.progress, 0);
+        return Math.round(totalProgress / arr.length); // Làm tròn trung bình
+    };
+
+    // Tính toán tiến độ trung bình cho Intel
     const averageIntelProgress = calculateAverageProgress(intelStats);
 
-    intelStats[0].progress = averageIntelProgress; // Update Intelligence progress
+    // Cập nhật tiến độ Intelligence
+    const updatedIntelStats = [...intelStats];
+    updatedIntelStats[0].progress = averageIntelProgress;
+
+    // Function để xử lý cập nhật intelStats
+    const handleUpdateIntelStats = (newIntelStats) => {
+        updateIntelStats(newIntelStats);
+    };
+
+
     return (
         <View style={styles.container}>
             <View style={styles.topRow}>
