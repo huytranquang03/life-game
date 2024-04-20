@@ -23,10 +23,6 @@ const App = () => {
                     <Stack.Screen name="MainMenuScreen" component={MainMenuScreen} />
                     <Stack.Screen name="ContinueGameScreen" component={ContinueGameScreen} />
                     <Stack.Screen name="SetupScreen" component={SetupScreen} />
-<<<<<<< HEAD
-                    <Stack.Screen name="MainGameScreen" component={MainGameScreen} options={{headerShown: false}}/>
-                   
-=======
                     <Stack.Screen name="MainGameScreen" component={MainGameScreen} />
                     <Stack.Screen name="PlayerStatsScreen" component={PlayerStatsScreen} />
                     <Stack.Screen name="SchoolJobScreen" component={SchoolJobScreen} />
@@ -35,7 +31,6 @@ const App = () => {
                     <Stack.Screen name="ActivitiesScreen" component={ActivitiesScreen} />
 
 
->>>>>>> origin
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>
