@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     progressContainer: {
         width: '100%',
         overflow: 'hidden',
+        backgroundColor: 'lightgrey',
     },
     progressBar: {
         height: '100%',
