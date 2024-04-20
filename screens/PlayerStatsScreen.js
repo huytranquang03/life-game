@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import GameBar from '../components/ui/GameBar'; // Assuming your GameBar component is in a separate file
-import { UserContext } from '../store/UserContext'; 
+import { UserContext  } from '../store/UserContext'; 
 
 
 const PlayerStatsScreen = () => {
@@ -15,9 +15,19 @@ const PlayerStatsScreen = () => {
         return Math.round(totalProgress / arr.length); // Round the average
     };
 
+    // Tính toán tiến độ trung bình cho Intel
     const averageIntelProgress = calculateAverageProgress(intelStats);
 
-    intelStats[0].progress = averageIntelProgress; // Update Intelligence progress
+    // Cập nhật tiến độ Intelligence
+    const updatedIntelStats = [...intelStats];
+    updatedIntelStats[0].progress = averageIntelProgress;
+
+    // Function để xử lý cập nhật intelStats
+    const handleUpdateIntelStats = (newIntelStats) => {
+        updateIntelStats(newIntelStats);
+    };
+
+
     return (
         <View style={styles.container}>
             <View style={styles.topRow}>

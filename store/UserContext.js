@@ -16,21 +16,19 @@ const UserProvider = ({ children }) => {
         { name: 'Knowledge', progress: 70, color: 'green', description: "Your knowledge level\nNeeded for certain professions\nCan help with your relationships" }
     ]);
 
-    const [stats] = useState([
+    const [stats, setStats] = useState([
         { name: 'Health', progress: 50, color: 'red', description: "Your healthiness level. The lower the stats, the more likely it is to get sick" },
         { name: 'Happiness', progress: 70, color: 'pink', description: "Your happiness level. The lower the stats, the likely it is to get mental illnesses." },
         { name: 'Appearance', progress: 70, color: 'blue', description: "Your looks. The higher it is, the more it would help with your relationships" }
     ]);
 
-    // Function to calculate average progress
-    const calculateAverageProgress = (arr) => {
-        const totalProgress = arr.reduce((acc, stat) => acc + stat.progress, 0);
-        return Math.round(totalProgress / arr.length); // Round the average
+    const updateStats = (newStats) => {
+        setStats(newStats);
     };
 
-    // Calculate average progress for intelStats and update Intelligence progress
-    const averageIntelProgress = calculateAverageProgress(intelStats);
-    intelStats[0].progress = averageIntelProgress;
+    const updateIntelStats = (newIntelStats) => {
+        setIntelStats(newIntelStats);
+    };
 
     return (
         <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance }}>
