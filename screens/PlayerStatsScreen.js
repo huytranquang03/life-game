@@ -1,7 +1,7 @@
 import {React,useContext} from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import GameBar from '../components/ui/GameBar'; // Assuming your GameBar component is in a separate file
-import { UserContext , intelStats,stats } from '../store/UserContext'; 
+import { UserContext  } from '../store/UserContext'; 
 
 
 const PlayerStatsScreen = () => {

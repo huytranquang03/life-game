@@ -1,20 +1,21 @@
-import React from "react";
+import {React,useContext} from 'react';
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 // import View from "../components/ui/View"; // Import View
 import PrimaryButton from "../components/ui/PrimaryButton"; // Import PrimaryButton
 import IconButton from "../components/ui/IconButton"; // Import IconButton
 import GameBar from "../components/ui/GameBar"; // Import GameBar
-
+import { UserContext  } from '../store/UserContext'; 
 
 const MainGameScreen = ({ navigation }) => {
+	const { stats } = useContext(UserContext);
 
- 
-	const stats = [
-		{ name: "Health", progress: 50, color: "red" },
-		{ name: "Happiness", progress: 70, color: "pink" },
-		{ name: "Intelligence", progress: 70, color: "purple" },
-		{ name: "Appearance", progress: 70, color: "blue" },
-	];
+
+	// const stats = [
+	// 	{ name: "Health", progress: 50, color: "red" },
+	// 	{ name: "Happiness", progress: 70, color: "pink" },
+	// 	{ name: "Intelligence", progress: 70, color: "purple" },
+	// 	{ name: "Appearance", progress: 70, color: "blue" },
+	// ];
 	return (
 		<View style={styles.container}>
 			<View style={styles.topRow}>
