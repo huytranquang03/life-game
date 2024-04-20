@@ -7,14 +7,6 @@ import GameBar from "../components/ui/GameBar"; // Import GameBar
 
 
 const MainGameScreen = ({ navigation }) => {
-<<<<<<< HEAD
-   const handlePress = () => {
-       
-      navigation.navigate('MainMenuScreen');
-  };
-=======
-
->>>>>>> origin
 
  
 	const stats = [
@@ -26,61 +18,37 @@ const MainGameScreen = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.topRow}>
-<<<<<<< HEAD
-            <Pressable style={{padding: 20}} onPress={handlePress}>
-=======
             <Pressable style={{padding: 20}} onPress={() => {navigation.navigate('PlayerStatsScreen')}}>
->>>>>>> origin
 					<Image
 						source={{ uri: "https://picsum.photos/100/100" }}
 						style={{ width: 80, height: 80, borderRadius: 50 }}
 					/>
 				</Pressable>
-<<<<<<< HEAD
-				<Pressable style={{padding: 1}} onPress={() => {navigation.navigate('MainMenuScreen')}}>
-=======
 				<Pressable style={{padding: 1}} onPress={() => {navigation.navigate('PlayerStatsScreen')}}>
->>>>>>> origin
 					<Text style={{fontSize: 24}}>Player</Text>
 				</Pressable>
 			</View>
          <View style={styles.box}></View>
 			<View style={styles.buttonRow}>
 				<View style={styles.View}>
-<<<<<<< HEAD
-					<PrimaryButton onPress={() => {}} style={styles.primaryButton}>
-=======
 					<PrimaryButton onPress={() => {navigation.navigate('SchoolJobScreen')}} style={styles.primaryButton}>
->>>>>>> origin
 						<IconButton
 							icon="school"
 							size={16}
 							color="white"
-<<<<<<< HEAD
-							onPress={() => {}}
-=======
 							onPress={() => {navigation.navigate('SchoolJobScreen')}}
->>>>>>> origin
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
 					<Text style={styles.ViewText}>School</Text>
 				</View>
 				<View style={styles.View}>
-<<<<<<< HEAD
-					<PrimaryButton onPress={() => {}} style={styles.primaryButton}>
-=======
 					<PrimaryButton onPress={() => {navigation.navigate('FinanceScreen')}} style={styles.primaryButton}>
->>>>>>> origin
 						<IconButton
 							icon="add-outline"
 							size={16}
 							color="white"
-<<<<<<< HEAD
-							onPress={() => {}}
-=======
 							onPress={() => {navigation.navigate('FinanceScreen')}}
->>>>>>> origin
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
@@ -99,73 +67,43 @@ const MainGameScreen = ({ navigation }) => {
 					<Text style={styles.ViewText}>Age</Text>
 				</View>
 				<View style={styles.View}>
-<<<<<<< HEAD
-					<PrimaryButton onPress={() => {}} style={styles.primaryButton}>
-=======
 					<PrimaryButton onPress={() => {navigation.navigate('RelationshipScreen')}} style={styles.primaryButton}>
->>>>>>> origin
 						<IconButton
 							icon="heart"
 							size={16}
 							color="white"
-<<<<<<< HEAD
-							onPress={() => {}}
-=======
 							onPress={() => {navigation.navigate('RelationshipScreen')}}
->>>>>>> origin
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
 					<Text style={styles.ViewText}>Relationship</Text>
 				</View>
-<<<<<<< HEAD
-				<View style={styles.View}>
-					<PrimaryButton onPress={() => {}} style={styles.primaryButton}>
-=======
 				<View style={styles.View} >
 					<PrimaryButton onPress={() => {navigation.navigate('ActivitiesScreen')}} style={styles.primaryButton}>
->>>>>>> origin
 						<IconButton
 							icon="fitness"
 							size={16}
 							color="white"
-<<<<<<< HEAD
-							onPress={() => {}}
-=======
 							onPress={() => {navigation.navigate('ActivitiesScreen')}}
->>>>>>> origin
 							style={styles.iconButton}
 						/>
 					</PrimaryButton>
 					<Text style={styles.ViewText}>Activity</Text>
 				</View>
 			</View>
-<<<<<<< HEAD
-			<View style={styles.statsView}>
-				{stats.map((stat) => (
-					<View key={stat.name} style={styles.statBar}>
-						<Text style={styles.statLabel}>{stat.name}</Text>
-=======
 			<View style={styles.statsView} >
 				{stats.map((stat) => (
 					<Pressable key={stat.name} style={styles.statBar} onPress={() => {navigation.navigate('PlayerStatsScreen')}}>
 						<Text style={styles.statLabel} >{stat.name}</Text>
->>>>>>> origin
 						<GameBar
 							progress={stat.progress}
 							color={stat.color}
 							height={10}
 							borderRadius={5}
-<<<<<<< HEAD
-						/>
-						<Text styles={styles.description}>{stat.description}</Text>
-					</View>
-=======
 							
 						/>
 						<Text styles={styles.description}>{stat.description}</Text>
 					</Pressable>
->>>>>>> origin
 				))}
 			</View>
 		</View>
