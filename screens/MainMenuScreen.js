@@ -8,7 +8,7 @@ const HomeScreen = ({ navigation }) => {
     };
 
     const handleContinuePress = () => {
-        navigation.navigate('ContinueGameScreen');
+        navigation.navigate('MainGameScreen');
     };
 
     return (
