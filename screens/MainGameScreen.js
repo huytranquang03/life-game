@@ -5,15 +5,25 @@ import PrimaryButton from "../components/ui/PrimaryButton"; // Import PrimaryBut
 import IconButton from "../components/ui/IconButton"; // Import IconButton
 import GameBar from "../components/ui/GameBar"; // Import GameBar
 import { UserContext } from '../store/UserContext';
-
+import TimeBar from '../components/ui/TimeBar';
 
 const MainGameScreen = ({ navigation }) => {
 
-	const { stats, name, age, balance } = useContext(UserContext);
-
-	return (
+	const { stats, name, age, balance, setAge, setTime } = useContext(UserContext);
+	const plusAgeButton = () => {
+		setTime(0);
+		setAge(age+1);
+	  };
+		return (
 		<View style={styles.container}>
+
 			<View style={styles.topRow}>
+				<TimeBar
+					duration={3} // Total duration in seconds
+					color="#00FF00" // Change the color as needed
+					height={20} // Change the height as needed
+					borderRadius={10} // Change the border radius as needed
+				/>
 				<Pressable style={{ padding: 20 }} onPress={() => { navigation.navigate('PlayerStatsScreen') }}>
 					<Image
 						source={{ uri: "https://picsum.photos/100/100" }}
@@ -56,7 +66,7 @@ const MainGameScreen = ({ navigation }) => {
 					<Text style={styles.ViewText}>Finance</Text>
 				</View>
 				<View style={styles.View}>
-					<PrimaryButton onPress={() => { }} style={styles.primaryButton}>
+					<PrimaryButton onPress={plusAgeButton} style={styles.primaryButton}>
 						<IconButton
 							icon="calendar"
 							size={16}
@@ -118,7 +128,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	topRow: {
-		flex:1,
+		flex: 1,
 		flexDirection: "row",
 		alignItems: "center",
 		width: "100%",
@@ -165,11 +175,11 @@ const styles = StyleSheet.create({
 		color: 'green',
 		fontWeight: 'bold',
 	},
-	
+
 	iconButton: {
 		width: 50, // Giảm kích thước của IconButton
 		height: 50, // Giảm kích thước của IconButton
-		padding: 10, // Giảm padding
+		padding: 10, // Giảm padding	
 		borderRadius: 10, // Tùy chỉnh border radius
 		marginBottom: 5, // Điều chỉnh khoảng cách giữa nút và text
 	},
