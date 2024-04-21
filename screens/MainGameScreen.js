@@ -1,175 +1,72 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
-// import View from "../components/ui/View"; // Import View
-import PrimaryButton from "../components/ui/PrimaryButton"; // Import PrimaryButton
-import IconButton from "../components/ui/IconButton"; // Import IconButton
-import GameBar from "../components/ui/GameBar"; // Import GameBar
-import { UserContext } from "../store/UserContext";
+import PrimaryButton from "../components/ui/PrimaryButton";
+import IconButton from "../components/ui/IconButton";
+import GameBar from "../components/ui/GameBar";
 import TimeBar from "../components/ui/TimeBar";
+import { UserContext } from "../store/UserContext";
 
 const MainGameScreen = ({ navigation }) => {
-	const { stats, name, age, balance, setAge, setTime } =
-		useContext(UserContext);
+	const { stats, intelStats, name, age, balance, setAge, setTime } = useContext(UserContext);
+
 	const plusAgeButton = () => {
 		setTime(0);
 		setAge(age + 1);
 	};
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.topRow}>
-				<Pressable
-					style={{ padding: 20 }}
-					onPress={() => {
-						navigation.navigate("PlayerStatsScreen");
-					}}
-				>
-					<Image
-						source={{ uri: "https://picsum.photos/100/100" }}
-						style={{ width: 80, height: 80, borderRadius: 50 }}
-					/>
+				<Pressable style={styles.profileImageContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
+					<Image source={{ uri: "https://picsum.photos/100/100" }} style={styles.profileImage} />
 				</Pressable>
-				<Pressable
-					style={{ padding: 1 }}
-					onPress={() => {
-						navigation.navigate("PlayerStatsScreen");
-					}}
-				>
-					<Text style={{ fontSize: 24 }}>{name}</Text>
+				<Pressable style={styles.profileInfoContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
+					<Text style={styles.profileName}>{name}</Text>
 					<Text style={styles.ageText}>Age: {age}</Text>
 				</Pressable>
-				<Pressable
-					style={styles.balanceContainer}
-					onPress={() => {
-						navigation.navigate("FinanceScreen");
-					}}
-				>
+				<Pressable style={styles.balanceContainer} onPress={() => navigation.navigate("FinanceScreen")}>
 					<Text style={styles.balanceText}>$$$ {balance}</Text>
 				</Pressable>
 			</View>
-
-			<TimeBar
-				duration={10} // Total duration in seconds
-				color="pink" // Change the color as needed
-				height={20} // Change the height as needed
-				borderRadius={10} // Change the border radius as needed
-			/>
-
-			<View style={styles.box}></View>
-			<View style={styles.buttonRow}>
-				<View style={styles.View}>
-					<PrimaryButton
-						onPress={() => {
-							navigation.navigate("SchoolJobScreen");
-						}}
-						style={styles.primaryButton}
-					>
-						<IconButton
-							icon="school"
-							size={16}
-							color="white"
-							onPress={() => {
-								navigation.navigate("SchoolJobScreen");
-							}}
-							style={styles.iconButton}
-						/>
-					</PrimaryButton>
-					<Text style={styles.ViewText}>School</Text>
-				</View>
-				<View style={styles.View}>
-					<PrimaryButton
-						onPress={() => {
-							navigation.navigate("FinanceScreen");
-						}}
-						style={styles.primaryButton}
-					>
-						<IconButton
-							icon="add-outline"
-							size={16}
-							color="white"
-							onPress={() => {
-								navigation.navigate("FinanceScreen");
-							}}
-							style={styles.iconButton}
-						/>
-					</PrimaryButton>
-					<Text style={styles.ViewText}>Finance</Text>
-				</View>
-				<View style={styles.View}>
-					<PrimaryButton
-						onPress={plusAgeButton}
-						style={styles.primaryButton}
-					>
-						<IconButton
-							icon="calendar"
-							size={16}
-							color="white"
-							onPress={() => {}}
-							style={styles.iconButton}
-						/>
-					</PrimaryButton>
-					<Text style={styles.ViewText}>Age</Text>
-				</View>
-				<View style={styles.View}>
-					<PrimaryButton
-						onPress={() => {
-							navigation.navigate("RelationshipScreen");
-						}}
-						style={styles.primaryButton}
-					>
-						<IconButton
-							icon="heart"
-							size={16}
-							color="white"
-							onPress={() => {
-								navigation.navigate("RelationshipScreen");
-							}}
-							style={styles.iconButton}
-						/>
-					</PrimaryButton>
-					<Text style={styles.ViewText}>Relationship</Text>
-				</View>
-				<View style={styles.View}>
-					<PrimaryButton
-						onPress={() => {
-							navigation.navigate("ActivitiesScreen");
-						}}
-						style={styles.primaryButton}
-					>
-						<IconButton
-							icon="fitness"
-							size={16}
-							color="white"
-							onPress={() => {
-								navigation.navigate("ActivitiesScreen");
-							}}
-							style={styles.iconButton}
-						/>
-					</PrimaryButton>
-					<Text style={styles.ViewText}>Activity</Text>
-				</View>
+			<View style={styles.textBox}>
+				<Text style={styles.text}>This is text box</Text>
 			</View>
+
+			<TimeBar duration={10} color="pink" height={20} borderRadius={10} />
+
+			<View style={styles.buttonRow}>
+				<ActionButton icon="school" text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
+				<ActionButton icon="logo-usd" text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
+				<ActionButton icon="add-outline" text="Age" onPress={plusAgeButton} />
+				<ActionButton icon="heart" text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
+				<ActionButton icon="fitness" text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
+			</View>
+
 			<View style={styles.statsView}>
 				{stats.map((stat) => (
-					<Pressable
-						key={stat.name}
-						style={styles.statBar}
-						onPress={() => {
-							navigation.navigate("PlayerStatsScreen");
-						}}
-					>
-						<Text style={styles.statLabel}>{stat.name}</Text>
-						<GameBar
-							progress={stat.progress}
-							color={stat.color}
-							height={10}
-							borderRadius={5}
-						/>
-					</Pressable>
+					<StatBar key={stat.name} name={stat.name} progress={stat.progress} color={stat.color} onPress={() => navigation.navigate("PlayerStatsScreen")}/>
 				))}
+				<StatBar key={intelStats[0].name} name={intelStats[0].name} progress={intelStats[0].progress} color={intelStats[0].color} onPress={() => navigation.navigate("PlayerStatsScreen")}/>
 			</View>
 		</View>
 	);
 };
+
+const ActionButton = ({ icon, text, onPress }) => (
+	<View style={styles.actionButton}>
+		<PrimaryButton onPress={onPress} style={styles.primaryButton}>
+			<IconButton onPress={onPress} icon={icon} size={16} color="white" style={styles.iconButton} />
+		</PrimaryButton>
+		<Text style={styles.actionButtonText}>{text}</Text>
+	</View>
+);
+
+const StatBar = ({ name, progress, color, onPress }) => (
+	<Pressable style={styles.statBar} onPress={onPress}>
+		<Text style={styles.statLabel}>{name}</Text>
+		<GameBar progress={progress} color={color} height={10} borderRadius={5} />
+	</Pressable>
+);
 
 const styles = StyleSheet.create({
 	container: {
@@ -178,37 +75,24 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	topRow: {
-		flex: 1,
 		flexDirection: "row",
 		alignItems: "center",
 		width: "100%",
 		marginTop: 20,
 	},
-	box: {
-		width: "100%",
-		height: 300,
-		backgroundColor: "black",
-		marginTop: 20,
+	profileImageContainer: {
+		padding: 20,
 	},
-	buttonRow: {
-		flexDirection: "row",
-		justifyContent: "space-around",
-		width: "100%",
+	profileImage: {
+		width: 80,
+		height: 80,
+		borderRadius: 50,
 	},
-	View: {
-		width: 81, // Điều chỉnh độ rộng của View
-		height: 90, // Điều chỉnh độ cao của View
-		margin: 10,
-		borderRadius: 20,
-		padding: 10,
-		// backgroundColor: "white",
-		alignItems: "center",
-		// borderColor: 'black',
-		// borderWidth: 1,
+	profileInfoContainer: {
+		padding: 1,
 	},
-	ViewText: {
-		fontSize: 10, // Giảm kích thước font chữ
-		fontWeight: "bold",
+	profileName: {
+		fontSize: 24,
 	},
 	ageText: {
 		fontSize: 16,
@@ -216,7 +100,7 @@ const styles = StyleSheet.create({
 	},
 	balanceContainer: {
 		position: "absolute",
-		right: 0, // Position the container at the outer right edge of the screen
+		right: 0,
 		padding: 10,
 	},
 	balanceText: {
@@ -224,21 +108,54 @@ const styles = StyleSheet.create({
 		color: "green",
 		fontWeight: "bold",
 	},
-
-	iconButton: {
-		width: 50, // Giảm kích thước của IconButton
-		height: 50, // Giảm kích thước của IconButton
-		padding: 10, // Giảm padding
-		borderRadius: 10, // Tùy chỉnh border radius
-		marginBottom: 5, // Điều chỉnh khoảng cách giữa nút và text
+	buttonRow: {
+		flexDirection: "row",
+		justifyContent: "space-around",
+		width: "100%",
+	},
+	textBox: {
+		width: "100%",
+		height: 300,
+		backgroundColor: "black",
+		marginTop: 20,
+	},
+	text:{
+		color: 'white',
+	},
+	actionButton: {
+		width: 81,
+		height: 90,
+		margin: 10,
+		borderRadius: 20,
+		padding: 10,
+		alignItems: "center",
 	},
 	primaryButton: {
-		padding: 10, // Giảm padding của PrimaryButton
-		width: 80, // Giảm độ rộng của PrimaryButton
+		padding: 10,
+		width: 80,
+	},
+	iconButton: {
+		width: 50,
+		height: 50,
+		padding: 10,
+		borderRadius: 10,
+		marginBottom: 5,
+	},
+	actionButtonText: {
+		fontSize: 10,
+		fontWeight: "bold",
 	},
 	statsView: {
 		padding: 20,
 		width: 400,
+	},
+	statBar: {
+		marginBottom: 10,
+	},
+	statLabel: {
+		fontSize: 12,
+		fontWeight: "bold",
+		marginBottom: 5,
 	},
 });
 

@@ -14,19 +14,8 @@ import SubjectListScreen from './screens/SchoolJob/SubjectListScreen';
 import ClassmateListScreen from './screens/SchoolJob/ClassmateListScreen';
 import { ParttimeJobListScreen, FulltimeJobListScreen } from './screens/SchoolJob/JobListScreen';
 
-<<<<<<< HEAD
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>It worked!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-=======
 import { UserProvider } from './store/UserContext';
 const Stack = createStackNavigator();
->>>>>>> main
 
 const App = () => {
     return (

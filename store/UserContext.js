@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const [name, setName] = useState('');
+    const [name, setName] = useState('Player');
     const [gender, setGender] = useState('');
     const [age, setAge] = useState(0);
     const [balance, setBalance] = useState(0);
@@ -21,8 +21,18 @@ const UserProvider = ({ children }) => {
         { name: 'Health', progress: 50, color: 'red', description: "Your healthiness level. The lower the stats, the more likely it is to get sick" },
         { name: 'Happiness', progress: 70, color: 'pink', description: "Your happiness level. The lower the stats, the likely it is to get mental illnesses." },
         { name: 'Appearance', progress: 70, color: 'blue', description: "Your looks. The higher it is, the more it would help with your relationships" },
-        { name: 'Intelligence', progress: 100, color: 'yellow' },
     ]);
+
+    intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
+
+    const calculateAverageProgress = (arr) => {
+        const totalProgress = arr.reduce((acc, stat) => acc + stat.progress, 0);
+        return Math.round(totalProgress / arr.length); // Round the average
+    };
+
+    const averageIntelProgress = calculateAverageProgress(intelStats);
+
+    intelStats[0].progress = averageIntelProgress;
 
     const updateStats = (newStats) => {
         setStats(newStats);
@@ -33,7 +43,7 @@ const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance,time, setTime }}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime }}>
             {children}
         </UserContext.Provider>
     );

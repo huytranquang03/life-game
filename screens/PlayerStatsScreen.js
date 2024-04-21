@@ -7,26 +7,7 @@ import { UserContext  } from '../store/UserContext';
 const PlayerStatsScreen = () => {
     const {intelStats,stats, name, age } = useContext(UserContext);
 
-
     const avatarUrl = 'https://picsum.photos/200/200'; // Replace with your avatar URL
-
-    const calculateAverageProgress = (arr) => {
-        const totalProgress = arr.reduce((acc, stat) => acc + stat.progress, 0);
-        return Math.round(totalProgress / arr.length); // Round the average
-    };
-
-    // Tính toán tiến độ trung bình cho Intel
-    const averageIntelProgress = calculateAverageProgress(intelStats);
-
-    // Cập nhật tiến độ Intelligence
-    const updatedIntelStats = [...intelStats];
-    updatedIntelStats[0].progress = averageIntelProgress;
-
-    // Function để xử lý cập nhật intelStats
-    const handleUpdateIntelStats = (newIntelStats) => {
-        updateIntelStats(newIntelStats);
-    };
-
 
     return (
         <View style={styles.container}>
