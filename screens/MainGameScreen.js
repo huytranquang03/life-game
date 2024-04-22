@@ -33,7 +33,7 @@ const MainGameScreen = ({ navigation }) => {
 				<Text style={styles.text}>This is text box</Text>
 			</View>
 
-			<TimeBar duration={10} color="pink" height={20} borderRadius={10} />
+			<TimeBar duration={3} color="pink" height={20} borderRadius={10} />
 
 			<View style={styles.buttonRow}>
 				<ActionButton icon="school" text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
