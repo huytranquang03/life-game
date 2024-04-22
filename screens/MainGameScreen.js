@@ -7,12 +7,13 @@ import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
 
 const MainGameScreen = ({ navigation }) => {
-	const { stats, intelStats, name, age, balance, setAge, setTime } = useContext(UserContext);
+	const { stats, intelStats, name, age, balance, setAge, setTime, updateStats } = useContext(UserContext);
 
 	const plusAgeButton = () => {
-		setTime(0);
-		setAge(age + 1);
-	};
+      setTime(0);
+      setAge(age + 1);
+      updateStats();
+  };  
 
 	return (
 		<View style={styles.container}>

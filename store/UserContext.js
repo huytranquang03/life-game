@@ -34,16 +34,21 @@ const UserProvider = ({ children }) => {
 
     intelStats[0].progress = averageIntelProgress;
 
-    const updateStats = (newStats) => {
-        setStats(newStats);
+    const updateStats = () => {
+        const calculatedStats = stats.map(stat => {
+            const decrement = Math.floor(Math.random() * 5) + 1; // Tạo một số ngẫu nhiên từ 1 đến 5
+            return { ...stat, progress: Math.max(0, stat.progress - decrement) };  // Cập nhật giá trị progress bằng cách trừ đi decrement
+      });
+  
+        setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
     };
-
+  
     const updateIntelStats = (newIntelStats) => {
         setIntelStats(newIntelStats);
     };
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime }}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, setStats, age, setAge, balance, setBalance, time, setTime, updateStats }}>
             {children}
         </UserContext.Provider>
     );
