@@ -30,7 +30,7 @@ const UserProvider = ({ children }) => {
 
 
     // Define initial values for intelStats and stats as arrays
-    const [intelStats] = useState([
+    const [intelStats, setIntelStats] = useState([
         { name: 'Intelligence', progress: 0, color: 'yellow' },
         { name: 'IQ', progress: 80, color: 'red', description: "Your problem solving ability\nNeeded for certain profession" },
         { name: 'EQ', progress: 50, color: 'blue', description: "Your knowledge level\nNeeded for certain professions\nCan help with your relationships" },
@@ -54,16 +54,20 @@ const UserProvider = ({ children }) => {
 
     intelStats[0].progress = averageIntelProgress;
 
-    const updateStats = (newStats) => {
-        setStats(newStats);
+    const updateStats = () => {
+        const calculatedStats = stats.map(stat => {
+            return { ...stat, progress: Math.max(0, stat.progress - Math.floor(Math.random() * 5) + 1) };  // Cập nhật giá trị progress bằng cách trừ đi decrement
+        });
+        const calculatedIntelStats = intelStats.map(intelStat => {
+            return { ...intelStat, progress: Math.max(0, intelStat.progress - Math.floor(Math.random() * 5) + 1) };  // Cập nhật giá trị progress bằng cách trừ đi decrement
+        });
+        setIntelStats(calculatedIntelStats);
+        setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
     };
 
-    const updateIntelStats = (newIntelStats) => {
-        setIntelStats(newIntelStats);
-    };
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime ,IQ,EQ,setIQ,setEQ}}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime }}>
             {children}
         </UserContext.Provider>
     );
