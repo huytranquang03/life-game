@@ -8,7 +8,8 @@ const UserProvider = ({ children }) => {
     const [age, setAge] = useState(0);
     const [balance, setBalance] = useState(0);
     const [time, setTime] = useState(0);
-    const[EQ,IQ,setIQ,setEQ] = useState(100);
+    const[IQ,setIQ] = useState(0);
+    const[EQ,setEQ] = useState(0);
     const[health, setHealth] =useState(100);
     const[happiness, setHappiness] =useState(100);
     const[knowledge, setKnowledge] =useState(0);
@@ -18,49 +19,44 @@ const UserProvider = ({ children }) => {
     const[performance, setPerformance] = useState(100);
 
     // study harder
-    const studyHarder = () => {
-        setIQ(IQ + 5);
-        setEQ(EQ - 1);
-        setTime(time - 90);
-        setHealth(health-1);
-        setHappiness(happiness-10);
-        setKnowledge(knowledge+5);
-        setCommunication(communication-5);
-        setGrade(grade+10)
-      };
+    // const studyHarder = () => {
+    //     setIQ(IQ + 5);
+    //     setEQ(EQ - 1);
+    //     setTime(time - 90);
+    //     setHealth(health-1);
+    //     setHappiness(happiness-10);
+    //     setKnowledge(knowledge+5);
+    //     setCommunication(communication-5);
+    //     setGrade(grade+10)
+    //   };
 
-      // word harder
-      const workHarder = () =>{
-        setTime(time - 90);
-        setHealth(health-10);
-        setHappiness(happiness-10);
-        setPerformance(performance+10)
-      }
+    //   // word harder
+    //   const workHarder = () =>{
+    //     setTime(time - 90);
+    //     setHealth(health-10);
+    //     setHappiness(happiness-10);
+    //     setPerformance(performance+10)
+    //   }
 
 
-      // Study Subjects
-      const studyMath =() => {
-        setIQ(IQ + 5);
-        setEQ(EQ - 2);
-        setTime(time - 30);
-        
-      }
-      const studyLiterature =() => {
-        setIQ(IQ - 2);
-        setEQ(EQ + 2);
-        setTime(time - 30);
-        setKnowledge(knowledge +3 );
-        setCommunication(communication + 3);
+    //   // Study Subjects
+
+    //   const studyLiterature =() => {
+    //     setIQ(IQ - 2);
+    //     setEQ(EQ + 2);
+    //     setTime(time - 30);
+    //     setKnowledge(knowledge +3 );
+    //     setCommunication(communication + 3);
      
-      }
-      const studyScience =() => {
-        setIQ(IQ + 3);
-        setEQ(EQ - 1);
-        setTime(time - 30);
-        setHappiness(happiness + 2);
-        setKnowledge(knowledge + 3);
+    //   }
+    //   const studyScience =() => {
+    //     setIQ(IQ + 3);
+    //     setEQ(EQ - 1);
+    //     setTime(time - 30);
+    //     setHappiness(happiness + 2);
+    //     setKnowledge(knowledge + 3);
        
-      }
+    //   }
 
     //   const studyHistory =() => {
     //     setIQ(IQ + 5);
@@ -137,7 +133,7 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime, updateStats,studyMath,subjects,setSubject}}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime, updateStats,IQ, subjects, EQ,setIQ, setEQ, setSubject}}>
             {children}
         </UserContext.Provider>
     );

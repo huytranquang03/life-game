@@ -7,11 +7,14 @@ import { UserContext } from '../../store/UserContext';
 
 
 const SubjectListScreen = () => {
-    const { studyMath,subjects} = useContext(UserContext);
+    const { IQ, EQ, setIQ ,setEQ,subjects, time, setTime} = useContext(UserContext);
 
-    const handleStudy = () => {
-        studyMath();
-    };
+    const studyMath =() => {
+        setIQ(IQ + 5);
+        setEQ(EQ - 2);
+        setTime(time - 30);
+        
+      }
 
     return (
         <View style={styles.container}>
@@ -25,7 +28,8 @@ const SubjectListScreen = () => {
                         </View>
                         <View style={styles.buttonContainer}>
                             <View style={styles.button}>
-                                <IconButton icon={'book'} size={30} text={'Study'} onPress={(handleStudy) => {}} />
+                            <IconButton icon={'book'} size={30} text={'Study'} onPress={studyMath} />
+
                             </View>
                             <View style={styles.button}>
                                 <IconButton icon={'person'} size={30} text={'Teacher'} onPress={() => {}} />
