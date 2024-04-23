@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-function IconButton({ icon, size, color, onPress, text }) {
+function IconButton({ icon, size, color, onPress }) {
     return (
         <Pressable
             onPress={onPress}
@@ -10,7 +10,6 @@ function IconButton({ icon, size, color, onPress, text }) {
         >
             <View style={styles.innerContainer}>
                 <Ionicons name={icon} size={size} color={color} />
-                <Text style={{ margin: 8, fontSize: size / 3, fontWeight: '500', color: color }}>{text}</Text>
             </View>
         </Pressable>
     );

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Button, Image, StyleSheet, Text, Pressable } from 'react-native';
 import GameBar from '../../components/ui/GameBar';
 import IconButton from '../../components/ui/IconButton';
 import { ScrollView } from 'react-native-gesture-handler';
+import { UserContext } from '../../store/UserContext';
 
 const SchoolJobScreen = ({ navigation }) => {
-
+    const { isGraduated, setGraduated } = useContext(UserContext);
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -20,40 +21,42 @@ const SchoolJobScreen = ({ navigation }) => {
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Current Grade:</Text>
                     </View>
                 </View>
-                <View style={styles.mainView}>
-                    <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
-                        <GameBar progress={70} color={'green'} height={10} borderRadius={5} />
-                    </Pressable>
-                    <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Classmate</Text>
-                    </Pressable>
-                    <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
-                    </Pressable>
-                    <View style={styles.skipClass}>
-                        <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={() => { }} />
+                {!isGraduated ? (
+                    <View style={styles.mainView}>
+                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
+                            <GameBar progress={70} color={'green'} height={10} borderRadius={5} />
+                        </Pressable>
+                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Classmate</Text>
+                        </Pressable>
+                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
+                        </Pressable>
+                        <View style={styles.skipClass}>
+                            <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={() => { }} />
+                        </View>
                     </View>
-                </View>
-
-                <View style={styles.mainView}>
-                    <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Performance</Text>
-                        <GameBar progress={70} color={'green'} height={10} borderRadius={5} />
-                    </Pressable>
-                    <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Colleague</Text>
-                    </Pressable>
-                    <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
-                    </Pressable>
-                    <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('FulltimeJobListScreen') }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Full-time jobs</Text>
-                    </Pressable>
-                    <View style={styles.skipClass}>
-                        <IconButton icon={'briefcase'} size={50} color={'black'} text={'Work Harder'} onPress={() => { }} />
+                ) : (
+                    <View style={styles.mainView}>
+                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Performance</Text>
+                            <GameBar progress={70} color={'green'} height={10} borderRadius={5} />
+                        </Pressable>
+                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Colleague</Text>
+                        </Pressable>
+                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
+                        </Pressable>
+                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('FulltimeJobListScreen') }}>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Full-time jobs</Text>
+                        </Pressable>
+                        <View style={styles.skipClass}>
+                            <IconButton icon={'briefcase'} size={50} color={'black'} text={'Work Harder'} onPress={() => { }} />
+                        </View>
                     </View>
-                </View>
+                )}
             </View>
         </ScrollView>
     );
@@ -80,11 +83,9 @@ const styles = StyleSheet.create({
     },
     mainView: {
         width: '80%',
-        height: '40%',
         backgroundColor: 'cornsilk',
         borderRadius: 20,
         margin: 30,
-        justifyContent: 'center',
     },
     gradeBar: {
         margin: 20,
