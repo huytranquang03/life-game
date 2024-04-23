@@ -9,12 +9,23 @@ const UserProvider = ({ children }) => {
     const [balance, setBalance] = useState(0);
     const [time, setTime] = useState(0);
     const[EQ,IQ,setIQ,setEQ] = useState(100);
+    const[health, setHealth] =useState(100);
+    const[happiness, setHappiness] =useState(100);
+    const[knowledge, setKnowledge] =useState(0);
+    const[communication, setCommunication] =useState(100);
+    const[appearance, setAppearance] =useState(100);
+
  
 
     const studyHarder = () => {
         setIQ(IQ + 5);
         setEQ(EQ - 1);
         setTime(time - 90);
+        setHealth(health-1);
+        setHappiness(happiness-1);
+        setKnowledge(knowledge+10);
+        setCommunication(communication-1);
+        setAppearance(appearance+1)
       };
 
 
