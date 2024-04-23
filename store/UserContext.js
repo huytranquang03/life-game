@@ -13,20 +13,27 @@ const UserProvider = ({ children }) => {
     const[happiness, setHappiness] =useState(100);
     const[knowledge, setKnowledge] =useState(0);
     const[communication, setCommunication] =useState(100);
-    const[appearance, setAppearance] =useState(100);
+    // const[appearance, setAppearance] =useState(100);
+    const[grade, setGrade] =useState(100);
 
- 
-
+    // study harder
     const studyHarder = () => {
         setIQ(IQ + 5);
         setEQ(EQ - 1);
         setTime(time - 90);
         setHealth(health-1);
-        setHappiness(happiness-1);
-        setKnowledge(knowledge+10);
-        setCommunication(communication-1);
-        setAppearance(appearance+1)
+        setHappiness(happiness-10);
+        setKnowledge(knowledge+5);
+        setCommunication(communication-5);
+        setGrade(appearance+10)
       };
+
+      // word harder
+      const workHarder = () =>
+      setTime(time - 90);
+        setHealth(health-1);
+        
+      }
 
 
     // Define initial values for intelStats and stats as arrays
@@ -67,7 +74,7 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime }}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime, updateStats}}>
             {children}
         </UserContext.Provider>
     );
