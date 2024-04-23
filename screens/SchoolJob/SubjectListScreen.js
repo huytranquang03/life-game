@@ -4,24 +4,13 @@ import GameBar from '../../components/ui/GameBar';
 import IconButton from '../../components/ui/IconButton';
 import { UserContext } from '../../store/UserContext';
 
-const subjects = [
-    { id: '1', name: 'Math', grade: '50' },
-    { id: '2', name: 'Literature', grade: '50' },
-    { id: '3', name: 'Science', grade: '50' },
-    { id: '4', name: 'History', grade: '50' },
-    { id: '5', name: 'Geography', grade: '50' },
-    { id: '6', name: 'Art', grade: '50' },
-    { id: '7', name: 'IT', grade: '50' },
-    { id: '8', name: 'PE', grade: '50' },
-    { id: '9', name: 'Foreign Language', grade: '50' },
-];
+
 
 const SubjectListScreen = () => {
-    const { studyMath } = useContext(UserContext);
+    const { studyMath,subjects} = useContext(UserContext);
 
-    const handleStudy = (subjectId) => {
-        // Call the study method with the subjectId
-        studyMath(subjectId);
+    const handleStudy = () => {
+        studyMath();
     };
 
     return (
@@ -36,7 +25,7 @@ const SubjectListScreen = () => {
                         </View>
                         <View style={styles.buttonContainer}>
                             <View style={styles.button}>
-                                <IconButton icon={'book'} size={30} text={'Study'} onPress={() => handleStudy(item.name)} />
+                                <IconButton icon={'book'} size={30} text={'Study'} onPress={(handleStudy) => {}} />
                             </View>
                             <View style={styles.button}>
                                 <IconButton icon={'person'} size={30} text={'Teacher'} onPress={() => {}} />

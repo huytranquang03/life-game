@@ -87,6 +87,19 @@ const UserProvider = ({ children }) => {
       
 
     // Define initial values for intelStats and stats as arrays
+    const [subjects,setSubject] = useState([ 
+        { id: '1', name: 'Math', grade: '50' },
+        { id: '2', name: 'Literature', grade: '50' },
+        { id: '3', name: 'Science', grade: '50' },
+        { id: '4', name: 'History', grade: '50' },
+        { id: '5', name: 'Geography', grade: '50' },
+        { id: '6', name: 'Art', grade: '50' },
+        { id: '7', name: 'IT', grade: '50' },
+        { id: '8', name: 'PE', grade: '50' },
+        { id: '9', name: 'Foreign Language', grade: '50' },
+    ]);
+
+
     const [intelStats, setIntelStats] = useState([
         { name: 'Intelligence', progress: 0, color: 'yellow' },
         { name: 'IQ', progress: 80, color: 'red', description: "Your problem solving ability\nNeeded for certain profession" },
@@ -124,7 +137,7 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime, updateStats,studyMath}}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime, updateStats,studyMath,subjects,setSubject}}>
             {children}
         </UserContext.Provider>
     );
