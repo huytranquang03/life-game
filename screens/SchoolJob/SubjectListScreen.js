@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import GameBar from '../../components/ui/GameBar';
 import IconButton from '../../components/ui/IconButton';
+import { UserContext } from '../../store/UserContext';
 
 const subjects = [
     { id: '1', name: 'Math', grade: '50' },
@@ -16,27 +17,34 @@ const subjects = [
 ];
 
 const SubjectListScreen = () => {
+    const { studyMath } = useContext(UserContext);
+
+    const handleStudy = (subjectId) => {
+        // Call the study method with the subjectId
+        studyMath(subjectId);
+    };
+
     return (
         <View style={styles.container}>
             <FlatList
                 data={subjects}
                 renderItem={({ item }) => (
                     <View style={styles.item} key={item.id}>
-                        <View styles={{ with: 100 }}>
+                        <View style={{ width: 100 }}>
                             <Text style={styles.title}>{item.name}</Text>
                             <GameBar progress={item.grade} color={'green'} height={10} borderRadius={5} />
                         </View>
                         <View style={styles.buttonContainer}>
                             <View style={styles.button}>
-                                <IconButton icon={'book'} size={30} text={'Study'} onPress={()=>{}}/>
+                                <IconButton icon={'book'} size={30} text={'Study'} onPress={() => handleStudy(item.name)} />
                             </View>
                             <View style={styles.button}>
-                                <IconButton icon={'person'} size={30} text={'Teacher'} onPress={()=>{}}/>
+                                <IconButton icon={'person'} size={30} text={'Teacher'} onPress={() => {}} />
                             </View>
                         </View>
                     </View>
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={(item) => item.id}
                 contentContainerStyle={{ paddingBottom: 20 }} // Add some padding at the bottom
                 showsVerticalScrollIndicator={false} // Hide the scroll indicator
             />
@@ -72,6 +80,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
 });
-
 
 export default SubjectListScreen;

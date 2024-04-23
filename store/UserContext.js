@@ -13,8 +13,9 @@ const UserProvider = ({ children }) => {
     const[happiness, setHappiness] =useState(100);
     const[knowledge, setKnowledge] =useState(0);
     const[communication, setCommunication] =useState(100);
-    // const[appearance, setAppearance] =useState(100);
+    const[appearance, setAppearance] =useState(100);
     const[grade, setGrade] =useState(100);
+    const[performance, setPerformance] = useState(100);
 
     // study harder
     const studyHarder = () => {
@@ -25,16 +26,65 @@ const UserProvider = ({ children }) => {
         setHappiness(happiness-10);
         setKnowledge(knowledge+5);
         setCommunication(communication-5);
-        setGrade(appearance+10)
+        setGrade(grade+10)
       };
 
       // word harder
-      const workHarder = () =>
-      setTime(time - 90);
-        setHealth(health-1);
-        
+      const workHarder = () =>{
+        setTime(time - 90);
+        setHealth(health-10);
+        setHappiness(happiness-10);
+        setPerformance(performance+10)
       }
 
+
+      // Study Subjects
+      const studyMath =() => {
+        setIQ(IQ + 5);
+        setEQ(EQ - 2);
+        setTime(time - 30);
+        
+      }
+      const studyLiterature =() => {
+        setIQ(IQ - 2);
+        setEQ(EQ + 2);
+        setTime(time - 30);
+        setKnowledge(knowledge +3 );
+        setCommunication(communication + 3);
+     
+      }
+      const studyScience =() => {
+        setIQ(IQ + 3);
+        setEQ(EQ - 1);
+        setTime(time - 30);
+        setHappiness(happiness + 2);
+        setKnowledge(knowledge + 3);
+       
+      }
+
+    //   const studyHistory =() => {
+    //     setIQ(IQ + 5);
+    //     setEQ(EQ - 1);
+    //     setTime(time - 90);
+    //     setHealth(health-1);
+    //     setHappiness(happiness-10);
+    //     setKnowledge(knowledge+5);
+    //     setCommunication(communication-5);
+    //     setGrade(grade+10)
+    //   }
+
+    //   const studyForeignLanguage =() => {
+    //     setIQ(IQ + 5);
+    //     setEQ(EQ - 1);
+    //     setTime(time - 90);
+    //     setHealth(health-1);
+    //     setHappiness(happiness-10);
+    //     setKnowledge(knowledge+5);
+    //     setCommunication(communication-5);
+    //     setGrade(grade+10)
+    //   }
+      
+      
 
     // Define initial values for intelStats and stats as arrays
     const [intelStats, setIntelStats] = useState([
@@ -60,7 +110,7 @@ const UserProvider = ({ children }) => {
     const averageIntelProgress = calculateAverageProgress(intelStats);
 
     intelStats[0].progress = averageIntelProgress;
-
+    // update state
     const updateStats = () => {
         const calculatedStats = stats.map(stat => {
             return { ...stat, progress: Math.max(0, stat.progress - Math.floor(Math.random() * 5) + 1) };  // Cập nhật giá trị progress bằng cách trừ đi decrement
@@ -74,7 +124,7 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime, updateStats}}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, age, setAge, balance, setBalance, time, setTime, updateStats,studyMath}}>
             {children}
         </UserContext.Provider>
     );
