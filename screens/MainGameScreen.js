@@ -38,7 +38,7 @@ const MainGameScreen = ({ navigation }) => {
 			<View style={styles.buttonRow}>
 				<ActionButton icon="school" text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
 				<ActionButton icon="logo-usd" text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
-				<ActionButton icon="add-outline" text="Age" onPress={plusAgeButton} />
+				<ActionButton icon="add-circle" text="Age" onPress={plusAgeButton} />
 				<ActionButton icon="heart" text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
 				<ActionButton icon="fitness" text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
 			</View>

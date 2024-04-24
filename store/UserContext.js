@@ -8,6 +8,7 @@ const UserProvider = ({ children }) => {
     const [age, setAge] = useState(0);
     const [balance, setBalance] = useState(0);
     const [time, setTime] = useState(0);
+    const [isGraduated, setGraduated] = useState(false);
 
     // Define initial values for intelStats and stats as arrays
     const [intelStats, setIntelStats] = useState([
@@ -47,7 +48,7 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, setStats, age, setAge, balance, setBalance, time, setTime, updateStats, setIntelStats }}>
+        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, setStats, age, setAge, balance, setBalance, time, setTime, updateStats, setIntelStats, isGraduated, setGraduated }}>
             {children}
         </UserContext.Provider>
     );
