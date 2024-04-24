@@ -13,6 +13,7 @@ import ActivitiesScreen from './screens/ActivitiesScreen'
 import SubjectListScreen from './screens/SchoolJob/SubjectListScreen';
 import ClassmateListScreen from './screens/SchoolJob/ClassmateListScreen';
 import { ParttimeJobListScreen, FulltimeJobListScreen } from './screens/SchoolJob/JobListScreen';
+import NPCDetailsScreen from './screens/NPCDetailsScreen';
 
 import { UserProvider } from './store/UserContext';
 const Stack = createStackNavigator();
@@ -36,7 +37,7 @@ const App = () => {
                     <Stack.Screen name="ClassmateListScreen" component={ClassmateListScreen} />
                     <Stack.Screen name="ParttimeJobListScreen" component={ParttimeJobListScreen} />
                     <Stack.Screen name="FulltimeJobListScreen" component={FulltimeJobListScreen} />
-
+                    <Stack.Screen name="NPCDetailsScreen" component={NPCDetailsScreen} />
 
                 </Stack.Navigator>
             </NavigationContainer>
