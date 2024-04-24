@@ -16,24 +16,4 @@ const RelationshipScreen = ({ navigation }) => {
 	return <ListItem data={npcData} onPress={handlePress} />;
 };
 
-const styles = StyleSheet.create({
-	item: {
-		width: 700,
-		borderBottomWidth: 1,
-		borderBottomColor: "#ccc",
-	},
-	itemContent: {
-		flexDirection: "row",
-		alignItems: "center",
-		padding: 20,
-	},
-	text: {
-		marginLeft: 20,
-		fontSize: 30,
-	},
-	pressed: {
-		opacity: 0.5,
-	},
-});
-
 export default RelationshipScreen;
