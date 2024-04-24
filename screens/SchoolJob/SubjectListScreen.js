@@ -17,7 +17,6 @@ const SubjectListScreen = () => {
 
     const study = (subject) => {
         if (subject.name === 'Math') {
-            console.log("Study math");
             studyMath();
         } else if (subject.name === 'Literature') {
             studyLiterature();
