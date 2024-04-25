@@ -5,6 +5,7 @@ import IconButton from "../components/ui/IconButton";
 import GameBar from "../components/ui/GameBar";
 import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
+import Avatar from "../components/ui/Avatar"; // Import Avatar component
 
 const MainGameScreen = ({ navigation }) => {
 	const { stats, intelStats, name, age, balance, setAge, setTime, updateStats } = useContext(UserContext);
@@ -19,8 +20,9 @@ const MainGameScreen = ({ navigation }) => {
 		<View style={styles.container}>
 			<View style={styles.topRow}>
 				<Pressable style={styles.profileImageContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
-					<Image source={{ uri: "https://picsum.photos/100/100" }} style={styles.profileImage} />
-				</Pressable>
+				<Avatar source={{ uri: "https://picsum.photos/100/100" }} name={name} onPress={() => navigation.navigate("PlayerStatsScreen")} />
+
+						</Pressable>
 				<Pressable style={styles.profileInfoContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
 					<Text style={styles.profileName}>{name}</Text>
 					<Text style={styles.ageText}>Age: {age}</Text>
@@ -79,10 +81,11 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		width: "100%",
-		marginTop: 20,
+		marginTop: 10,
+		padding:0,
 	},
 	profileImageContainer: {
-		padding: 20,
+		padding: 10,
 	},
 	profileImage: {
 		width: 80,
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
 	},
 	textBox: {
 		width: "100%",
-		height: 300,
+		height: 310,
 		backgroundColor: "black",
 		marginTop: 20,
 	},
