@@ -93,6 +93,17 @@ const UserProvider = ({ children }) => {
         { name: 'Appearance', progress: 70, color: 'blue', description: "Your looks. The higher it is, the more it would help with your relationships" },
     ]);
 
+    const [npcData ] = useState([
+      { id: 1, icon: "checkbox-outline", item: 'Parent', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': true, 'Spendtime': true, 'Compliment': true, 'Flirt': false, 'Ask out': false, 'Propose': false, 'Be friend': false, 'Bribe': false, 'Have child': false, 'Promote/Raise': false }},
+      { id: 2, icon: "checkbox-outline", item: 'Friend', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': true, 'Spendtime': true, 'Compliment': true, 'Flirt': true, 'Ask out': true, 'Propose': false, 'Be friend': false, 'Bribe': false, 'Have child': false, 'Promote/Raise': false }},
+      { id: 3, icon: "checkbox-outline", item: 'Superior', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': false, 'Spendtime': true, 'Compliment': true, 'Flirt': true, 'Ask out': true, 'Propose': false, 'Be friend': false, 'Bribe': true, 'Have child': false, 'Promote/Raise': true }},
+      { id: 4, icon: "checkbox-outline", item: 'Classmate', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': false, 'Spendtime': true, 'Compliment': true, 'Flirt': true, 'Ask out': true, 'Propose': false, 'Be friend': true, 'Bribe': false, 'Have child': false, 'Promote/Raise': false }},
+      { id: 5, icon: "checkbox-outline", item: 'Sibling', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': true, 'Spendtime': true, 'Compliment': true, 'Flirt': false, 'Ask out': false, 'Propose': false, 'Be friend': false, 'Bribe': false, 'Have child': false, 'Promote/Raise': false }},
+      { id: 6, icon: "checkbox-outline", item: 'Teacher', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': false, 'Spendtime': true, 'Compliment': true, 'Flirt': true, 'Ask out': true, 'Propose': false, 'Be friend': false, 'Bribe': true, 'Have child': false, 'Promote/Raise': false }},
+      { id: 7, icon: "checkbox-outline", item: 'Lover', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': true, 'Spendtime': true, 'Compliment': true, 'Flirt': false, 'Ask out': false, 'Propose': true, 'Be friend': false, 'Bribe': false, 'Have child': false, 'Promote/Raise': false }},
+      { id: 8, icon: "checkbox-outline", item: 'Husband/Wife', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': true, 'Spendtime': true, 'Compliment': true, 'Flirt': false, 'Ask out': false, 'Propose': false, 'Be friend': false, 'Bribe': false, 'Have child': true, 'Promote/Raise': false }},
+   ]);
+
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
 
     const calculateAverageProgress = (arr) => {
@@ -170,7 +181,8 @@ const UserProvider = ({ children }) => {
             isGraduated, setGraduated,
             plusAge,
             performance, setPerformance,
-            diploma, setDiploma
+            diploma, setDiploma,
+            npcData
         }}>
             {children}
         </UserContext.Provider>

@@ -1,24 +1,19 @@
-import React from 'react';
-import { View, Button, StyleSheet ,Text} from 'react-native';
+import React, { useContext } from "react";
+import { StyleSheet } from "react-native";
+import ListItem from "../components/layout/ListItem";
+import { UserContext } from "../store/UserContext";
 
 const RelationshipScreen = ({ navigation }) => {
-   
-    return (
-        <View style={styles.container}>
-              <Text> This is Realtionship Screen  </Text>       
-        </View>
-    );
-};
+   const { npcData } = useContext(UserContext);
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    button: {
-        marginTop: 10,
-    },
-});
+	const handlePress = (item) => {
+		console.log("Pressed item with ID:", item.id);
+		navigation.navigate("NPCDetailsScreen", {
+			actions: item.actions,
+		});
+	};
+
+	return <ListItem data={npcData} onPress={handlePress} />;
+};
 
 export default RelationshipScreen;
