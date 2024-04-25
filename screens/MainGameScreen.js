@@ -7,13 +7,9 @@ import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
 
 const MainGameScreen = ({ navigation }) => {
-	const { stats, intelStats, name, age, balance, setAge, setTime, updateStats } = useContext(UserContext);
+	const { stats, intelStats, name, age, balance, plusAge } = useContext(UserContext);
 
-	const plusAgeButton = () => {
-      setTime(0);
-      setAge(age + 1);
-      updateStats();
-  };  
+
 
 	return (
 		<View style={styles.container}>
@@ -33,12 +29,12 @@ const MainGameScreen = ({ navigation }) => {
 				<Text style={styles.text}>This is text box</Text>
 			</View>
 
-			<TimeBar duration={3} color="pink" height={20} borderRadius={10} />
+			<TimeBar duration={10} color="pink" height={20} borderRadius={10} />
 
 			<View style={styles.buttonRow}>
 				<ActionButton icon="school" text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
 				<ActionButton icon="logo-usd" text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
-				<ActionButton icon="add-circle" text="Age" onPress={plusAgeButton} />
+				<ActionButton icon="add-circle" text="Age" onPress={plusAge} />
 				<ActionButton icon="heart" text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
 				<ActionButton icon="fitness" text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
 			</View>

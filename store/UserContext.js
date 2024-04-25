@@ -9,14 +9,15 @@ const UserProvider = ({ children }) => {
     const [balance, setBalance] = useState(0);
     const [time, setTime] = useState(0);
     const [isGraduated, setGraduated] = useState(false);
-
     const [grade, setGrade] = useState(0);
+    const [performance, setPerformance] = useState(0);
+    const [diploma, setDiploma] = useState('None');
 
     // study harder
     const studyHarder = () => {
         setIQ(IQ + 5);
         setEQ(EQ - 1);
-        setTime(time - 90);
+        setTime(time + 90);
         setHealth(health - 1);
         setHappiness(happiness - 10);
         setKnowledge(knowledge + 5);
@@ -26,7 +27,7 @@ const UserProvider = ({ children }) => {
 
     // word harder
     const workHarder = () => {
-        setTime(time - 90);
+        setTime(time + 90);
         setHealth(health - 10);
         setHappiness(happiness - 10);
         setPerformance(performance + 10)
@@ -36,7 +37,7 @@ const UserProvider = ({ children }) => {
     // Study Subjects
     const studyMath = () => {
         const intelChanges = {
-            IQ: 2,
+            IQ: 10,
             EQ: -1,
         };
         const statsChanges = {
@@ -45,7 +46,7 @@ const UserProvider = ({ children }) => {
         updateIntelStats(intelChanges);
         updateStats(statsChanges)
         setGrade(grade + 2);
-        setTime(time - 30);
+        setTime(time + 30);
     };
 
     const studyLiterature = () => {
@@ -59,9 +60,9 @@ const UserProvider = ({ children }) => {
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
         setGrade(grade + 2);
-        setTime(time - 30);
+        setTime(time + 30);
     };
-    
+
     const studyForeignLanguage = () => {
         const intelChanges = {
             IQ: 2,
@@ -74,7 +75,7 @@ const UserProvider = ({ children }) => {
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
         setGrade(grade + 2);
-        setTime(time - 30);
+        setTime(time + 30);
     };
 
     // Define initial values for intelStats and stats as arrays
@@ -140,13 +141,37 @@ const UserProvider = ({ children }) => {
         const calculatedIntelStats = intelStats.map(intelStat => {
             return { ...intelStat, progress: Math.max(0, intelStat.progress - Math.floor(Math.random() * 5) + 1) };  // Cập nhật giá trị progress bằng cách trừ đi decrement
         });
+
         setIntelStats(calculatedIntelStats);
         setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
+        setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
     };
 
+    const plusAge = () => {
+        setTime(0);
+        setAge(age + 1);
+        decreaseStats();
+    };
 
     return (
-        <UserContext.Provider value={{ name, setName, gender, setGender, intelStats, stats, grade, age, setAge, balance, setBalance, time, setTime, updateStats, studyMath, studyLiterature, studyForeignLanguage, isGraduated, setGraduated, decreaseStats }}>
+        <UserContext.Provider value={{
+            name, setName,
+            gender, setGender,
+            intelStats,
+            stats,
+            grade,
+            age, setAge,
+            balance, setBalance,
+            time, setTime,
+            updateStats,
+            studyMath,
+            studyLiterature,
+            studyForeignLanguage,
+            isGraduated, setGraduated,
+            plusAge,
+            performance, setPerformance,
+            diploma, setDiploma
+        }}>
             {children}
         </UserContext.Provider>
     );

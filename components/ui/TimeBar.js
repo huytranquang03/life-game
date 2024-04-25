@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { UserContext } from '../../store/UserContext';
 
 const TimeBar = ({ duration, color, height, borderRadius }) => {
-    const { time, setTime, age, setAge, decreaseStats } = useContext(UserContext);
+    const { time, setTime, age, setAge, plusAge } = useContext(UserContext);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -18,9 +18,7 @@ const TimeBar = ({ duration, color, height, borderRadius }) => {
 
     useEffect(() => {
         if (time >= 100) {
-            setTime(0); // Reset the time
-            setAge(age + 1); // Increment age
-            decreaseStats(); // Update stats
+            plusAge();
         }
     }, [time]);
 
