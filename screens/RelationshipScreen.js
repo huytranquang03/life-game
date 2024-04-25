@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { StyleSheet } from "react-native";
 import ListItem from "../components/layout/ListItem";
 import { UserContext } from "../store/UserContext";
 
