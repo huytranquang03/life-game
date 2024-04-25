@@ -146,17 +146,29 @@ const UserProvider = ({ children }) => {
 
 
     const decreaseStats = () => {
-        const calculatedStats = stats.map(stat => {
-            return { ...stat, progress: Math.max(0, stat.progress - Math.floor(Math.random() * 5) + 1) };  // Cập nhật giá trị progress bằng cách trừ đi decrement
-        });
-        const calculatedIntelStats = intelStats.map(intelStat => {
-            return { ...intelStat, progress: Math.max(0, intelStat.progress - Math.floor(Math.random() * 5) + 1) };  // Cập nhật giá trị progress bằng cách trừ đi decrement
-        });
-
-        setIntelStats(calculatedIntelStats);
-        setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
-        setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
-    };
+      const calculatedStats = stats.map(stat => {
+          // Xác định giá trị giảm dựa trên độ tuổi
+          let decrement;
+          if (age >= 1 && age <= 39) {
+              decrement = Math.floor(Math.random() * 5) + 1; // Giảm từ 1 đến 5
+          } else if (age >= 40 && age <= 80) {
+              decrement = Math.floor(Math.random() * 10) + 1; // Giảm từ 1 đến 10
+          } else {
+              decrement = 0; // Không giảm nếu nằm ngoài khoảng tuổi đã chỉ định
+          }
+  
+          return { ...stat, progress: Math.max(0, stat.progress - decrement) };
+      });
+  
+      const calculatedIntelStats = intelStats.map(intelStat => {
+          return { ...intelStat, progress: Math.max(0, intelStat.progress - Math.floor(Math.random() * 5) + 1) };
+      });
+  
+      setIntelStats(calculatedIntelStats);
+      setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
+      setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
+  };
+  
 
     const plusAge = () => {
         setTime(0);
