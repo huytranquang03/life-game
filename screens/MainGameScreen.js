@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { View, StyleSheet, Text, Image, Pressable } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, StyleSheet, Text, Image, Pressable, Alert } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import IconButton from "../components/ui/IconButton";
 import GameBar from "../components/ui/GameBar";
@@ -9,7 +9,14 @@ import { UserContext } from "../store/UserContext";
 const MainGameScreen = ({ navigation }) => {
 	const { stats, intelStats, name, age, balance, plusAge } = useContext(UserContext);
 
-
+	useEffect(() => {
+		// Hiển thị thông báo khi màn hình này được render
+		Alert.alert(
+			"Thông báo",
+			"Chào mừng bạn đến với trò chơi!",
+			[{ text: "OK", onPress: () => console.log("Alert closed") }]
+		);
+	}, []);
 
 	return (
 		<View style={styles.container}>
@@ -157,4 +164,3 @@ const styles = StyleSheet.create({
 });
 
 export default MainGameScreen;
-          
