@@ -2,31 +2,24 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 
-const data = [
-  { id: 1, icon: 'ios-shirt', item: 'Áo thu', price: '$10' },
-];
+function StoreItem({ data, onPress }) {
+  function renderItem({ item }) {
+    return (
+      <Pressable
+        onPress={() => onPress(item)}
+        style={({ pressed }) => [styles.item, pressed && styles.pressed]}
+      >
+        <View style={styles.itemContent}>
+          <View style={styles.leftContainer}>
+            <Ionicons name={item.icon} size={24} color="black" />
+            <Text style={styles.storeText}>{item.item}</Text>
+          </View>
+          <Text style={styles.price}>${item.price}</Text>
+        </View>
+      </Pressable>
+    );
+  }
 
-function renderItem({ item }) {
-  return (
-    <Pressable
-      onPress={() => handlePress(item.id)}
-      style={({ pressed }) => [styles.item, pressed && styles.pressed]}
-    >
-      <View style={styles.itemContent}>
-        <Ionicons name={item.icon} size={24} color="black" />
-        <Text style={styles.storeText}>{item.item}</Text>
-        <Text style={styles.text}>{item.price}</Text>
-      </View>
-    </Pressable>
-  );
-}
-
-function handlePress(id) {
-  console.log('Pressed item with ID:', id);
-  // Add navigation here
-}
-
-function StoreItem() {
   return (
     <FlatList
       data={data}
@@ -40,22 +33,24 @@ const styles = StyleSheet.create({
   item: {
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    width:700,
+    width: '100%',
   },
   itemContent: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems:'flex-end',
+    justifyContent: 'space-between', // Adjusts items to opposite sides
+    alignItems: 'center',
     padding: 20,
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   storeText: {
     marginLeft: 10,
-    fontSize:30,
-    textAlign:'left',
+    fontSize: 30,
   },
-  text: {
-    marginLeft: 10,
-    fontSize:30,
+  price: {
+    fontSize: 30,
   },
   pressed: {
     opacity: 0.5,

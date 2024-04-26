@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { UserContext } from '../../store/UserContext';
 
 const SchoolJobScreen = ({ navigation }) => {
-    const { isGraduated, setGraduated } = useContext(UserContext);
+    const { grade, isGraduated, setGraduated, performance } = useContext(UserContext);
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -25,7 +25,7 @@ const SchoolJobScreen = ({ navigation }) => {
                     <View style={styles.mainView}>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
-                            <GameBar progress={70} color={'green'} height={10} borderRadius={5} />
+                            <GameBar progress={grade} color={'green'} height={10} borderRadius={5} />
                         </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Classmate</Text>
@@ -41,7 +41,7 @@ const SchoolJobScreen = ({ navigation }) => {
                     <View style={styles.mainView}>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Performance</Text>
-                            <GameBar progress={70} color={'green'} height={10} borderRadius={5} />
+                            <GameBar progress={performance} color={'green'} height={10} borderRadius={5} />
                         </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Colleague</Text>

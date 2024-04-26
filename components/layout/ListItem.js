@@ -2,14 +2,10 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 
-const data = [
-  { id: 1, icon: 'ios-pants', item: 'Quần dài' },
-];
-
-function ListItem() {
+function ListItem({ data, onPress }) {
   const renderItem = ({ item }) => (
     <Pressable
-      onPress={() => handlePress(item.id)}
+      onPress={() => onPress(item)}
       style={({ pressed }) => [styles.item, pressed && styles.pressed]}
     >
       <View style={styles.itemContent}>
@@ -18,11 +14,6 @@ function ListItem() {
       </View>
     </Pressable>
   );
-
-  const handlePress = (id) => {
-    console.log('Pressed item with ID:', id);
-    // Add navigation or action 
-  };
 
   return (
     <FlatList

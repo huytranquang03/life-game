@@ -1,42 +1,53 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import GameBar from '../../components/ui/GameBar';
 import IconButton from '../../components/ui/IconButton';
+import { UserContext } from '../../store/UserContext';
 
-const subjects = [
-    { id: '1', name: 'Math', grade: '50' },
-    { id: '2', name: 'Literature', grade: '50' },
-    { id: '3', name: 'Science', grade: '50' },
-    { id: '4', name: 'History', grade: '50' },
-    { id: '5', name: 'Geography', grade: '50' },
-    { id: '6', name: 'Art', grade: '50' },
-    { id: '7', name: 'IT', grade: '50' },
-    { id: '8', name: 'PE', grade: '50' },
-    { id: '9', name: 'Foreign Language', grade: '50' },
-];
+
 
 const SubjectListScreen = () => {
+    const { studyMath, studyLiterature, studyForeignLanguage, grade } = useContext(UserContext);
+
+    const subjects = [
+        { id: '1', name: 'Math' },
+        { id: '2', name: 'Literature' },
+        { id: '3', name: 'Foreign Language' },
+    ];
+
+    const study = (subject) => {
+        if (subject.name === 'Math') {
+            studyMath();
+        } else if (subject.name === 'Literature') {
+            studyLiterature();
+        } else if (subject.name === 'Foreign Language') {
+            studyForeignLanguage();
+        }
+    };
+
     return (
         <View style={styles.container}>
+            <View style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
+                <GameBar progress={grade} color={'green'} height={10} borderRadius={5} />
+            </View>
             <FlatList
                 data={subjects}
                 renderItem={({ item }) => (
                     <View style={styles.item} key={item.id}>
-                        <View styles={{ with: 100 }}>
+                        <View style={styles.subjectItem}>
                             <Text style={styles.title}>{item.name}</Text>
-                            <GameBar progress={item.grade} color={'green'} height={10} borderRadius={5} />
-                        </View>
-                        <View style={styles.buttonContainer}>
+
                             <View style={styles.button}>
-                                <IconButton icon={'book'} size={30} text={'Study'} onPress={()=>{}}/>
+                                <IconButton icon={'book'} size={30} text={'Study'} onPress={() => study(item)} />
                             </View>
                             <View style={styles.button}>
-                                <IconButton icon={'person'} size={30} text={'Teacher'} onPress={()=>{}}/>
+                                <IconButton icon={'person'} size={30} text={'Teacher'} onPress={() => { }} />
                             </View>
                         </View>
                     </View>
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={(item) => item.id}
                 contentContainerStyle={{ paddingBottom: 20 }} // Add some padding at the bottom
                 showsVerticalScrollIndicator={false} // Hide the scroll indicator
             />
@@ -50,6 +61,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingTop: 50,
     },
+    gradeBar: {
+        margin: 20,
+        fontSize: 14,
+        fontWeight: '200',
+        backgroundColor: 'coral',
+        padding: 20,
+        borderRadius: 20,
+    },
     item: {
         backgroundColor: 'beige',
         padding: 20,
@@ -59,19 +78,22 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
+        fontWeight: '500',
+        width: 80,
+        textAlign: 'center',
+        alignSelf: 'center',
     },
-    buttonContainer: {
+    subjectItem: {
         flexDirection: 'row',
+        justifyContent: 'center',
         justifyContent: 'center',
     },
     button: {
         width: 'auto',
         backgroundColor: 'aliceblue',
         borderRadius: 50,
-        marginTop: 10,
-        marginHorizontal: 20,
+        marginHorizontal: 5,
     },
 });
-
 
 export default SubjectListScreen;

@@ -1,24 +1,26 @@
 import React from 'react';
-import { View, Button, StyleSheet ,Text} from 'react-native';
+import StoreItem from '../components/layout/StoreItem';
 
 const FinanceScreen = ({ navigation }) => {
-   
+   const data = [
+      {id: 1, icon: 'checkbox-outline', item: 'Store1', price: 100},
+      {id: 2, icon: 'checkbox-outline', item: 'Store1', price: 100},
+      {id: 3, icon: 'checkbox-outline', item: 'Store1', price: 100},
+      {id: 4, icon: 'checkbox-outline', item: 'Store1', price: 100},
+      {id: 5, icon: 'checkbox-outline', item: 'Store1', price: 100},
+      {id: 6, icon: 'checkbox-outline', item: 'Store1', price: 100},
+      {id: 7, icon: 'checkbox-outline', item: 'Store1', price: 100},
+   ]
+   const handlePress = (item) => {
+		console.log("Pressed item with ID:", item.id);
+		navigation.navigate("MainGameScreen", {
+			actions: item.actions,
+		});
+	};
     return (
-        <View style={styles.container}>
-              <Text> This is Finance Screen  </Text>       
-        </View>
+        <StoreItem data={data} onPress={handlePress} />
     );
+    
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    button: {
-        marginTop: 10,
-    },
-});
 
 export default FinanceScreen;

@@ -1,26 +1,31 @@
-import React, { useContext } from "react";
-import { View, StyleSheet, Text, Image, Pressable } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, StyleSheet, Text, Image, Pressable, Alert } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import IconButton from "../components/ui/IconButton";
 import GameBar from "../components/ui/GameBar";
 import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
+import Avatar from "../components/ui/Avatar"; // Import Avatar component
 
 const MainGameScreen = ({ navigation }) => {
-	const { stats, intelStats, name, age, balance, setAge, setTime, updateStats } = useContext(UserContext);
+	const { stats, intelStats, name, age, balance, plusAge } = useContext(UserContext);
 
-	const plusAgeButton = () => {
-      setTime(0);
-      setAge(age + 1);
-      updateStats();
-  };  
+	useEffect(() => {
+		// Hiển thị thông báo khi màn hình này được render
+		Alert.alert(
+			"Thông báo",
+			"Chào mừng bạn đến với trò chơi!",
+			[{ text: "OK", onPress: () => console.log("Alert closed") }]
+		);
+	}, []);
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.topRow}>
 				<Pressable style={styles.profileImageContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
-					<Image source={{ uri: "https://picsum.photos/100/100" }} style={styles.profileImage} />
-				</Pressable>
+				<Avatar source={{ uri: "https://picsum.photos/100/100" }} name={name} onPress={() => navigation.navigate("PlayerStatsScreen")} />
+
+						</Pressable>
 				<Pressable style={styles.profileInfoContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
 					<Text style={styles.profileName}>{name}</Text>
 					<Text style={styles.ageText}>Age: {age}</Text>
@@ -33,12 +38,12 @@ const MainGameScreen = ({ navigation }) => {
 				<Text style={styles.text}>This is text box</Text>
 			</View>
 
-			<TimeBar duration={3} color="pink" height={20} borderRadius={10} />
+			<TimeBar duration={10} color="pink" height={20} borderRadius={10} />
 
 			<View style={styles.buttonRow}>
 				<ActionButton icon="school" text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
 				<ActionButton icon="logo-usd" text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
-				<ActionButton icon="add-circle" text="Age" onPress={plusAgeButton} />
+				<ActionButton icon="add-circle" text="Age" onPress={plusAge} />
 				<ActionButton icon="heart" text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
 				<ActionButton icon="fitness" text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
 			</View>
@@ -79,10 +84,11 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		width: "100%",
-		marginTop: 20,
+		marginTop: 10,
+		padding:0,
 	},
 	profileImageContainer: {
-		padding: 20,
+		padding: 10,
 	},
 	profileImage: {
 		width: 80,
@@ -116,7 +122,7 @@ const styles = StyleSheet.create({
 	},
 	textBox: {
 		width: "100%",
-		height: 300,
+		height: 310,
 		backgroundColor: "black",
 		marginTop: 20,
 	},
