@@ -11,63 +11,73 @@ import RandomEvent from "../components/layout/RandomEvent";
 
 
 const MainGameScreen = ({ navigation }) => {
-	const { stats, intelStats, name, age, balance, plusAge,resetAge,setAge } = useContext(UserContext);
-    const [currentMinute, setCurrentMinute] = useState(new Date().getMinutes());
+	const { stats, intelStats, name, age, balance, plusAge,setAge } = useContext(UserContext);
     const [popupVisible, setPopupVisible] = useState(false);
-    const [popupMessage, setPopupMessage] = useState("")
+    const [popupMessage, setPopupMessage] = useState("");
 
-
-	useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentMinute(new Date().getMinutes());
-        }, 60000); // Update currentMinute every minute
+            const randomNumber = Math.random();
+            const threshold = 0.5; // Change this threshold to adjust the probability
+            if (randomNumber < threshold) {
+                // Show popup
+                setPopupVisible(true);
+                const randomMessage = getRandomMessage();
+                setPopupMessage(randomMessage);
+            } else {
+                // Hide popup
+                setPopupVisible(false);
+                setPopupMessage("");
+            }
+        }, 60000); // Update every minute
 
         return () => clearInterval(interval);
     }, []);
 
-    useEffect(() => {
-        if (currentMinute % 2 === 0 )
-		   if (age > 0) {
-            setPopupVisible(true);
-            setPopupMessage("Bạn bị cảm lạnh.");
-		   if (age >=30){
-			setPopupVisible(true);
-			setPopupMessage("Ban bi tai nan xe hoi");
-		   }
-		   if (age >=40){
-			setPopupVisible(true);
-			setPopupMessage("Ban bi viem dang trang");
-		   }
-        } else {
-			if(age > 70){
-            setPopupVisible(false);
-            setPopupMessage("Bạn đã chết đột ngột");}
-			else{
-				setPopupVisible(false);
-				setPopupMessage("Ban bi cuop giet chet")
-			}
-        }
-    }, [currentMinute, age]);
-
-	const handleTreatPress = () => {
+    // Function to generate random message
+    const getRandomMessage = () => {
+		const age = useContext(UserContext).age;
+		let messages = [];
+		if (age > 10) {
+			messages.push("Bạn bị cảm lạnh.");
+		}
+		if (age > 30) {
+			messages.push("Bạn bị tai nạn xe hơi.");
+		}
+		if (age > 70) {
+			messages.push("Bạn bị viêm đường ruột.");
+		}
+		if (age >= 20) {
+			messages.push("Bạn bị cướp giết chết.");
+		}
+		if (age > 0) {
+			messages.push("Bạn đã chết đột ngột.");
+		}
+	
+		if (messages.length === 0) {
+			// Nếu không có điều kiện nào được thỏa mãn, trả về một thông báo mặc định
+			messages = [
+				"Không có sự kiện đặc biệt nào xảy ra."
+			];
+		}
+	
+		// Chọn một thông báo ngẫu nhiên từ danh sách messages
+		const randomIndex = Math.floor(Math.random() * messages.length);
+		return messages[randomIndex];
+	};
+	
+    const handleTreatPress = () => {
         console.log("Treat pressed");
         setPopupVisible(false);
+      
     };
 
-	const handledoNothingPress = () => {
+    const handledoNothingPress = () => {
         console.log("No pressed");
+		setAge(0)
         setPopupVisible(false);
-		setAge(0);
-        // Dừng game và navigate đến màn hình MainMenuScreen
         navigation.navigate("MainMenuScreen");
-		
-		
     };
-
-
-
-
-
 
 
 
