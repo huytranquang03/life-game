@@ -168,7 +168,6 @@ const UserProvider = ({ children }) => {
       setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
       setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
   };
-  
 
     const plusAge = () => {
         setTime(0);
@@ -194,7 +193,8 @@ const UserProvider = ({ children }) => {
             plusAge,
             performance, setPerformance,
             diploma, setDiploma,
-            npcData
+            npcData,
+            // resetAge
         }}>
             {children}
         </UserContext.Provider>

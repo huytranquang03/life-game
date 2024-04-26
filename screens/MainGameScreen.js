@@ -8,11 +8,14 @@ import { UserContext } from "../store/UserContext";
 import Avatar from "../components/ui/Avatar"; // Import Avatar component
 import RandomEvent from "../components/layout/RandomEven";
 
+
+
 const MainGameScreen = ({ navigation }) => {
-	const { stats, intelStats, name, age, balance, plusAge } = useContext(UserContext);
+	const { stats, intelStats, name, age, balance, plusAge,resetAge,setAge } = useContext(UserContext);
     const [currentMinute, setCurrentMinute] = useState(new Date().getMinutes());
     const [popupVisible, setPopupVisible] = useState(false);
-    const [popupMessage, setPopupMessage] = useState("");
+    const [popupMessage, setPopupMessage] = useState("")
+
 
 	useEffect(() => {
         const interval = setInterval(() => {
@@ -31,6 +34,10 @@ const MainGameScreen = ({ navigation }) => {
 			setPopupVisible(true);
 			setPopupMessage("Ban bi tai nan xe hoi");
 		   }
+		   if (age >=40){
+			setPopupVisible(true);
+			setPopupMessage("Ban bi viem dang trang");
+		   }
         } else {
 			if(age > 70){
             setPopupVisible(false);
@@ -47,9 +54,14 @@ const MainGameScreen = ({ navigation }) => {
         setPopupVisible(false);
     };
 
-    const handleNoPress = () => {
+	const handleNoPress = () => {
         console.log("No pressed");
         setPopupVisible(false);
+		setAge(0);
+        // Dừng game và navigate đến màn hình MainMenuScreen
+        navigation.navigate("MainMenuScreen");
+		
+		
     };
 
 
@@ -94,7 +106,7 @@ const MainGameScreen = ({ navigation }) => {
 				))}
 				<StatBar key={intelStats[0].name} name={intelStats[0].name} progress={intelStats[0].progress} color={intelStats[0].color} onPress={() => navigation.navigate("PlayerStatsScreen")}/>
 			</View>
-			<RandomEvent 
+			<RandomEvent // random event
 			 visible={popupVisible}
 			 message={popupMessage}
 			 onTreatPress={handleTreatPress}
