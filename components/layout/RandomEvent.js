@@ -3,7 +3,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const RandomEvent = ({ visible, message, onTreatPress, onNoPress }) => {
+const RandomEvent = ({ visible, message, onTreatPress, doNothingPress }) => {
     if (!visible) {
         return null;
     }
@@ -16,8 +16,8 @@ const RandomEvent = ({ visible, message, onTreatPress, onNoPress }) => {
                     <TouchableOpacity style={styles.button} onPress={onTreatPress}>
                         <Text style={styles.buttonText}>Treat</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={onNoPress}>
-                        <Text style={styles.buttonText}>No</Text>
+                    <TouchableOpacity style={styles.button} onPress={doNothingPress}>
+                        <Text style={styles.buttonText}>Do Nothing</Text>
                     </TouchableOpacity>
                 </View>
             </View>

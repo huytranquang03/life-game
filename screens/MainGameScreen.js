@@ -6,7 +6,7 @@ import GameBar from "../components/ui/GameBar";
 import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
 import Avatar from "../components/ui/Avatar"; // Import Avatar component
-import RandomEvent from "../components/layout/RandomEven";
+import RandomEvent from "../components/layout/RandomEvent";
 
 
 
@@ -54,7 +54,7 @@ const MainGameScreen = ({ navigation }) => {
         setPopupVisible(false);
     };
 
-	const handleNoPress = () => {
+	const handledoNothingPress = () => {
         console.log("No pressed");
         setPopupVisible(false);
 		setAge(0);
@@ -110,7 +110,7 @@ const MainGameScreen = ({ navigation }) => {
 			 visible={popupVisible}
 			 message={popupMessage}
 			 onTreatPress={handleTreatPress}
-			 onNoPress={handleNoPress}/>
+			 doNothingPress={handledoNothingPress}/>
 		</View>
 	);
 };
