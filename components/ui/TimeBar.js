@@ -24,7 +24,7 @@ const TimeBar = ({ duration, color, height, borderRadius }) => {
 
     return (
         <View style={styles.container}>
-            <View style={[styles.progressContainer, { height, borderRadius }]}>
+            <View style={[styles.progressContainer, { height }]}>
                 <View style={[styles.progressBar, { backgroundColor: color, width: `${time}%`, borderRadius }]} />
             </View>
         </View>

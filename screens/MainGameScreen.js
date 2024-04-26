@@ -29,7 +29,7 @@ const MainGameScreen = ({ navigation }) => {
 				<Text style={styles.text}>This is text box</Text>
 			</View>
 
-			<TimeBar duration={10} color="pink" height={20} borderRadius={10} />
+			<TimeBar duration={10} color="pink" height={20}/>
 
 			<View style={styles.buttonRow}>
 				<ActionButton icon="school" text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
 	primaryButton: {
 		padding: 10,
 		width: 80,
+      justifyContent: 'center',
 	},
 	iconButton: {
 		width: 50,
@@ -137,6 +138,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderRadius: 10,
 		marginBottom: 5,
+      
 	},
 	actionButtonText: {
 		fontSize: 10,

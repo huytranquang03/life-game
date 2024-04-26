@@ -1,16 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import StoreItem from '../components/layout/StoreItem';
+import { UserContext } from '../store/UserContext';
 
 const FinanceScreen = ({ navigation }) => {
-   const data = [
-      {id: 1, icon: 'checkbox-outline', item: 'Store1', price: 100},
-      {id: 2, icon: 'checkbox-outline', item: 'Store1', price: 100},
-      {id: 3, icon: 'checkbox-outline', item: 'Store1', price: 100},
-      {id: 4, icon: 'checkbox-outline', item: 'Store1', price: 100},
-      {id: 5, icon: 'checkbox-outline', item: 'Store1', price: 100},
-      {id: 6, icon: 'checkbox-outline', item: 'Store1', price: 100},
-      {id: 7, icon: 'checkbox-outline', item: 'Store1', price: 100},
-   ]
+   const { finance } = useContext(UserContext);
+
    const handlePress = (item) => {
 		console.log("Pressed item with ID:", item.id);
 		navigation.navigate("MainGameScreen", {
@@ -18,7 +12,7 @@ const FinanceScreen = ({ navigation }) => {
 		});
 	};
     return (
-        <StoreItem data={data} onPress={handlePress} />
+        <StoreItem data={finance} onPress={handlePress} />
     );
     
 };
