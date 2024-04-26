@@ -1,23 +1,63 @@
-import React, { useContext, useEffect } from "react";
-import { View, StyleSheet, Text, Image, Pressable, Alert } from "react-native";
+import React, { useContext, useEffect , useState} from "react";
+import { View, StyleSheet, Text, Pressable, Alert } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import IconButton from "../components/ui/IconButton";
 import GameBar from "../components/ui/GameBar";
 import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
 import Avatar from "../components/ui/Avatar"; // Import Avatar component
+import RandomEvent from "../components/layout/RandomEven";
 
 const MainGameScreen = ({ navigation }) => {
 	const { stats, intelStats, name, age, balance, plusAge } = useContext(UserContext);
+    const [currentMinute, setCurrentMinute] = useState(new Date().getMinutes());
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
 
 	useEffect(() => {
-		// Hiển thị thông báo khi màn hình này được render
-		Alert.alert(
-			"Thông báo",
-			"Chào mừng bạn đến với trò chơi!",
-			[{ text: "OK", onPress: () => console.log("Alert closed") }]
-		);
-	}, []);
+        const interval = setInterval(() => {
+            setCurrentMinute(new Date().getMinutes());
+        }, 60000); // Update currentMinute every minute
+
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        if (currentMinute % 2 === 0 )
+		   if (age > 0) {
+            setPopupVisible(true);
+            setPopupMessage("Bạn bị cảm lạnh.");
+		   if (age >=30){
+			setPopupVisible(true);
+			setPopupMessage("Ban bi tai nan xe hoi");
+		   }
+        } else {
+			if(age > 70){
+            setPopupVisible(false);
+            setPopupMessage("Bạn đã chết đột ngột");}
+			else{
+				setPopupVisible(false);
+				setPopupMessage("Ban bi cuop giet chet")
+			}
+        }
+    }, [currentMinute, age]);
+
+	const handleTreatPress = () => {
+        console.log("Treat pressed");
+        setPopupVisible(false);
+    };
+
+    const handleNoPress = () => {
+        console.log("No pressed");
+        setPopupVisible(false);
+    };
+
+
+
+
+
+
+
 
 	return (
 		<View style={styles.container}>
@@ -54,6 +94,11 @@ const MainGameScreen = ({ navigation }) => {
 				))}
 				<StatBar key={intelStats[0].name} name={intelStats[0].name} progress={intelStats[0].progress} color={intelStats[0].color} onPress={() => navigation.navigate("PlayerStatsScreen")}/>
 			</View>
+			<RandomEvent 
+			 visible={popupVisible}
+			 message={popupMessage}
+			 onTreatPress={handleTreatPress}
+			 onNoPress={handleNoPress}/>
 		</View>
 	);
 };
