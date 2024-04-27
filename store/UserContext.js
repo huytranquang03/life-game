@@ -20,6 +20,7 @@ const UserProvider = ({ children }) => {
     const [npc, setNpc] = useState(npcData);
     const [popupVisible, setPopupVisible] = useState(false);
     const [popupMessage, setPopupMessage] = useState("");
+    
 
  
     // study harder
