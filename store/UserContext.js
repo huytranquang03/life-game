@@ -78,6 +78,9 @@ const UserProvider = ({ children }) => {
         setTime(time + 30);
     };
 
+   
+
+
     // Define initial values for intelStats and stats as arrays
 
     const [intelStats, setIntelStats] = useState([
@@ -194,7 +197,7 @@ const UserProvider = ({ children }) => {
             performance, setPerformance,
             diploma, setDiploma,
             npcData,
-            // resetAge
+            percentageSimulator
         }}>
             {children}
         </UserContext.Provider>
