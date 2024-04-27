@@ -1,6 +1,6 @@
 import React, { createContext, useState,useEffect } from 'react';
 import { intelStatsData, statsData, npcData, } from '../data/data.js';
-import { useNavigation } from '@react-navigation/native';
+
 
 
 const UserContext = createContext();
@@ -162,8 +162,8 @@ const UserProvider = ({ children }) => {
         setTime(0);
         setAge(age + 1);
         decreaseStats();
-    };
 
+    };
 
     //
     const percentageSimulator = (percentage) => {
@@ -179,25 +179,27 @@ const UserProvider = ({ children }) => {
      
 	useEffect(() => { checkAgeCondition();}, [age]); 
     const checkAgeCondition = () => {
-		if (age > 70 && percentageSimulator(30)) {
-			setPopupMessage("old age");
+		if (age > 0 && percentageSimulator(30)) {
+			setPopupMessage("You're sick");
 			setPopupVisible(true);
-		} else if (age > 30 && percentageSimulator(30)) {
-			setPopupMessage("car accident");
+
+        } else if (age > 10 && percentageSimulator(20)) {
+			setPopupMessage("You have cancer");
 			setPopupVisible(true);
-		} else if (age > 0 && percentageSimulator(30)) {
-			setPopupMessage("cold");
+
+        } else if (age > 25 && percentageSimulator(10)) {
+			setPopupMessage("You was hit by a stronger women");
 			setPopupVisible(true);
-		} else if (age > 5 && percentageSimulator(30)) {
-			setPopupMessage("bi giet");
+
+		} else if (age > 30 && percentageSimulator(20)) {
+			setPopupMessage("You've been in a car accident");
 			setPopupVisible(true);
-		} else if (age > 7 && percentageSimulator(30))  {
-			setPopupMessage("bi dam");
+
+		} else if (age > 60 && percentageSimulator(30))  {
+			setPopupMessage("You have a heart attack");
 			setPopupVisible(true);
-		} else if (age > 8 && percentageSimulator(30)) {
-			setPopupMessage("bi an thit");
-			setPopupVisible(true);
-		}
+
+        }
 	};
 	
 	

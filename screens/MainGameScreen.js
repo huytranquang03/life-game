@@ -17,17 +17,18 @@ const MainGameScreen = ({ navigation }) => {
 	const handleTreatPress = () => {
         console.log("Treat pressed");
         setPopupVisible(false);
+		stats[0].progress = stats[0].progress + 20
     };
     
 	const handledoNothingPress = () => {
-        console.log("No pressed");
-        setPopupVisible(false);
-		setAge(0);
-		
-        // Dừng game và navigate đến màn hình MainMenuScreen
-        navigation.navigate("MainMenuScreen");
-		
-		
+		if(stats[0].progress = 0) {
+			navigation.navigate("MainMenuScreen");
+			setAge(0);
+		}
+		else {
+            setPopupVisible(false);		
+		    stats[0].progress = stats[0].progress - 5
+		}
     };
 
 	return (
