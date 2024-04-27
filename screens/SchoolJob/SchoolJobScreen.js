@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { UserContext } from '../../store/UserContext';
 
 const SchoolJobScreen = ({ navigation }) => {
-    const { grade, statuses, currentStatus, performance, skipClass, studyHarder, workHarder } = useContext(UserContext);
+    const { grade, currentStatus, performance, skipClass, studyHarder, workHarder } = useContext(UserContext);
     return (
         <ScrollView>
             <View style={styles.container}>

@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
         UNISTUDENT: 'uniStudent',
         UNEMPLOYED: 'unemployed',
         EMPLOYED: 'employed',
-    }; 
+    };
     const [currentStatus, setCurrentStatus] = useState(statuses.INFANT); // Initialize with 'infant'
 
     // study harder
@@ -69,7 +69,7 @@ const UserProvider = ({ children }) => {
         };
         updateStats(statsChanges);
         setTime(time + 90);
-        setPerformance(performance + 10)
+        setPerformance(performance + 5)
     }
 
     // Study Subjects
@@ -116,6 +116,13 @@ const UserProvider = ({ children }) => {
         setTime(time + 30);
     };
 
+    const applyForFulltimeJob = () => {
+        setCurrentStatus(statuses.EMPLOYED);
+        console.log(`You're hired`);
+        console.log(`Current status updated to: ${currentStatus}`);
+
+    };
+
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
 
     const calculateAverageProgress = (arr) => {
@@ -127,16 +134,16 @@ const UserProvider = ({ children }) => {
 
     // update state
     const updateCurrentStatus = (age) => {
-        if (age >= 6 && age < 18 && currentStatus !== statuses.STUDENT) {
+        if (age === 6) {
             setCurrentStatus(statuses.STUDENT);
-        } else if (age >= 18 && age < 22 && currentStatus !== statuses.UNISTUDENT) {
+        } else if (age === 18) {
             if (grade >= 50) {
                 setCurrentStatus(statuses.UNISTUDENT);
             }
-            else{
+            else {
                 setCurrentStatus(statuses.UNEMPLOYED);
             }
-        } else if (age > 22 && currentStatus !== statuses.UNEMPLOYED) {
+        } else if (age === 22 && currentStatus===statuses.UNISTUDENT) {
             setCurrentStatus(statuses.UNEMPLOYED);
         }
         console.log(`Current status updated to: ${currentStatus}`);
@@ -201,7 +208,7 @@ const UserProvider = ({ children }) => {
         setAge(age + 1);
         decreaseStats();
         console.log(age);
-        updateCurrentStatus(age+1);
+        updateCurrentStatus(age + 1);
     };
 
     return (
@@ -222,6 +229,7 @@ const UserProvider = ({ children }) => {
             studyLiterature,
             studyForeignLanguage,
             statuses, currentStatus,
+            applyForFulltimeJob,
             plusAge,
             performance, setPerformance,
             diploma, setDiploma,

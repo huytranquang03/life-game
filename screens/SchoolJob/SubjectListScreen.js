@@ -41,9 +41,6 @@ const SubjectListScreen = () => {
                             <View style={styles.button}>
                                 <IconButton icon={'book'} size={30} text={'Study'} onPress={() => study(item)} />
                             </View>
-                            <View style={styles.button}>
-                                <IconButton icon={'person'} size={30} text={'Teacher'} onPress={() => { }} />
-                            </View>
                         </View>
                     </View>
                 )}
@@ -79,9 +76,10 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         fontWeight: '500',
-        width: 80,
-        textAlign: 'center',
+        width: 200,
+        textAlign: 'left',
         alignSelf: 'center',
+        margin: 10,
     },
     subjectItem: {
         flexDirection: 'row',
