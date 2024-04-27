@@ -35,26 +35,60 @@ const UserProvider = ({ children }) => {
      ]);   
      const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
 
+    const statuses = {
+        INFANT: 'infant',
+        STUDENT: 'student',
+        UNISTUDENT: 'uniStudent',
+        UNEMPLOYED: 'unemployed',
+        EMPLOYED: 'employed',
+    };
+    const [currentStatus, setCurrentStatus] = useState(statuses.INFANT); // Initialize with 'infant'
+
     // study harder
     const studyHarder = () => {
-        setIQ(IQ + 5);
-        setEQ(EQ - 1);
+        const intelChanges = {
+            IQ: 5,
+            EQ: -1,
+            Knowledge: 5,
+        };
+        const statsChanges = {
+            Health: -10,
+            Happiness: -2,
+            Communication: -5,
+        };
+        updateIntelStats(intelChanges);
+        updateStats(statsChanges);
         setTime(time + 90);
-        setHealth(health - 1);
-        setHappiness(happiness - 10);
-        setKnowledge(knowledge + 5);
-        setCommunication(communication - 5);
+        setGrade(grade + 10)
+    };
+    //skip class
+    const skipClass = () => {
+        const intelChanges = {
+            IQ: -2,
+            EQ: 5,
+            Knowledge: -5,
+        };
+        const statsChanges = {
+            Health: -10,
+            Happiness: 5,
+            Communication: 5,
+        };
+        updateIntelStats(intelChanges);
+        updateStats(statsChanges);
+        setTime(time + 90);
         setGrade(grade + 10)
     };
 
     // word harder
     const workHarder = () => {
+        const statsChanges = {
+            Health: -10,
+            Happiness: -10,
+        };
+        updateStats(statsChanges);
         setTime(time + 90);
-        setHealth(health - 10);
-        setHappiness(happiness - 10);
-        setPerformance(performance + 10)
+        setPerformance(performance + 5)
     }
-
 
     // Study Subjects
     const studyMath = () => {
@@ -127,7 +161,12 @@ const UserProvider = ({ children }) => {
        intelStats[3].progress=newKnowledge
     }
  
-    // Define initial values for intelStats and stats as arrays
+    const applyForFulltimeJob = () => {
+        setCurrentStatus(statuses.EMPLOYED);
+        console.log(`You're hired`);
+        console.log(`Current status updated to: ${currentStatus}`);
+
+    };
 
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
 
@@ -139,6 +178,22 @@ const UserProvider = ({ children }) => {
 
 
     // update state
+    const updateCurrentStatus = (age) => {
+        if (age === 6) {
+            setCurrentStatus(statuses.STUDENT);
+        } else if (age === 18) {
+            if (grade >= 50) {
+                setCurrentStatus(statuses.UNISTUDENT);
+            }
+            else {
+                setCurrentStatus(statuses.UNEMPLOYED);
+            }
+        } else if (age === 22 && currentStatus===statuses.UNISTUDENT) {
+            setCurrentStatus(statuses.UNEMPLOYED);
+        }
+        console.log(`Current status updated to: ${currentStatus}`);
+    }
+
     const updateIntelStats = (changes) => {
         const updatedIntelStats = intelStats.map(stat => {
             if (!intelStats) return; // Check if intelStats is defined
@@ -165,9 +220,6 @@ const UserProvider = ({ children }) => {
         });
         setStats(updatedStats);
     };
-
-
-
 
 
     const decreaseStats = () => {
@@ -197,8 +249,11 @@ const UserProvider = ({ children }) => {
 
     const plusAge = () => {
         setTime(0);
+        console.log(age);
         setAge(age + 1);
         decreaseStats();
+        console.log(age);
+        updateCurrentStatus(age + 1);
     };
 
     return (
@@ -212,10 +267,14 @@ const UserProvider = ({ children }) => {
             balance, setBalance,
             time, setTime,
             updateStats,
+            skipClass,
+            studyHarder,
+            workHarder,
             studyMath,
             studyLiterature,
             studyForeignLanguage,
-            isGraduated, setGraduated,
+            statuses, currentStatus,
+            applyForFulltimeJob,
             plusAge,
             performance, setPerformance,
             diploma, setDiploma,

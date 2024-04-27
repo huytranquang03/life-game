@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, FlatList, StyleSheet, Pressable } from 'react-native';
+import { UserContext } from '../../store/UserContext';
 
 const partTime = [
     { id: '1', name: 'Fuho', wage: '200' },
@@ -38,6 +39,7 @@ const ParttimeJobListScreen = () => {
 };
 
 const FulltimeJobListScreen = () => {
+    const { applyForFulltimeJob } = useContext(UserContext);
     return (
         <View style={styles.container}>
             <View>
@@ -45,7 +47,7 @@ const FulltimeJobListScreen = () => {
                 <FlatList
                     data={fullTime}
                     renderItem={({ item }) => (
-                        <Pressable onPress={() => { }}
+                        <Pressable onPress={applyForFulltimeJob}
                             style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}>
                             <View style={styles.item}>
                                 <Text style={styles.name}>{item.name}</Text>
@@ -84,4 +86,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export {ParttimeJobListScreen, FulltimeJobListScreen};
+export { ParttimeJobListScreen, FulltimeJobListScreen };
