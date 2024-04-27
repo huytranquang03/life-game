@@ -12,6 +12,7 @@ const UserProvider = ({ children }) => {
     const [grade, setGrade] = useState(0);
     const [performance, setPerformance] = useState(0);
     const [diploma, setDiploma] = useState('None');
+    const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
 
     // study harder
     const studyHarder = () => {
@@ -93,6 +94,34 @@ const UserProvider = ({ children }) => {
         { name: 'Appearance', progress: 70, color: 'blue', description: "Your looks. The higher it is, the more it would help with your relationships" },
     ]);
 
+   const getHealth = () => stats[0].progress
+   const getAppearance = () => stats[2].progress
+   const getHappiness = () => stats[1].progress
+
+   const getIQ = () => intelStats[1].progress
+   const getEQ = () => intelStats[2].progress
+   const getKnowledge = () => intelStats[3].progress
+
+   const setHealth = (newHealth) => {
+      stats[0].progress=newHealth
+   }
+   const setHappiness = (newHappiness) => {
+      stats[1].progress=newHappiness
+   }
+   const setAppearance = (newAppearance) => {
+      stats[2].progress=newAppearance
+   }
+
+   const setIQ = (newIQ) => {
+      intelStats[1].progress=newIQ
+   }
+   const setEQ = (newEQ) => { 
+      intelStats[2].progress=newEQ
+   }
+   const setKnowledge = (newKnowledge) => {
+      intelStats[3].progress=newKnowledge
+   }
+
     const [npcData ] = useState([
       { id: 1, icon: "checkbox-outline", item: 'Parent', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': true, 'Spendtime': true, 'Compliment': true, 'Flirt': false, 'Ask out': false, 'Propose': false, 'Be friend': false, 'Bribe': false, 'Have child': false, 'Promote/Raise': false }},
       { id: 2, icon: "checkbox-outline", item: 'Friend', actions: { 'Conversation': true, 'Insult': true, 'Ask For Money': true, 'Spendtime': true, 'Compliment': true, 'Flirt': true, 'Ask out': true, 'Propose': false, 'Be friend': false, 'Bribe': false, 'Have child': false, 'Promote/Raise': false }},
@@ -103,13 +132,21 @@ const UserProvider = ({ children }) => {
 
     const [finance, setFinance] = useState([
       { id: 1, icon: "checkbox-outline", item: 'Bike', price: 50, description: "Helps you work more efficiently" },
-      { id: 2, icon: "checkbox-outline", item: 'Motorbike', price: '2,000', description: "Helps you work more efficiently" },
-      { id: 3, icon: "checkbox-outline", item: 'Car', price: '100,000', description: "Helps you work more efficiently" },
-      { id: 4, icon: "checkbox-outline", item: 'Apartment', price: '20,000/year', description: "Give you a shelter in exchange for an amount of rent every year. Having no shelter will make your health worse." },
-      { id: 5, icon: "checkbox-outline", item: 'House', price: '200,000', description: "Give you a permanent shelter. Having no shelter will make your health worse." },
-      { id: 6, icon: "checkbox-outline", item: 'Gym subscription', price: '1,000/year', description: "Helps improve your health every year." },
-      { id: 7, icon: "checkbox-outline", item: 'Luxurious clothes', price: '20,000', description: "Improves on your appearance" },
-      ]);
+      { id: 2, icon: "checkbox-outline", item: 'Motorbike', price: 2000, description: "Helps you work more efficiently" },
+      { id: 3, icon: "checkbox-outline", item: 'Car', price: 100000, description: "Helps you work more efficiently" },
+      { id: 4, icon: "checkbox-outline", item: 'Apartment', price: 21000, description: "Give you a shelter in exchange for an amount of rent every year. Having no shelter will make your health worse." },
+      { id: 5, icon: "checkbox-outline", item: 'House', price: 200000, description: "Give you a permanent shelter. Having no shelter will make your health worse." },
+      { id: 6, icon: "checkbox-outline", item: 'Gym subscription', price: 1000, description: "Helps improve your health every year." },
+      { id: 7, icon: "checkbox-outline", item: 'Luxurious clothes', price: 20000, description: "Improves on your appearance" },
+   ]);
+
+    const [activity, setActivity] = useState([
+      { id: 1, icon: "checkbox-outline", item: 'Play sports'},
+      { id: 2, icon: "checkbox-outline", item: 'Read a book'},
+      { id: 3, icon: "checkbox-outline", item: 'Play video games'},
+      { id: 4, icon: "checkbox-outline", item: 'Go to a spa', price: 100},
+      { id: 5, icon: "checkbox-outline", item: 'Join a club'},
+   ]);   
 
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
 
@@ -203,6 +240,9 @@ const UserProvider = ({ children }) => {
             diploma, setDiploma,
             npcData,
             finance, setFinance,
+            vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
+            activity, setActivity,
+            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge
         }}>
             {children}
         </UserContext.Provider>
