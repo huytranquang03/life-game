@@ -1,5 +1,7 @@
-import React, { createContext, useState } from 'react';
-import { intelStatsData, statsData, npcData } from '../data/data.js';
+import React, { createContext, useState,useEffect } from 'react';
+import { intelStatsData, statsData, npcData, } from '../data/data.js';
+import { useNavigation } from '@react-navigation/native';
+
 
 const UserContext = createContext();
 
@@ -16,7 +18,10 @@ const UserProvider = ({ children }) => {
     const [intelStats, setIntelStats] = useState(intelStatsData);
     const [stats, setStats] = useState(statsData);
     const [npc, setNpc] = useState(npcData);
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
 
+ 
     // study harder
     const studyHarder = () => {
         setIQ(IQ + 5);
@@ -152,34 +157,53 @@ const UserProvider = ({ children }) => {
         setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
     };
 
-      const calculatedStats = stats.map(stat => {
-          // Xác định giá trị giảm dựa trên độ tuổi
-          let decrement;
-          if (age >= 1 && age <= 39) {
-              decrement = Math.floor(Math.random() * 5) + 1; // Giảm từ 1 đến 5
-          } else if (age >= 40 && age <= 80) {
-              decrement = Math.floor(Math.random() * 10) + 1; // Giảm từ 1 đến 10
-          } else {
-              decrement = 0; // Không giảm nếu nằm ngoài khoảng tuổi đã chỉ định
-          }
-  
-          return { ...stat, progress: Math.max(0, stat.progress - decrement) };
-      });
-  
-      const calculatedIntelStats = intelStats.map(intelStat => {
-          return { ...intelStat, progress: Math.max(0, intelStat.progress - Math.floor(Math.random() * 5) + 1) };
-      });
-  
-      setIntelStats(calculatedIntelStats);
-      setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
-      setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
-  };
 
     const plusAge = () => {
         setTime(0);
         setAge(age + 1);
         decreaseStats();
     };
+
+
+    //
+    const percentageSimulator = (percentage) => {
+        //generate a random number from 1-100
+        const randomNumber = Math.floor(Math.random() * 99) + 1;
+
+        //check if the random number is in the range
+        if (randomNumber <= percentage)
+            return true
+        else
+            return false;
+    }
+     
+	useEffect(() => { checkAgeCondition();}, [age]); 
+    const checkAgeCondition = () => {
+		if (age > 70 && percentageSimulator(30)) {
+			setPopupMessage("old age");
+			setPopupVisible(true);
+		} else if (age > 30 && percentageSimulator(30)) {
+			setPopupMessage("car accident");
+			setPopupVisible(true);
+		} else if (age > 0 && percentageSimulator(30)) {
+			setPopupMessage("cold");
+			setPopupVisible(true);
+		} else if (age > 5 && percentageSimulator(30)) {
+			setPopupMessage("bi giet");
+			setPopupVisible(true);
+		} else if (age > 7 && percentageSimulator(30))  {
+			setPopupMessage("bi dam");
+			setPopupVisible(true);
+		} else if (age > 8 && percentageSimulator(30)) {
+			setPopupMessage("bi an thit");
+			setPopupVisible(true);
+		}
+	};
+	
+	
+
+
+
 
     return (
         <UserContext.Provider value={{
@@ -199,7 +223,12 @@ const UserProvider = ({ children }) => {
             plusAge,
             performance, setPerformance,
             diploma, setDiploma,
-            npc, setNpc
+            npc, setNpc,
+            popupVisible, setPopupVisible
+            ,popupMessage, setPopupMessage,
+             checkAgeCondition, percentageSimulator
+            
+        
         }}>
             {children}
         </UserContext.Provider>

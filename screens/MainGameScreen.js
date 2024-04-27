@@ -10,56 +10,25 @@ import RandomEvent from "../components/layout/RandomEvent";
 
 
 
+
 const MainGameScreen = ({ navigation }) => {
-	const { stats, intelStats, name, age, balance, plusAge,setAge, percentageSimulator} = useContext(UserContext);
-    const [popupVisible, setPopupVisible] = useState(false);
-    const [popupMessage, setPopupMessage] = useState("");
-
-
-
-
-	
-    // useEffect(() => {
-	// 	const eventOccurs = percentageSimulator(30);
-	// 	if (eventOccurs) {
-	// 		if (age > 10) {
-	// 			setPopupVisible(true);
-	// 		    setPopupMessage("Bạn sắp chết rồi!");
-			    
-	// 		}
-	// 		if (age > 20){
-	// 			setPopupVisible(true);
-	// 		    setPopupMessage("Bạn sắp chết rồi!(dadasdadas");
-	// 		}
-			
-	// 	} else {
-	// 		console.log("Event did not occur!");
-	// 		setPopupVisible(false);
-	// 	}
-	// }, []); 
-
+	const { stats, intelStats, name, age, balance, plusAge,popupMessage,popupVisible,setPopupVisible,setAge} = useContext(UserContext);
 
 	const handleTreatPress = () => {
         console.log("Treat pressed");
         setPopupVisible(false);
     };
-
+    
 	const handledoNothingPress = () => {
         console.log("No pressed");
         setPopupVisible(false);
 		setAge(0);
+		
         // Dừng game và navigate đến màn hình MainMenuScreen
         navigation.navigate("MainMenuScreen");
 		
 		
     };
-
-
-
-
-
-
-
 
 	return (
 		<View style={styles.container}>

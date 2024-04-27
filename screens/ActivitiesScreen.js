@@ -5,7 +5,7 @@ const ActivitiesScreen = ({ navigation }) => {
    
     return (
         <View style={styles.container}>
-              <Text> This is Finance Screen  </Text>       
+              <Text> This is ActivitiesScreen </Text>       
         </View>
     );
 };
