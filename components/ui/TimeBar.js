@@ -6,15 +6,16 @@ const TimeBar = ({ duration, color, height, borderRadius }) => {
     const { time, setTime, age, setAge, plusAge } = useContext(UserContext);
 
     useEffect(() => {
+        const increment = 100 / duration;
         const interval = setInterval(() => {
             setTime(prevProgress => {
-                const newProgress = prevProgress + (100 / duration); // Update progress every second
+                const newProgress = prevProgress + increment;
                 return newProgress > 100 ? 100 : newProgress;
             });
-        }, 1000); // Update every second
+        }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [duration]);
 
     useEffect(() => {
         if (time >= 100) {
@@ -30,6 +31,8 @@ const TimeBar = ({ duration, color, height, borderRadius }) => {
         </View>
     );
 };
+
+
 
 const styles = StyleSheet.create({
     container: {

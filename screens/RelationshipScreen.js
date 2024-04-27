@@ -3,7 +3,7 @@ import ListItem from "../components/layout/ListItem";
 import { UserContext } from "../store/UserContext";
 
 const RelationshipScreen = ({ navigation }) => {
-   const { npcData } = useContext(UserContext);
+   const { npc, setNpc } = useContext(UserContext);
 
 	const handlePress = (item) => {
 		console.log("Pressed item with ID:", item.id);
@@ -12,7 +12,7 @@ const RelationshipScreen = ({ navigation }) => {
 		});
 	};
 
-	return <ListItem data={npcData} onPress={handlePress} />;
+	return <ListItem data={npc} onPress={handlePress} />;
 };
 
 export default RelationshipScreen;
