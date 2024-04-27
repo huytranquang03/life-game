@@ -1,29 +1,32 @@
-
-
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { UserContext } from '../../store/UserContext';
+const RandomEvent = () => {
+    const { currentEvent, handleUserChoice } = useContext(UserContext);
 
-const RandomEvent = ({ visible, message, onTreatPress, doNothingPress }) => {
-    if (!visible) {
+    if (!currentEvent || !currentEvent.visible) {
         return null;
     }
-
-    return (
-        <View style={styles.popupContainer}>
-            <View style={styles.popup}>
-                <Text style={styles.popupText}>{message}</Text>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={onTreatPress}>
-                        <Text style={styles.buttonText}>Treat</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={doNothingPress}>
-                        <Text style={styles.buttonText}>Do Nothing</Text>
-                    </TouchableOpacity>
+    else
+        return (
+            <View style={styles.popupContainer}>
+                <View style={styles.popup}>
+                    <Text style={styles.popupText}>{currentEvent.description}</Text>
+                    <View style={styles.buttonContainer}>
+                        {currentEvent.treatable && (
+                            <TouchableOpacity style={styles.button} onPress={() => handleUserChoice('treat')}>
+                                <Text style={styles.buttonText}>Treat (${currentEvent.treatCost})</Text>
+                            </TouchableOpacity>
+                        )}
+                        <TouchableOpacity style={styles.button} onPress={() => handleUserChoice('do nothing')}>
+                            <Text style={styles.buttonText}>Do Nothing</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-        </View>
-    );
+        );
 };
+
 
 const styles = StyleSheet.create({
     popupContainer: {

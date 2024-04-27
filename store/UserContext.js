@@ -1,4 +1,4 @@
-import React, { createContext, useState,useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { intelStatsData, statsData, npcData, } from '../data/data.js';
 
 
@@ -20,9 +20,10 @@ const UserProvider = ({ children }) => {
     const [npc, setNpc] = useState(npcData);
     const [popupVisible, setPopupVisible] = useState(false);
     const [popupMessage, setPopupMessage] = useState("");
-    
+    const [currentEvent, setCurrentEvent] = useState(null);
 
- 
+
+
     // study harder
     const studyHarder = () => {
         setIQ(IQ + 5);
@@ -88,7 +89,7 @@ const UserProvider = ({ children }) => {
         setTime(time + 30);
     };
 
-   
+
 
 
     // Define initial values for intelStats and stats as arrays
@@ -163,50 +164,128 @@ const UserProvider = ({ children }) => {
         setTime(0);
         setAge(age + 1);
         decreaseStats();
-
+        handleEvents();
     };
 
     //
     const percentageSimulator = (percentage) => {
-        //generate a random number from 1-100
-        const randomNumber = Math.floor(Math.random() * 99) + 1;
-
-        //check if the random number is in the range
-        if (randomNumber <= percentage)
-            return true
-        else
-            return false;
+        // Generate a random number from 1 to 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+    
+        // Check if the random number is less than or equal to the percentage
+        return randomNumber <= percentage;
     }
-     
-	useEffect(() => { checkAgeCondition();}, [age]); 
-    const checkAgeCondition = () => {
-		if (age > 0 && percentageSimulator(30)) {
-			setPopupMessage("You're sick");
-			setPopupVisible(true);
+    const eventData = [
+        {
+            id: 'oldAge',
+            description: "You die of old age. Game Over.",
+            ageTrigger: 70,
+            statsTrigger: true,
+            chance: 50,
+            treatCost: null,
+            effectIfNotTreat: () => { /* Game over logic */ },
+            treatable: false
+        },
+        {
+            id: 'acne',
+            description: "You have acne. Treat it?",
+            ageTrigger: 12,
+            statsTrigger: true,
+            chance: 30,
+            treatCost: 100,
+            effectIfNotTreat: () => {
+                setHealth(getHealth() - 10);
+                setAppearance(getAppearance() - 10);
+            },
+            treatable: true
+        },
+        {
+            id: 'commonCold',
+            description: "You have a common cold. Treat it?",
+            ageTrigger: 0,
+            statsTrigger: ()=>getHealth<60,
+            chance: 30,
+            treatCost: 50,
+            effectIfNotTreat: () => {
+                setHealth(getHealth() - 20);
+            },
+            treatable: true
+        }, {
+            id: 'carAccident',
+            description: "You ran into a car accident and die. Poor thing. Game Over.",
+            ageTrigger: 10,
+            statsTrigger: true,
+            chance: 1,
+            treatCost: null,
+            effectIfNotTreat: () => {
 
-        } else if (age > 10 && percentageSimulator(20)) {
-			setPopupMessage("You have cancer");
-			setPopupVisible(true);
+            },
+            treatable: null
+        }, {
+            id: 'depresion',
+            description: "You have depression. Treat it?",
+            ageTrigger: 0,
+            statsTrigger: ()=>getHappiness<30,
+            chance: 80,
+            treatCost: 1000,
+            effectIfNotTreat: () => {
 
-        } else if (age > 25 && percentageSimulator(10)) {
-			setPopupMessage("You was hit by a stronger women");
-			setPopupVisible(true);
+            },
+            treatable: true
+        },
+        {
+            id: 'suddenDeath',
+            description: "Oops. Looks like God did a little trolling on you. R.I.P. Game Over.",
+            ageTrigger: 30,
+            statsTrigger: ()=>getHappiness<30,
+            chance: 1,
+            treatCost: null,
+            effectIfNotTreat: () => {
 
-		} else if (age > 30 && percentageSimulator(20)) {
-			setPopupMessage("You've been in a car accident");
-			setPopupVisible(true);
+            },
+            treatable: false
+        },
 
-		} else if (age > 60 && percentageSimulator(30))  {
-			setPopupMessage("You have a heart attack");
-			setPopupVisible(true);
+    ];
+    const getHealth = () => stats[0].progress
+    const getAppearance = () => stats[2].progress
+    const getHappiness = () => stats[1].progress
 
+    const setHealth = (newHealth) => {
+        stats[0].progress = newHealth
+    }
+    const setHappiness = (newHappiness) => {
+        stats[1].progress = newHappiness
+    }
+    const setAppearance = (newAppearance) => {
+        stats[2].progress = newAppearance
+    }
+    const handleEvents = () => {
+        let eventTriggered = false;
+        eventData.forEach(event => {
+            if (!eventTriggered && age >= event.ageTrigger && percentageSimulator(event.chance) && event.statsTrigger) {
+                console.log(`Event triggered: ${event.description}`);  // Debug log
+                setCurrentEvent({
+                    ...event,
+                    visible: true,
+                });
+                eventTriggered = true; // Ensure only one event can trigger per age increment
+            }
+        });
+    };
+
+    // Handling user's choice directly in context
+    const handleUserChoice = (choice) => {
+        if (choice === 'treat' && currentEvent && currentEvent.treatable) {
+            setBalance(balance - currentEvent.treatCost); // Ensure balance cannot go negative
         }
-	};
-	
-	
+        else {
+            currentEvent.effectIfNotTreat();
+        }
+        setCurrentEvent(null); // Close the popup after handling
+    };
 
-
-
+  
 
     return (
         <UserContext.Provider value={{
@@ -228,10 +307,10 @@ const UserProvider = ({ children }) => {
             diploma, setDiploma,
             npc, setNpc,
             popupVisible, setPopupVisible
-            ,popupMessage, setPopupMessage,
-             checkAgeCondition, percentageSimulator
-            
-        
+            , popupMessage, setPopupMessage,
+            percentageSimulator,
+            currentEvent, setCurrentEvent, handleUserChoice
+
         }}>
             {children}
         </UserContext.Provider>

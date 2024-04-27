@@ -16,28 +16,9 @@ const MainGameScreen = ({ navigation }) => {
     age,
     balance,
     plusAge,
-    popupMessage,
-    popupVisible,
-    setPopupVisible,
-    setAge,
+	currentEvent
   } = useContext(UserContext);
 
-  const handleTreatPress = () => {
-    console.log("Treat pressed");
-    setPopupVisible(false);
-    stats[0].progress = stats[0].progress + 20;
-  };
-
-  const handledoNothingPress = () => {
-    if (stats[0].progress === 0) {
-      navigation.navigate("MainMenuScreen");
-      setAge(0);
-    } 
-	else {
-      setPopupVisible(false);
-      stats[0].progress = stats[0].progress - 5;
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -70,7 +51,7 @@ const MainGameScreen = ({ navigation }) => {
         <Text style={styles.text}>This is text box</Text>
       </View>
 
-      <TimeBar duration={10} color="pink" height={20} borderRadius={10} />
+      <TimeBar duration={10} color="pink" height={20} />
 
       <View style={styles.buttonRow}>
         <ActionButton
@@ -114,12 +95,7 @@ const MainGameScreen = ({ navigation }) => {
           onPress={() => navigation.navigate("PlayerStatsScreen")}
         />
       </View>
-      <RandomEvent // random event
-        visible={popupVisible}
-        message={popupMessage}
-        onTreatPress={handleTreatPress}
-        doNothingPress={handledoNothingPress}
-      />
+	  <RandomEvent event={currentEvent} />
     </View>
   );
 };
