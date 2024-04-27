@@ -15,7 +15,9 @@ import ClassmateListScreen from './screens/SchoolJob/ClassmateListScreen';
 import { ParttimeJobListScreen, FulltimeJobListScreen } from './screens/SchoolJob/JobListScreen';
 import NPCDetailsScreen from './screens/NPCDetailsScreen';
 
+
 import { UserProvider } from './store/UserContext';
+import LoadingScreen from './screens/LoadingScreen';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -23,6 +25,7 @@ const App = () => {
         <UserProvider>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen name = "LoadingScreen" component={LoadingScreen}/>
                     <Stack.Screen name="MainMenuScreen" component={MainMenuScreen} />
                     <Stack.Screen name="ContinueGameScreen" component={ContinueGameScreen} />
                     <Stack.Screen name="SetupScreen" component={SetupScreen} />
