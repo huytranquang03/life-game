@@ -17,6 +17,15 @@ const UserProvider = ({ children }) => {
     const [stats, setStats] = useState(statsData);
     const [npc, setNpc] = useState(npcData);
 
+    const statuses = {
+        INFANT: 'infant',
+        STUDENT: 'student',
+        UNISTUDENT: 'uniStudent',
+        UNEMPLOYED: 'unemployed',
+        EMPLOYED: 'employed',
+    }; 
+    const [currentStatus, setCurrentStatus] = useState(statuses.INFANT); // Initialize with 'infant'
+
     // study harder
     const studyHarder = () => {
         const intelChanges = {
@@ -117,6 +126,22 @@ const UserProvider = ({ children }) => {
 
 
     // update state
+    const updateCurrentStatus = (age) => {
+        if (age >= 6 && age < 18 && currentStatus !== statuses.STUDENT) {
+            setCurrentStatus(statuses.STUDENT);
+        } else if (age >= 18 && age < 22 && currentStatus !== statuses.UNISTUDENT) {
+            if (grade >= 50) {
+                setCurrentStatus(statuses.UNISTUDENT);
+            }
+            else{
+                setCurrentStatus(statuses.UNEMPLOYED);
+            }
+        } else if (age > 22 && currentStatus !== statuses.UNEMPLOYED) {
+            setCurrentStatus(statuses.UNEMPLOYED);
+        }
+        console.log(`Current status updated to: ${currentStatus}`);
+    }
+
     const updateIntelStats = (changes) => {
         const updatedIntelStats = intelStats.map(stat => {
             if (!intelStats) return; // Check if intelStats is defined
@@ -172,8 +197,11 @@ const UserProvider = ({ children }) => {
 
     const plusAge = () => {
         setTime(0);
+        console.log(age);
         setAge(age + 1);
         decreaseStats();
+        console.log(age);
+        updateCurrentStatus(age+1);
     };
 
     return (
