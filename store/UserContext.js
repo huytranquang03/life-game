@@ -8,7 +8,10 @@ const UserProvider = ({ children }) => {
     const [age, setAge] = useState(0);
     const [balance, setBalance] = useState(0);
     const [time, setTime] = useState(0);
-    const [isGraduated, setGraduated] = useState(false);
+
+    const statuses = ['infant', 'student', 'uniStudent', 'unemployed', 'employed'];
+    const [currentStatus, setCurrentStatus] = useState(statuses[0]);
+
     const [grade, setGrade] = useState(0);
     const [performance, setPerformance] = useState(0);
     const [diploma, setDiploma] = useState('None');
@@ -178,7 +181,7 @@ const UserProvider = ({ children }) => {
             studyMath,
             studyLiterature,
             studyForeignLanguage,
-            isGraduated, setGraduated,
+            statuses, currentStatus,
             plusAge,
             performance, setPerformance,
             diploma, setDiploma,
