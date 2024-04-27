@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     },
     avatarView: {
         margin: 20,
+      
     },
     avatar: {
         width: 80,
@@ -79,13 +80,12 @@ const styles = StyleSheet.create({
         borderRadius: 40, // Half of width and height to make it round
         borderWidth: 2,
         borderColor: 'green', // There is a green border in the screenshot
-        marginRight: 10, // Add some margin to the right of the avatar
     },
     infoView: {
         marginBottom: 10,
     },
     nameText: {
-        fontSize: 20,
+        fontSize: 23,
         fontWeight: 'bold',
     },
     ageText: {
@@ -95,13 +95,14 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor:'#FFF379',
         borderRadius:10,
+        marginTop:10,
 
     },
     statsView: {
         padding: 20,
         backgroundColor:'#FFF379',
         borderRadius:10,
-        marginTop:20,
+        marginTop:40,
 
     },
     statBar: {
@@ -110,12 +111,12 @@ const styles = StyleSheet.create({
     statLabel: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 2,
+        marginBottom: 3,
     },
     emoji: {
         fontSize: 23,
         marginHorizontal: 10,
-
+        marginBottom: 3,
     },
     labelEmojiContainer: {
        flexDirection: 'row',
