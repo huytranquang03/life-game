@@ -24,7 +24,6 @@ const MainGameScreen = ({ navigation }) => {
 			<View style={styles.topRow}>
 				<Pressable style={styles.profileImageContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
 				<Avatar source={{ uri: "https://picsum.photos/100/100" }} name={name} onPress={() => navigation.navigate("PlayerStatsScreen")} />
-
 						</Pressable>
 				<Pressable style={styles.profileInfoContainer} onPress={() => navigation.navigate("PlayerStatsScreen")}>
 					<Text style={styles.profileName}>{name}</Text>
