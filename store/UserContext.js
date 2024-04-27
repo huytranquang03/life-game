@@ -16,6 +16,24 @@ const UserProvider = ({ children }) => {
     const [intelStats, setIntelStats] = useState(intelStatsData);
     const [stats, setStats] = useState(statsData);
     const [npc, setNpc] = useState(npcData);
+    const [finance, setFinance] = useState([
+        { id: 1, icon: "checkbox-outline", item: 'Bike', price: 50, description: "Helps you work more efficiently" },
+        { id: 2, icon: "checkbox-outline", item: 'Motorbike', price: 2000, description: "Helps you work more efficiently" },
+        { id: 3, icon: "checkbox-outline", item: 'Car', price: 100000, description: "Helps you work more efficiently" },
+        { id: 4, icon: "checkbox-outline", item: 'Apartment', price: 21000, description: "Give you a shelter in exchange for an amount of rent every year. Having no shelter will make your health worse." },
+        { id: 5, icon: "checkbox-outline", item: 'House', price: 200000, description: "Give you a permanent shelter. Having no shelter will make your health worse." },
+        { id: 6, icon: "checkbox-outline", item: 'Gym subscription', price: 1000, description: "Helps improve your health every year." },
+        { id: 7, icon: "checkbox-outline", item: 'Luxurious clothes', price: 20000, description: "Improves on your appearance" },
+     ]);
+  
+      const [activity, setActivity] = useState([
+        { id: 1, icon: "checkbox-outline", item: 'Play sports'},
+        { id: 2, icon: "checkbox-outline", item: 'Read a book'},
+        { id: 3, icon: "checkbox-outline", item: 'Play video games'},
+        { id: 4, icon: "checkbox-outline", item: 'Go to a spa', price: 100},
+        { id: 5, icon: "checkbox-outline", item: 'Join a club'},
+     ]);   
+     const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
 
     // study harder
     const studyHarder = () => {
@@ -81,7 +99,34 @@ const UserProvider = ({ children }) => {
         setGrade(grade + 2);
         setTime(time + 30);
     };
-
+    const getHealth = () => stats[0].progress
+    const getAppearance = () => stats[2].progress
+    const getHappiness = () => stats[1].progress
+ 
+    const getIQ = () => intelStats[1].progress
+    const getEQ = () => intelStats[2].progress
+    const getKnowledge = () => intelStats[3].progress
+ 
+    const setHealth = (newHealth) => {
+       stats[0].progress=newHealth
+    }
+    const setHappiness = (newHappiness) => {
+       stats[1].progress=newHappiness
+    }
+    const setAppearance = (newAppearance) => {
+       stats[2].progress=newAppearance
+    }
+ 
+    const setIQ = (newIQ) => {
+       intelStats[1].progress=newIQ
+    }
+    const setEQ = (newEQ) => { 
+       intelStats[2].progress=newEQ
+    }
+    const setKnowledge = (newKnowledge) => {
+       intelStats[3].progress=newKnowledge
+    }
+ 
     // Define initial values for intelStats and stats as arrays
 
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
@@ -176,6 +221,10 @@ const UserProvider = ({ children }) => {
             diploma, setDiploma,
             npc, setNpc,
             finance, setFinance,
+            vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
+            activity, setActivity,
+            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge
+
         }}>
             {children}
         </UserContext.Provider>
