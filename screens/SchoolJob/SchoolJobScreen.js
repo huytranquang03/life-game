@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { UserContext } from '../../store/UserContext';
 
 const SchoolJobScreen = ({ navigation }) => {
-    const { grade, statuses, currentStatus, performance } = useContext(UserContext);
+    const { grade, statuses, currentStatus, performance, skipClass, studyHarder, workHarder } = useContext(UserContext);
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -33,8 +33,8 @@ const SchoolJobScreen = ({ navigation }) => {
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
                         </Pressable>
-                        <View style={styles.skipClass}>
-                            <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={() => { }} />
+                        <View style={styles.functionButton}>
+                            <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={skipClass} />
                         </View>
                     </View>
                 )}
@@ -50,11 +50,11 @@ const SchoolJobScreen = ({ navigation }) => {
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
                         </Pressable>
-                        <View style={styles.skipClass}>
-                            <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={() => { }} />
+                        <View style={styles.functionButton}>
+                            <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={skipClass} />
                         </View>
-                        <View style={styles.skipClass}>
-                            <IconButton icon={'sad'} size={50} color={'black'} text={'Study Harder'} onPress={() => { }} />
+                        <View style={styles.functionButton}>
+                            <IconButton icon={'sad'} size={50} color={'black'} text={'Study Harder'} onPress={studyHarder} />
                         </View>
                     </View>
                 )}
@@ -80,8 +80,8 @@ const SchoolJobScreen = ({ navigation }) => {
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
                         </Pressable>
-                        <View style={styles.skipClass}>
-                            <IconButton icon={'briefcase'} size={50} color={'black'} text={'Work Harder'} onPress={() => { }} />
+                        <View style={styles.functionButton}>
+                            <IconButton icon={'briefcase'} size={50} color={'black'} text={'Work Harder'} onPress={workHarder} />
                         </View>
                     </View>
                 )}
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 20,
     },
-    skipClass: {
+    functionButton: {
         backgroundColor: 'red',
         borderRadius: 20,
         margin: 30,
