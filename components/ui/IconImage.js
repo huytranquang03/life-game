@@ -4,6 +4,7 @@ const IconImage = ({ image, text, onPress }) => (
     <View style={styles.imageButtonContainer}>
         <Pressable onPress={onPress} style={styles.pressableArea}>
             <Image source={image} style={styles.image} resizeMode="contain" />
+            
         </Pressable>
     </View>
 );
@@ -26,6 +27,8 @@ const styles = StyleSheet.create({
     image: {
         width: "100%",
         height: "100%",
+        marginTop:18,
+        textAlign:'center',
     },
     
 });
