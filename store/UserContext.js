@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { intelStatsData, statsData, npcData, } from '../data/data.js';
+import { Appearance } from 'react-native';
 
 
 
@@ -11,7 +12,6 @@ const UserProvider = ({ children }) => {
     const [age, setAge] = useState(0);
     const [balance, setBalance] = useState(0);
     const [time, setTime] = useState(0);
-    const [isGraduated, setGraduated] = useState(false);
     const [grade, setGrade] = useState(0);
     const [performance, setPerformance] = useState(0);
     const [diploma, setDiploma] = useState('None');
@@ -26,16 +26,16 @@ const UserProvider = ({ children }) => {
         { id: 5, icon: "checkbox-outline", item: 'House', price: 200000, description: "Give you a permanent shelter. Having no shelter will make your health worse." },
         { id: 6, icon: "checkbox-outline", item: 'Gym subscription', price: 1000, description: "Helps improve your health every year." },
         { id: 7, icon: "checkbox-outline", item: 'Luxurious clothes', price: 20000, description: "Improves on your appearance" },
-     ]);
-  
-      const [activity, setActivity] = useState([
-        { id: 1, icon: "checkbox-outline", item: 'Play sports'},
-        { id: 2, icon: "checkbox-outline", item: 'Read a book'},
-        { id: 3, icon: "checkbox-outline", item: 'Play video games'},
-        { id: 4, icon: "checkbox-outline", item: 'Go to a spa', price: 100},
-        { id: 5, icon: "checkbox-outline", item: 'Join a club'},
-     ]);   
-     const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
+    ]);
+
+    const [activity, setActivity] = useState([
+        { id: 1, icon: "checkbox-outline", item: 'Play sports' },
+        { id: 2, icon: "checkbox-outline", item: 'Read a book' },
+        { id: 3, icon: "checkbox-outline", item: 'Play video games' },
+        { id: 4, icon: "checkbox-outline", item: 'Go to a spa', price: 100 },
+        { id: 5, icon: "checkbox-outline", item: 'Join a club' },
+    ]);
+    const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
 
     const statuses = {
         INFANT: 'infant',
@@ -143,36 +143,29 @@ const UserProvider = ({ children }) => {
     const getHealth = () => stats[0].progress
     const getAppearance = () => stats[2].progress
     const getHappiness = () => stats[1].progress
- 
+
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
- 
-    const setHealth = (newHealth) => {
-       stats[0].progress=newHealth
-    }
-    const setHappiness = (newHappiness) => {
-       stats[1].progress=newHappiness
-    }
-    const setAppearance = (newAppearance) => {
-       stats[2].progress=newAppearance
-    }
- 
-    const setIQ = (newIQ) => {
-       intelStats[1].progress=newIQ
-    }
-    const setEQ = (newEQ) => { 
-       intelStats[2].progress=newEQ
-    }
-    const setKnowledge = (newKnowledge) => {
-       intelStats[3].progress=newKnowledge
-    }
- 
-    const applyForFulltimeJob = () => {
-        setCurrentStatus(statuses.EMPLOYED);
-        console.log(`You're hired`);
-        console.log(`Current status updated to: ${currentStatus}`);
 
+    const applyForFulltimeJob = () => {
+        let successRate = 10;
+        if (diploma === 'C')
+            successRate = 50;
+        if (diploma === 'B')
+            successRate = 70;
+        if (diploma === 'A')
+            successRate = 90;
+        if (diploma === 'A+')
+            successRate = 100;
+
+        if (percentageSimulator(successRate)) {
+            setCurrentStatus(statuses.EMPLOYED);
+            alert(`You're hired`);
+            console.log(`Current status updated to: ${currentStatus}`);
+        }
+        else
+            alert(`You're not hired`);
     };
 
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
@@ -195,20 +188,20 @@ const UserProvider = ({ children }) => {
             else {
                 setCurrentStatus(statuses.UNEMPLOYED);
             }
-        } else if (age === 22 && currentStatus===statuses.UNISTUDENT) {
-            if (grade >= 70 && grade <80){
+        } else if (age === 22 && currentStatus === statuses.UNISTUDENT) {
+            if (grade >= 70 && grade < 80) {
                 setDiploma('C');
                 alert(`You graduated from University with C diploma`);
             }
-            if (grade >= 80 && grade <90){
+            if (grade >= 80 && grade < 90) {
                 setDiploma('B');
                 alert(`You graduated from University with B diploma`);
             }
-            if (grade >= 90 && grade <100){
+            if (grade >= 90 && grade < 100) {
                 setDiploma('A');
                 alert(`You graduated from University with A diploma`);
             }
-            if (grade === 100){
+            if (grade === 100) {
                 setDiploma('A+');
                 alert(`You graduated from University with A+ diploma`);
             }
@@ -283,7 +276,7 @@ const UserProvider = ({ children }) => {
     const percentageSimulator = (percentage) => {
         // Generate a random number from 1 to 100
         const randomNumber = Math.floor(Math.random() * 100) + 1;
-    
+
         // Check if the random number is less than or equal to the percentage
         return randomNumber <= percentage;
     }
@@ -306,8 +299,7 @@ const UserProvider = ({ children }) => {
             chance: 30,
             treatCost: 100,
             effectIfNotTreat: () => {
-                setHealth(getHealth() - 10);
-                setAppearance(getAppearance() - 10);
+                updateStats({ Health: -10, Appearance: -10 });
             },
             treatable: true
         },
@@ -315,11 +307,11 @@ const UserProvider = ({ children }) => {
             id: 'commonCold',
             description: "You have a common cold. Treat it?",
             ageTrigger: 0,
-            statsTrigger: ()=>getHealth<60,
+            statsTrigger: getHealth() < 60,
             chance: 30,
             treatCost: 50,
             effectIfNotTreat: () => {
-                setHealth(getHealth() - 20);
+                updateStats({ Health: -20 });
             },
             treatable: true
         }, {
@@ -337,8 +329,8 @@ const UserProvider = ({ children }) => {
             id: 'depresion',
             description: "You have depression. Treat it?",
             ageTrigger: 0,
-            statsTrigger: ()=>getHappiness<30,
-            chance: 80,
+            statsTrigger: getHappiness() < 30,
+            chance: 60,
             treatCost: 1000,
             effectIfNotTreat: () => {
 
@@ -349,7 +341,7 @@ const UserProvider = ({ children }) => {
             id: 'suddenDeath',
             description: "Oops. Looks like God did a little trolling on you. R.I.P. Game Over.",
             ageTrigger: 30,
-            statsTrigger: ()=>getHappiness<30,
+            statsTrigger: getHappiness() < 30,
             chance: 1,
             treatCost: null,
             effectIfNotTreat: () => {
@@ -362,7 +354,9 @@ const UserProvider = ({ children }) => {
     const handleEvents = () => {
         let eventTriggered = false;
         eventData.forEach(event => {
-            if (!eventTriggered && age >= event.ageTrigger && percentageSimulator(event.chance) && event.statsTrigger) {
+            if (!eventTriggered && age >= event.ageTrigger && event.statsTrigger && percentageSimulator(event.chance)) {
+                console.log(`Happiness:${getHappiness()}`);
+                console.log(`Stat trigger:${event.statsTrigger}`);
                 console.log(`Event triggered: ${event.description}`);  // Debug log
                 setCurrentEvent({
                     ...event,
@@ -384,7 +378,7 @@ const UserProvider = ({ children }) => {
         setCurrentEvent(null); // Close the popup after handling
     };
 
-  
+
 
     return (
         <UserContext.Provider value={{
@@ -412,7 +406,7 @@ const UserProvider = ({ children }) => {
             finance, setFinance,
             vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
             activity, setActivity,
-            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge,percentageSimulator,
+            getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge, percentageSimulator,
             currentEvent, setCurrentEvent, handleUserChoice
 
         }}>
