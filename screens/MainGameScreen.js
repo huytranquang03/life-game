@@ -21,14 +21,7 @@ const MainGameScreen = ({ navigation }) => {
 	currentEvent
   } = useContext(UserContext);
 
-  const emojiMap = {
-	Health: '❤️',
-	Happiness: '😊',
-	Appearance: '💅',
-	Intelligence: '🧠',
-	
-};
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
@@ -65,7 +58,7 @@ const MainGameScreen = ({ navigation }) => {
 			<View style={styles.buttonRow}>
 				<ImageButton image={require("../icon/School.png")} text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
 				<ImageButton image={require("../icon/Money With Wings.png")} text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
-				<ImageButton image={require("../icon/Plus.png")} text="Age" onPress={plusAge} />
+				<ImageButton image={require("../icon/cong.png")} text="Age" onPress={plusAge} />
 				<ImageButton image={require("../icon/heart.png")} text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
 				<ImageButton image={require("../icon/Person Running.png")} text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
 			</View>
@@ -238,9 +231,8 @@ const styles = StyleSheet.create({
 	},
 	emoji: {
         fontSize: 23,
-        marginHorizontal: 10,
-        marginBottom: 3,
-		marginRight:40,
+        marginHorizontal: 30,
+     
     },
 
 });

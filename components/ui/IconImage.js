@@ -1,23 +1,22 @@
-import { View, Text, Image, Pressable, StyleSheet } from "react-native";
+import { View, Image, Pressable, StyleSheet } from "react-native";
 
-const ImageButton = ({ image, text, onPress }) => (
+const IconImage = ({ image, text, onPress }) => (
     <View style={styles.imageButtonContainer}>
         <Pressable onPress={onPress} style={styles.pressableArea}>
             <Image source={image} style={styles.image} resizeMode="contain" />
         </Pressable>
-        <Text style={styles.buttonText}>{text}</Text>
     </View>
 );
 
 const styles = StyleSheet.create({
     imageButtonContainer: {
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         margin: 5,
         borderRadius: 50,
         padding: 10,
         alignItems: "center",
-        backgroundColor:'#5E17EB',
+        backgroundColor:'white',
     },
     pressableArea: {
         width: 45, // Adjust according to your design
@@ -28,11 +27,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
     },
-    buttonText: {
-        fontSize: 10,
-        fontWeight: "bold",
-        color:'white',
-    },
+    
 });
 
-export default ImageButton;
+export default IconImage;
