@@ -57,8 +57,8 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setTime(time + 90);
-        setGrade(grade + 10)
+        setTime(time + 30);
+        setGrade(grade - 5)
     };
 
     // word harder
@@ -144,6 +144,23 @@ const UserProvider = ({ children }) => {
                 setCurrentStatus(statuses.UNEMPLOYED);
             }
         } else if (age === 22 && currentStatus===statuses.UNISTUDENT) {
+            if (grade >= 70 && grade <80){
+                setDiploma('C');
+                alert(`You graduated from University with C diploma`);
+            }
+            if (grade >= 80 && grade <90){
+                setDiploma('B');
+                alert(`You graduated from University with B diploma`);
+            }
+            if (grade >= 90 && grade <100){
+                setDiploma('A');
+                alert(`You graduated from University with A diploma`);
+            }
+            if (grade === 100){
+                setDiploma('A+');
+                alert(`You graduated from University with A+ diploma`);
+            }
+
             setCurrentStatus(statuses.UNEMPLOYED);
         }
         console.log(`Current status updated to: ${currentStatus}`);
@@ -204,10 +221,8 @@ const UserProvider = ({ children }) => {
 
     const plusAge = () => {
         setTime(0);
-        console.log(age);
         setAge(age + 1);
         decreaseStats();
-        console.log(age);
         updateCurrentStatus(age + 1);
     };
 

@@ -38,7 +38,7 @@ const ParttimeJobListScreen = () => {
     );
 };
 
-const FulltimeJobListScreen = () => {
+const FulltimeJobListScreen = ({ navigation }) => {
     const { applyForFulltimeJob } = useContext(UserContext);
     return (
         <View style={styles.container}>
@@ -47,7 +47,10 @@ const FulltimeJobListScreen = () => {
                 <FlatList
                     data={fullTime}
                     renderItem={({ item }) => (
-                        <Pressable onPress={applyForFulltimeJob}
+                        <Pressable onPress={() => {
+                            applyForFulltimeJob();
+                            navigation.navigate('SchoolJobScreen');
+                        }}
                             style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}>
                             <View style={styles.item}>
                                 <Text style={styles.name}>{item.name}</Text>
