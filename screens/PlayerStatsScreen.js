@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         borderRadius: 40, // Half of width and height to make it round
         borderWidth: 2,
-        borderColor: 'green', // There is a green border in the screenshot
+        borderColor: 'black', // There is a green border in the screenshot
     },
     infoView: {
         marginBottom: 10,
