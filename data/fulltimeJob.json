@@ -1,0 +1,7 @@
+[   
+    { "id": 1, "name": "Fuho Fulltime", "wage": 200, "chance": 90 },
+    { "id": 2, "name": "Ban Diem Fulltime", "wage": 750, "chance": 70 },
+    { "id": 3, "name": "Buon Lau Fulltime", "wage": 1250, "chance": 50 },
+    { "id": 4, "name": "Van Phong Ho Tro Tai Chinh", "wage": 5000, "chance": 40 },
+    { "id": 5, "name": "Hai Tac", "wage": 6000000000000, "chance": 5 }
+]

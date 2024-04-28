@@ -1,8 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { intelStatsData, statsData, npcData, } from '../data/data.js';
-import { Appearance } from 'react-native';
-
-
+import { intelStatsData, statsData, npcData, fulltimeJob, parttimeJob } from '../data/data.js';
 
 const UserContext = createContext();
 
@@ -11,6 +8,7 @@ const UserProvider = ({ children }) => {
     const [gender, setGender] = useState('');
     const [age, setAge] = useState(0);
     const [balance, setBalance] = useState(0);
+    const [annualWage, setAnnualWage] = useState(0);
     const [time, setTime] = useState(0);
     const [grade, setGrade] = useState(0);
     const [performance, setPerformance] = useState(0);
@@ -18,6 +16,8 @@ const UserProvider = ({ children }) => {
     const [intelStats, setIntelStats] = useState(intelStatsData);
     const [stats, setStats] = useState(statsData);
     const [npc, setNpc] = useState(npcData);
+    const [parttime, setParttime] = useState(parttimeJob);
+    const [fulltime, setFulltime] = useState(fulltimeJob);
     const [finance, setFinance] = useState([
         { id: 1, icon: "checkbox-outline", item: 'Bike', price: 50, description: "Helps you work more efficiently" },
         { id: 2, icon: "checkbox-outline", item: 'Motorbike', price: 2000, description: "Helps you work more efficiently" },
@@ -148,7 +148,16 @@ const UserProvider = ({ children }) => {
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
 
-    const applyForFulltimeJob = () => {
+    const applyForParttimeJob = (job) => {
+        if (percentageSimulator(job.chance)){
+            alert(`You're hired as a part-time ${job.name}`);
+            setBalance(balance+job.wage);
+            setTime(time+job.time);
+        }
+        else
+            alert(`You're not hired`);
+    };
+    const applyForFulltimeJob = (job) => {
         let successRate = 10;
         if (diploma === 'C')
             successRate = 50;
@@ -159,10 +168,10 @@ const UserProvider = ({ children }) => {
         if (diploma === 'A+')
             successRate = 100;
 
-        if (percentageSimulator(successRate)) {
+        if (percentageSimulator(successRate) && percentageSimulator(job.chance)) {
             setCurrentStatus(statuses.EMPLOYED);
             alert(`You're hired`);
-            console.log(`Current status updated to: ${currentStatus}`);
+            setAnnualWage(job.wage);
         }
         else
             alert(`You're not hired`);
@@ -260,7 +269,7 @@ const UserProvider = ({ children }) => {
 
         setIntelStats(calculatedIntelStats);
         setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
-        setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
+        // setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
     };
 
 
@@ -270,6 +279,7 @@ const UserProvider = ({ children }) => {
         decreaseStats();
         updateCurrentStatus(age + 1);
         handleEvents();
+        setBalance(balance + annualWage);
     };
 
     //
@@ -355,8 +365,6 @@ const UserProvider = ({ children }) => {
         let eventTriggered = false;
         eventData.forEach(event => {
             if (!eventTriggered && age >= event.ageTrigger && event.statsTrigger && percentageSimulator(event.chance)) {
-                console.log(`Happiness:${getHappiness()}`);
-                console.log(`Stat trigger:${event.statsTrigger}`);
                 console.log(`Event triggered: ${event.description}`);  // Debug log
                 setCurrentEvent({
                     ...event,
@@ -390,6 +398,8 @@ const UserProvider = ({ children }) => {
             age, setAge,
             balance, setBalance,
             time, setTime,
+            fulltime,
+            parttime,
             updateStats,
             skipClass,
             studyHarder,
@@ -398,6 +408,7 @@ const UserProvider = ({ children }) => {
             studyLiterature,
             studyForeignLanguage,
             statuses, currentStatus,
+            applyForParttimeJob,
             applyForFulltimeJob,
             plusAge,
             performance, setPerformance,

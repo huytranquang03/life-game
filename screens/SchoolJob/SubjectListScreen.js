@@ -7,7 +7,7 @@ import { UserContext } from '../../store/UserContext';
 
 
 const SubjectListScreen = () => {
-    const { studyMath, studyLiterature, studyForeignLanguage, grade } = useContext(UserContext);
+    const { currentStatus, studyMath, studyLiterature, studyForeignLanguage, grade } = useContext(UserContext);
 
     const subjects = [
         { id: '1', name: 'Math' },
@@ -27,27 +27,32 @@ const SubjectListScreen = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
-                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
-                <GameBar progress={grade} color={'green'} height={10} borderRadius={5} />
-            </View>
-            <FlatList
-                data={subjects}
-                renderItem={({ item }) => (
-                    <View style={styles.item} key={item.id}>
-                        <View style={styles.subjectItem}>
-                            <Text style={styles.title}>{item.name}</Text>
-
-                            <View style={styles.button}>
-                                <IconButton icon={'book'} size={30} text={'Study'} onPress={() => study(item)} />
-                            </View>
-                        </View>
+            {currentStatus === 'student' ? (
+                <>
+                    <View style={styles.gradeBar} onPress={() => { /* navigation.navigate('SubjectListScreen')  */ }}>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
+                        <GameBar progress={grade} color={'green'} height={10} borderRadius={5} />
                     </View>
-                )}
-                keyExtractor={(item) => item.id}
-                contentContainerStyle={{ paddingBottom: 20 }} // Add some padding at the bottom
-                showsVerticalScrollIndicator={false} // Hide the scroll indicator
-            />
+                    <FlatList
+                        data={subjects}
+                        renderItem={({ item }) => (
+                            <View style={styles.item} key={item.id}>
+                                <View style={styles.subjectItem}>
+                                    <Text style={styles.title}>{item.name}</Text>
+                                    <View style={styles.button}>
+                                        <IconButton icon={'book'} size={30} text={'Study'} onPress={() => study(item)} />
+                                    </View>
+                                </View>
+                            </View>
+                        )}
+                        keyExtractor={(item) => item.id}
+                        contentContainerStyle={{ paddingBottom: 20 }}
+                        showsVerticalScrollIndicator={false} // Hide the scroll indicator
+                    />
+                </>
+            ) : (
+                <Text style={styles.notStudentText}>You're not a student anymore</Text>
+            )}
         </View>
     );
 };
@@ -91,6 +96,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'aliceblue',
         borderRadius: 50,
         marginHorizontal: 5,
+    },
+    notStudentText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 20,
     },
 });
 

@@ -1,0 +1,5 @@
+[   
+    { "id": 1, "name": "Fuho", "wage": 200, "chance": 90, "time": 30},
+    { "id": 2, "name": "Ban Diem", "wage": 750, "chance": 70, "time": 60},
+    { "id": 3, "name": "Buon Lau", "wage": 1250, "chance": 50, "time": 80}
+]
