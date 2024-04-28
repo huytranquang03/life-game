@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Text, Pressable, Alert } from "react-native";
+import { View, StyleSheet, Text, Pressable, Alert,Image } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import IconButton from "../components/ui/IconButton";
 import GameBar from "../components/ui/GameBar";
@@ -8,6 +8,7 @@ import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
 import Avatar from "../components/ui/Avatar"; // Import Avatar component
 import RandomEvent from "../components/layout/RandomEvent";
+import ImageButton from "../components/ui/ImageButton";
 
 const MainGameScreen = ({ navigation }) => {
   const {
@@ -20,6 +21,13 @@ const MainGameScreen = ({ navigation }) => {
 	currentEvent
   } = useContext(UserContext);
 
+  const emojiMap = {
+	Health: '❤️',
+	Happiness: '😊',
+	Appearance: '💅',
+	Intelligence: '🧠',
+	
+};
 
   return (
     <View style={styles.container}>
@@ -52,31 +60,16 @@ const MainGameScreen = ({ navigation }) => {
         <Text style={styles.text}>This is text box</Text>
       </View>
 
-			<TimeBar duration={10} color="pink" height={20}/>
+			<TimeBar duration={10} color="#7ED957" height={20}/>
 
-      <View style={styles.buttonRow}>
-        <ActionButton
-          icon="school"
-          text="School"
-          onPress={() => navigation.navigate("SchoolJobScreen")}
-        />
-        <ActionButton
-          icon="logo-usd"
-          text="Finance"
-          onPress={() => navigation.navigate("FinanceScreen")}
-        />
-        <ActionButton icon="add-circle" text="Age" onPress={plusAge} />
-        <ActionButton
-          icon="heart"
-          text="Relationship"
-          onPress={() => navigation.navigate("RelationshipScreen")}
-        />
-        <ActionButton
-          icon="fitness"
-          text="Activity"
-          onPress={() => navigation.navigate("ActivitiesScreen")}
-        />
-      </View>
+			<View style={styles.buttonRow}>
+				<ImageButton image={require("../icon/School.png")} text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
+				<ImageButton image={require("../icon/Money With Wings.png")} text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
+				<ImageButton image={require("../icon/Plus.png")} text="Age" onPress={plusAge} />
+				<ImageButton image={require("../icon/heart.png")} text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
+				<ImageButton image={require("../icon/Person Running.png")} text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
+			</View>
+
 
       <View style={styles.statsView}>
         {stats.map((stat) => (
@@ -116,18 +109,31 @@ const ActionButton = ({ icon, text, onPress }) => (
   </View>
 );
 
+const emojiMap = {
+	Health: '❤️',
+	Happiness: '😊',
+	Appearance: '💅',
+	Intelligence: '🧠',
+	
+};
 const StatBar = ({ name, progress, color, onPress }) => (
-  <Pressable style={styles.statBar} onPress={onPress}>
-    <Text style={styles.statLabel}>{name}</Text>
-    <GameBar progress={progress} color={color} height={10} borderRadius={5} />
-  </Pressable>
+	<Pressable style={styles.statBar} onPress={onPress}>
+		<Text style={styles.labelImageContainer}>
+		<Text style={styles.statLabel}>{name}</Text>
+		<Text style={styles.emoji}>{emojiMap[name]}</Text> {/* Ensure this matches the keys in emojiMap */}
+				
+		</Text>
+		<GameBar progress={progress} color={color} height={10} borderRadius={5} />
+	</Pressable>
 );
+
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+		backgroundColor:'#FFFBE2',
 	},
 	topRow: {
 		flexDirection: "row",
@@ -137,7 +143,10 @@ const styles = StyleSheet.create({
 		padding:0,
 	},
 	profileImageContainer: {
-		padding: 10,
+		padding: 20,
+		borderRadius: 50,
+		backgroundColor:'#FFFBE2',
+
 	},
 	profileImage: {
 		width: 80,
@@ -149,10 +158,11 @@ const styles = StyleSheet.create({
 	},
 	profileName: {
 		fontSize: 24,
+		fontWeight: "bold",
+
 	},
 	ageText: {
 		fontSize: 16,
-		color: "#888",
 	},
 	balanceContainer: {
 		position: "absolute",
@@ -171,9 +181,12 @@ const styles = StyleSheet.create({
 	},
 	textBox: {
 		width: "100%",
-		height: 310,
-		backgroundColor: "black",
-		marginTop: 20,
+		height: 320,
+		backgroundColor: "#F8FFE3",
+		marginTop: 0,
+		borderRadius:10,
+		borderBottomColor:'black',
+		borderColor:'black',
 	},
 	text:{
 		color: 'white',
@@ -189,7 +202,6 @@ const styles = StyleSheet.create({
 	primaryButton: {
 		padding: 10,
 		width: 80,
-      justifyContent: 'center',
 	},
 	iconButton: {
 		width: 50,
@@ -210,11 +222,27 @@ const styles = StyleSheet.create({
 	statBar: {
 		marginBottom: 10,
 	},
-	statLabel: {
-		fontSize: 12,
-		fontWeight: "bold",
-		marginBottom: 5,
+	image: {
+		width:20,
+		height:20,
 	},
+	labelImageContainer: {
+		flexDirection: 'row',
+		 alignItems: 'center',
+	 },
+	statLabel: {
+		fontSize: 16,
+		fontWeight: "bold",
+		marginBottom: 8,
+		marginRight: 20,
+	},
+	emoji: {
+        fontSize: 23,
+        marginHorizontal: 10,
+        marginBottom: 3,
+		marginRight:40,
+    },
+
 });
 
 export default MainGameScreen;
