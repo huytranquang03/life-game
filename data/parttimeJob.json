@@ -1,5 +1,5 @@
 [   
-    { "id": 1, "name": "Fuho", "wage": 200, "chance": 90, "time": 30},
-    { "id": 2, "name": "Ban Diem", "wage": 750, "chance": 70, "time": 60},
-    { "id": 3, "name": "Buon Lau", "wage": 1250, "chance": 50, "time": 80}
+    { "id": 1, "name": "Fuho", "wage": 200, "chance": 90, "time": 30, "Health": -5, "Happiness": -3, "Appearance": -2, "IQ": 3, "EQ": 3, "Knowledge": 3},
+    { "id": 2, "name": "Ban Diem", "wage": 750, "chance": 70, "time": 60, "Health": -5, "Happiness": 5, "Appearance": -5, "IQ": -3, "EQ": 7, "Knowledge": -5},
+    { "id": 3, "name": "Buon Lau", "wage": 1250, "chance": 50, "time": 80, "Health": -10, "Happiness": 3, "Appearance": -2, "IQ": 5, "EQ": 7, "Knowledge": 5}
 ]

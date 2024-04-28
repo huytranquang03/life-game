@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { intelStatsData, statsData, npcData, fulltimeJob, parttimeJob } from '../data/data.js';
+import { intelStatsData, statsData, npcData, fulltimeJob, parttimeJob, departments } from '../data/data.js';
 
 const UserContext = createContext();
 
@@ -18,6 +18,10 @@ const UserProvider = ({ children }) => {
     const [npc, setNpc] = useState(npcData);
     const [parttime, setParttime] = useState(parttimeJob);
     const [fulltime, setFulltime] = useState(fulltimeJob);
+    const [department, setDepartment] = useState(null);
+    const [job, setJob] = useState(null);
+    const [universityDepartments, setUniversityDepartments] = useState(departments);
+    const [departmentPopupVisible, setDepartmentPopupVisible] = useState(false);
     const [finance, setFinance] = useState([
         { id: 1, icon: "checkbox-outline", item: 'Bike', price: 50, description: "Helps you work more efficiently" },
         { id: 2, icon: "checkbox-outline", item: 'Motorbike', price: 2000, description: "Helps you work more efficiently" },
@@ -83,7 +87,8 @@ const UserProvider = ({ children }) => {
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
         setTime(time + 30);
-        setGrade(grade - 5)
+        setGrade(Math.max(0,grade - 5));
+        console.log(grade)
     };
 
     // word harder
@@ -108,7 +113,7 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges)
-        setGrade(grade + 2);
+        setGrade(grade + 5);
         setTime(time + 30);
     };
 
@@ -122,7 +127,7 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setGrade(grade + 2);
+        setGrade(grade + 5);
         setTime(time + 30);
     };
 
@@ -137,7 +142,7 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setGrade(grade + 2);
+        setGrade(grade + 5);
         setTime(time + 30);
     };
     const getHealth = () => stats[0].progress
@@ -149,10 +154,12 @@ const UserProvider = ({ children }) => {
     const getKnowledge = () => intelStats[3].progress
 
     const applyForParttimeJob = (job) => {
-        if (percentageSimulator(job.chance)){
+        if (percentageSimulator(job.chance)) {
             alert(`You're hired as a part-time ${job.name}`);
-            setBalance(balance+job.wage);
-            setTime(time+job.time);
+            updateStats(job);
+            updateIntelStats(job);
+            setBalance(balance + job.wage);
+            setTime(time + job.time);
         }
         else
             alert(`You're not hired`);
@@ -169,6 +176,7 @@ const UserProvider = ({ children }) => {
             successRate = 100;
 
         if (percentageSimulator(successRate) && percentageSimulator(job.chance)) {
+            setJob(job.name);
             setCurrentStatus(statuses.EMPLOYED);
             alert(`You're hired`);
             setAnnualWage(job.wage);
@@ -184,7 +192,28 @@ const UserProvider = ({ children }) => {
         return Math.round(totalProgress / arr.length); // Round the average
     };
 
+    const meetsDepartmentRequirements = (department) => {
+        // Check if userStats and department objects are valid
+        if (!intelStats || !department || !department.requirements) {
+            return false;
+        }
 
+        // Extract user stats (IQ, EQ, Knowledge)
+        const progressMap = intelStats.map((stat) => stat.progress);
+        const IQ = progressMap[1];
+        const EQ = progressMap[2];
+        const Knowledge = progressMap[3];
+
+        // Extract department requirements
+        const requirements = department.requirements;
+
+        // Check if user stats meet or exceed each department requirement
+        return (
+            IQ >= requirements.IQ &&
+            EQ >= requirements.EQ &&
+            Knowledge >= requirements.Knowledge
+        );
+    }
 
     // update state
     const updateCurrentStatus = (age) => {
@@ -192,7 +221,7 @@ const UserProvider = ({ children }) => {
             setCurrentStatus(statuses.STUDENT);
         } else if (age === 18) {
             if (grade >= 50) {
-                setCurrentStatus(statuses.UNISTUDENT);
+                setDepartmentPopupVisible(true);
             }
             else {
                 setCurrentStatus(statuses.UNEMPLOYED);
@@ -228,7 +257,9 @@ const UserProvider = ({ children }) => {
             if (change) {
                 return { ...stat, progress: Math.min(Math.max(0, stat.progress + change), 100) };
             }
+            console.log(changes);
             return stat;
+
         });
         const averageIntelProgress = calculateAverageProgress(updatedIntelStats);
         updatedIntelStats[0].progress = averageIntelProgress;
@@ -242,6 +273,7 @@ const UserProvider = ({ children }) => {
             if (change) {
                 return { ...stat, progress: Math.min(Math.max(0, stat.progress + change), 100) };
             }
+            console.log(changes);
             return stat;
         });
         setStats(updatedStats);
@@ -400,14 +432,16 @@ const UserProvider = ({ children }) => {
             time, setTime,
             fulltime,
             parttime,
+            job, setJob,
             updateStats,
+            updateIntelStats,
             skipClass,
             studyHarder,
             workHarder,
             studyMath,
             studyLiterature,
             studyForeignLanguage,
-            statuses, currentStatus,
+            statuses, currentStatus, setCurrentStatus,
             applyForParttimeJob,
             applyForFulltimeJob,
             plusAge,
@@ -418,8 +452,11 @@ const UserProvider = ({ children }) => {
             vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
             activity, setActivity,
             getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge, percentageSimulator,
-            currentEvent, setCurrentEvent, handleUserChoice
-
+            currentEvent, setCurrentEvent, handleUserChoice,
+            universityDepartments, setUniversityDepartments,
+            meetsDepartmentRequirements,
+            department, setDepartment,
+            departmentPopupVisible, setDepartmentPopupVisible
         }}>
             {children}
         </UserContext.Provider>
