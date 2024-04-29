@@ -37,7 +37,6 @@ function AuthStack() {
 function AuthenticatedStack() {
   return (
     <UserProvider>
-      <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
 
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
@@ -57,7 +56,6 @@ function AuthenticatedStack() {
           <Stack.Screen name="NPCDetailsScreen" component={NPCDetailsScreen} />
 
         </Stack.Navigator>
-      </NavigationContainer>
       <DepartmentChoose />
     </UserProvider>
   );
