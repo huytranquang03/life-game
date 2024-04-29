@@ -45,12 +45,7 @@ const UserProvider = ({ children }) => {
         EMPLOYED: 'employed',
     };
     const [currentStatus, setCurrentStatus] = useState(statuses.INFANT); // Initialize with 'infant'
-    const [popupVisible, setPopupVisible] = useState(false);
-    const [popupMessage, setPopupMessage] = useState("");
     const [currentEvent, setCurrentEvent] = useState(null);
-
-
-    const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
 
     // study harder
     const studyHarder = () => {
@@ -145,6 +140,7 @@ const UserProvider = ({ children }) => {
     const getAppearance = () => stats[2].progress
     const getHappiness = () => stats[1].progress
  
+    const getIntelligence = () => intelStats[0].progress
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
@@ -370,7 +366,28 @@ const UserProvider = ({ children }) => {
         setCurrentEvent(null); // Close the popup after handling
     };
 
-  
+    const setNpcProgress = (npcId, value, mode = 'increment') => {
+      setNpc(prevNpcs => {
+          return prevNpcs.map(npc => {
+              if (npc.id === npcId) {
+                  let newProgress;
+                  switch (mode) {
+                      case 'increment':
+                          newProgress = Math.min(100, npc.progress + value);  // Prevent exceeding 100
+                          break;
+                      case 'decrement':
+                          newProgress = Math.max(0, npc.progress - value);  // Prevent going below 0
+                          break;
+                      default:
+                          newProgress = npc.progress;  // No change if mode is unrecognized
+                          break;
+                  }
+                  return { ...npc, progress: newProgress };
+              }
+              return npc;
+          });
+      });
+  };
 
     return (
         <UserContext.Provider value={{
@@ -398,12 +415,9 @@ const UserProvider = ({ children }) => {
             finance, setFinance,
             vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
             activity, setActivity,
-            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge,percentageSimulator,
-            currentEvent, setCurrentEvent, handleUserChoice
-
-            vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
-            activity, setActivity,
-            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge
+            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIntelligence, getIQ, getEQ, getKnowledge,percentageSimulator,
+            currentEvent, setCurrentEvent, handleUserChoice,
+            setNpcProgress,
         }}>
             {children}
         </UserContext.Provider>
