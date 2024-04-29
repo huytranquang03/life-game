@@ -426,8 +426,23 @@ const UserProvider = ({ children }) => {
             id: 'gangAccident',
             description: "You owe to much money! The boss you lent money from sent his goon to took care of you. Game Over.",
             ageTrigger: 20,
-            statsTrigger: () => balance < -10000,
+            statsTrigger: () => balance < -1000,
             chance: 50,
+            treatCost: null,
+            effectIfTreat: () => {
+
+            },
+            effectIfNotTreat: () => {
+                gameOver()
+            },
+            treatable: false
+        },
+        {
+            id: 'healthProblem',
+            description: "Your unhealthy lifestyle has finally caught up to you! Game Over.",
+            ageTrigger: 0,
+            statsTrigger: () => (getHealth() <= 0),
+            chance: 100,
             treatCost: null,
             effectIfTreat: () => {
 
@@ -496,7 +511,7 @@ const UserProvider = ({ children }) => {
         setDepartment(null);
         setDepartmentPopupVisible(false);
         setJob(null);
-
+        setTimerActive(false)
 
     };
 
