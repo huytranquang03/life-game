@@ -12,45 +12,44 @@ const FinanceScreen = ({ navigation }) => {
 		balance,
 		setBalance,
 		vehicleBonus,
-      setVehicleBonus,
-      stats,
+		setVehicleBonus,
+		stats,
 	} = useContext(UserContext); // Sử dụng setFinance để cập nhật dữ liệu
 
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [confirmVisible, setConfirmVisible] = useState(false);
-
 	const buyVehicle = (price) => {
-      if (balance >= price) {
-         setBalance((balance) => balance - price);
-         let newVehicleBonus = vehicleBonus;
-         switch (price) {
-            case 50:
-               newVehicleBonus += 2;
-               break;
-            case 2000:
-               newVehicleBonus += 3;
-               break;
-            case 100000:
-               newVehicleBonus += 5;
-               break;
-            case 1000:
-               stats[0].progress += 5;
-               break;
-            case 20000:
-               stats[2].progress += 20;
-               break;
-            case 200000:
-               stats[2].progress += 10;
-               break;
-            default:
-               break;
-         }
-         setVehicleBonus(newVehicleBonus);
-      } else {
-         Alert.alert("Notice", "Not enough money to buy the vehicle");
-      }
-   };
-   
+		if (balance >= price) {
+			setBalance((balance) => balance - price);
+			let newVehicleBonus = vehicleBonus;
+			switch (price) {
+				case 50:
+					newVehicleBonus += 2;
+					break;
+				case 2000:
+					newVehicleBonus += 3;
+					break;
+				case 100000:
+					newVehicleBonus += 5;
+					break;
+				case 1000:
+					stats[0].progress += 5;
+					break;
+				case 20000:
+					stats[2].progress += 20;
+					break;
+				case 200000:
+					stats[2].progress += 10;
+					break;
+				default:
+					break;
+			}
+			setVehicleBonus(newVehicleBonus);
+		} else {
+			Alert.alert("Notice", "Not enough money to buy the vehicle");
+		}
+	};
+
 
 	const handleConfirm = () => {
 		// Nếu item là xe thì mua xe

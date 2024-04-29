@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "icon": "checkbox-outline",
+        "item": "Bike",
+        "price": 50,
+        "description": "Helps you work more efficiently"
+    },
+    {
+        "id": 2,
+        "icon": "checkbox-outline",
+        "item": "Motorbike",
+        "price": 2000,
+        "description": "Helps you work more efficiently"
+    },
+    {
+        "id": 3,
+        "icon": "checkbox-outline",
+        "item": "Car",
+        "price": 100000,
+        "description": "Helps you work more efficiently"
+    },
+    {
+        "id": 4,
+        "icon": "checkbox-outline",
+        "item": "Apartment",
+        "price": 21000,
+        "description": "Give you a shelter in exchange for an amount of rent every year. Having no shelter will make your health worse."
+    },
+    {
+        "id": 5,
+        "icon": "checkbox-outline",
+        "item": "House",
+        "price": 200000,
+        "description": "Give you a permanent shelter. Having no shelter will make your health worse."
+    },
+    {
+        "id": 6,
+        "icon": "checkbox-outline",
+        "item": "Gym subscription",
+        "price": 1000,
+        "description": "Helps improve your health every year."
+    },
+    {
+        "id": 7,
+        "icon": "checkbox-outline",
+        "item": "Luxurious clothes",
+        "price": 20000,
+        "description": "Improves on your appearance"
+    }
+]
