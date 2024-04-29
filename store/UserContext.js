@@ -477,7 +477,7 @@ const UserProvider = ({ children }) => {
         }
 
         else
-            setCurrentEvent(false)
+            setCurrentEvent(null)
     };
 
 
