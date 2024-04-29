@@ -18,7 +18,9 @@ const SchoolJobScreen = ({ navigation }) => {
                         />
                     </View>
                     <View style={{margin: 20}}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 0,padding:0,color:'white'}}>Current Status:{currentStatus} </Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 0,padding:0,color:'black'}}>Current Status: </Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 0,padding:0,color:'black',textAlign:'center'}}>{currentStatus} </Text>
+
                     </View>
                 </View>
                 {currentStatus === 'student' && (
@@ -171,8 +173,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: '#5E17EB',
+        backgroundColor: '#F8FFE3',
         borderRadius: 20,
+        borderWidth:2,
     },
     avatar: {
         margin: 30,
@@ -188,11 +191,11 @@ const styles = StyleSheet.create({
         margin: 30,
     },
     gradeBar: {
-        margin: 20,
+        margin: 15,
         fontSize: 14,
         fontWeight: '200',
         backgroundColor: '#FFF379',
-        padding: 20,
+        padding: 23,
         borderRadius: 20,
         borderColor:'black',
         borderWidth:2,
@@ -203,6 +206,7 @@ const styles = StyleSheet.create({
         margin: 30,
         borderColor:'black',
         borderWidth:2,
+       
     },
 });
 

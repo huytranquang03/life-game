@@ -32,11 +32,11 @@ const ClassmateListScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f0f0f0',  // Light grey background for the whole screen
+        backgroundColor: 'white',  // Light grey background for the whole screen
         paddingTop: 20,
     },
     item: {
-        backgroundColor: '#FFFBE2',  // White background for items
+        backgroundColor: '#FFF379',  // White background for items
         padding: 16,
         marginVertical: 10,
         marginHorizontal: 16,
