@@ -35,38 +35,74 @@ const SchoolJobScreen = ({ navigation }) => {
                             style={{ width: 80, height: 80, borderRadius: 50 }}
                         />
                     </View>
-                    <View style={{ width: 250, padding: 20 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold', margin: 10 }}>{getCurrentStatusText()}</Text>
+                    <View style={{margin: 20}}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 0,padding:0,color:'white'}}>Current Status:{currentStatus} </Text>
                     </View>
                 </View>
                 {currentStatus === 'student' && (
                     <View style={styles.mainView}>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('SubjectListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
-                            <GameBar progress={grade} color={'green'} height={10} borderRadius={5} />
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/Study.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Overall Grade</Text>
+                            </View>
+                            <GameBar progress={grade} color={'#5E17EB'} height={10} borderRadius={5} />
                         </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Classmate</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/dauvat.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Classmate</Text>
+                            </View>
                         </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/boiban.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Part-time Jobs</Text>
+                            </View>
                         </Pressable>
                         <View style={styles.functionButton}>
-                            <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={skipClass} />
+                            <IconButton icon={'sad'} size={50} color={'black'} text={'Skip class'} onPress={skipClass} />
                         </View>
                     </View>
                 )}
                 {currentStatus === 'uniStudent' && (
                     <View style={styles.mainView}>
                         <View style={styles.gradeBar}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Overall Grade</Text>
-                            <GameBar progress={grade} color={'green'} height={10} borderRadius={5} />
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/Memo.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Overall Grade</Text>
+                            </View>
+                            <GameBar progress={grade} color={'#5E17EB'} height={10} borderRadius={5} />
                         </View>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Classmate</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/hand.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Classmate</Text>
+                            </View>
                         </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/boiban.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Part-time Jobs</Text>
+                            </View>
                         </Pressable>
                         <View style={styles.functionButton}>
                             <IconButton icon={'happy'} size={50} color={'black'} text={'Skip class'} onPress={skipClass} />
@@ -79,24 +115,54 @@ const SchoolJobScreen = ({ navigation }) => {
                 {currentStatus === 'unemployed' && (
                     <View style={styles.mainView}>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/Constructor.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Part-time jobs</Text>
+                            </View>
                         </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('FulltimeJobListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Full-time jobs</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/congviec.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Full Time Job</Text>
+                            </View>
                         </Pressable>
                     </View>
                 )}
                 {currentStatus === 'employed' && (
                     <View style={styles.mainView}>
                         <View style={styles.gradeBar}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Performance</Text>
-                            <GameBar progress={performance} color={'green'} height={10} borderRadius={5} />
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/Fire.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Performance</Text>
+                            </View>
+                            <GameBar progress={performance} color={'#5E17EB'} height={10} borderRadius={5} />
                         </View>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Colleague</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/hand.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Colleague</Text>
+                            </View>                           
                         </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Part-time jobs</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                    source={require('../../icon/Constructor.png')} // Updated to use local image
+                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
+                                />
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Part-time jobs</Text>
+                            </View>
                         </Pressable>
                         <View style={styles.functionButton}>
                             <IconButton icon={'briefcase'} size={50} color={'black'} text={'Work Harder'} onPress={workHarder} />
@@ -112,6 +178,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        //backgroundColor:'#FFFBE2',
     },
     button: {
         marginTop: 10,
@@ -122,15 +189,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: 'beige',
+        backgroundColor: '#5E17EB',
         borderRadius: 20,
     },
     avatar: {
         margin: 30,
+        marginLeft:20,
+        borderColor:'white',
+        borderWidth:2,
+        borderRadius:40,
     },
     mainView: {
-        width: '80%',
-        backgroundColor: 'cornsilk',
+        width: '90%',
+        //backgroundColor: 'cornsilk',
         borderRadius: 20,
         margin: 30,
     },
@@ -138,14 +209,18 @@ const styles = StyleSheet.create({
         margin: 20,
         fontSize: 14,
         fontWeight: '200',
-        backgroundColor: 'coral',
+        backgroundColor: '#FFF379',
         padding: 20,
         borderRadius: 20,
+        borderColor:'black',
+        borderWidth:2,
     },
     functionButton: {
-        backgroundColor: 'red',
+        backgroundColor: '#F8FFE3',
         borderRadius: 20,
         margin: 30,
+        borderColor:'black',
+        borderWidth:2,
     },
 });
 
