@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { intelStatsData, statsData, npcData, } from '../data/data.js';
 import moment from 'moment';
 
@@ -380,65 +380,64 @@ const UserProvider = ({ children }) => {
     const rewardData = [
             {
                 id: 'Monday',
-                getreward: 100
-    
+                getReward: 100,
             },
             {
                 id: 'Tuesday',
-                getreward: 200
+                getReward: 200
     
             },
             {
     
                 id: 'Wednesday',
-                getreward:300
+                getReward:300
     
             },
             {
                 id: 'Thursday',
-                getreward: 400
+                getReward: 400
     
             },
             {
                 id: 'Friday',
-                getreward: 500
+                getReward: 500
     
             },
             {
                 id: 'Saturday',
-                getreward: 600
+                getReward: 600
     
             },
             {
                 id: 'Sunday =',
-                getreward: 700
+                getReward: 700
     
             },
             ];
                 // 
-    const handleRewards = () => {
-            let rewardTriggered = false;
-            rewardData.forEach(reward => {
-                if (!rewardTriggered  && dayOfWeekString ) {
-                    setCurrentReward({
-                       ... reward,
-                       visible: true,
-                    });
-                    rewardTriggered = true;
-                }
-    
-            });
-        };
+                const handleRewards = () => {
+                  let rewardTriggered = false;
+                  rewardData.forEach(reward => {
+                      if (!rewardTriggered && dayOfWeekString === reward.id.trim()) { // Also trim any whitespace
+                          setCurrentReward({
+                              ...reward,
+                              visible: true,
+                          });
+                          rewardTriggered = true;
+                      }
+                  });
+              };
+              useEffect(() => {
+               handleRewards();  // Ensure it's called at component mount or when required
+           }, [dayOfWeekString]);  // Dependency array should include variables that trigger the update
+           
     
 
 
     // 
     const handleRewardChoice = (choice) => {
       if (choice === 'get' && currentReward) {
-         setBalance(balance + currentReward.reward); 
-      }
-      else {
-         currentEvent.effectIfNotTreat();
+         setBalance(balance + currentReward.getReward); 
       }
       setCurrentReward(null); 
     }; 

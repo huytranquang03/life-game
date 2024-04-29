@@ -15,7 +15,7 @@ const DailyReward = () => {
                     <View style={styles.buttonContainer}>
                         { (
                             <TouchableOpacity style={styles.button} onPress={() => handleRewardChoice('get')}>
-                                <Text style={styles.buttonText}>Treat (${currentReward.reward})</Text>
+                                <Text style={styles.buttonText}>Get (${currentReward.reward})</Text>
                             </TouchableOpacity>
                         )}
                         <TouchableOpacity style={styles.button} onPress={() => handleRewardChoice('do nothing')}>
