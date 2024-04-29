@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { intelStatsData, statsData, npcData, financeData, activityData,fulltimeJob, parttimeJob, departments } from '../data/data.js';
+import { intelStatsData, statsData, npcData, financeData, activityData, fulltimeJob, parttimeJob, departments } from '../data/data.js';
 
 
 const UserContext = createContext();
@@ -71,7 +71,7 @@ const UserProvider = ({ children }) => {
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
         setTime(time + 30);
-        setGrade(Math.max(0,grade - 5));
+        setGrade(Math.max(0, grade - 5));
         console.log(grade)
     };
 
@@ -386,7 +386,7 @@ const UserProvider = ({ children }) => {
             id: 'depression',
             description: "You have depression. Treat it?",
             ageTrigger: 0,
-            statsTrigger: () => getHappiness<30,
+            statsTrigger: () => (getHappiness() < 30),
             chance: 80,
             treatCost: 1000,
             effectIfTreat: () => {
@@ -430,7 +430,7 @@ const UserProvider = ({ children }) => {
             id: 'gangAccident',
             description: "You owe to much money! The boss you lent money from sent his goon to took care of you. Game Over.",
             ageTrigger: 20,
-            statsTrigger: () => balance<-10000,
+            statsTrigger: () => balance < -10000,
             chance: 50,
             treatCost: null,
             effectIfTreat: () => {
@@ -528,7 +528,7 @@ const UserProvider = ({ children }) => {
             finance, setFinance,
             vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
             activity, setActivity,
-            getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge,  percentageSimulator,
+            getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge, percentageSimulator,
             currentEvent, setCurrentEvent, handleUserChoice,
             timerActive, setTimerActive, gameOver,
             universityDepartments, setUniversityDepartments,
