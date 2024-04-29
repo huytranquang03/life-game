@@ -86,6 +86,14 @@ const UserProvider = ({ children }) => {
         setPerformance(performance + 5)
     }
 
+    //quit job
+    const quitJob = () => {
+        setJob(null);
+        setCurrentStatus(statuses.UNEMPLOYED);
+        setPerformance(0);
+        setBalance(balance-job.wage);
+    }
+
     // Study Subjects
     const studyMath = () => {
         const intelChanges = {
@@ -507,6 +515,7 @@ const UserProvider = ({ children }) => {
             skipClass,
             studyHarder,
             workHarder,
+            quitJob,
             studyMath,
             studyLiterature,
             studyForeignLanguage,

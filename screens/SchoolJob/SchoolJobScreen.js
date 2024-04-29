@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { UserContext } from '../../store/UserContext';
 
 const SchoolJobScreen = ({ navigation }) => {
-    const { department, job, grade, currentStatus, performance, skipClass, studyHarder, workHarder } = useContext(UserContext);
+    const { department, job, grade, currentStatus, performance, skipClass, studyHarder, workHarder, quitJob } = useContext(UserContext);
 
 
     const getCurrentStatusText = () => {
@@ -168,6 +168,9 @@ const SchoolJobScreen = ({ navigation }) => {
                         </Pressable>
                         <View style={styles.functionButton}>
                             <IconButton icon={'briefcase'} size={50} color={'black'} text={'Work Harder'} onPress={workHarder} />
+                        </View>
+                        <View style={styles.functionButton}>
+                            <IconButton icon={'close'} size={50} color={'black'} text={'Quit Job'} onPress={quitJob} />
                         </View>
                     </View>
                 )}
