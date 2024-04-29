@@ -5,23 +5,19 @@ import IconButton from '../../components/ui/IconButton';
 import { UserContext } from '../../store/UserContext';
 
 const SubjectListScreen = () => {
-    const { currentStatus, studyMath, studyLiterature, studyForeignLanguage, grade } = useContext(UserContext);
+    const { currentStatus, study, grade } = useContext(UserContext);
 
     const subjects = [
-        { id: '1', name: 'Math' },
-        { id: '2', name: 'Literature' },
-        { id: '3', name: 'Foreign Language' },
+        'Math',
+        'Literature',
+        'Science',
+        'History',
+        'Geography',
+        'Art',
+        'Information Technology',
+        'Physical Education',
+        'Foreign Language',
     ];
-
-    const study = (subject) => {
-        if (subject.name === 'Math') {
-            studyMath();
-        } else if (subject.name === 'Literature') {
-            studyLiterature();
-        } else if (subject.name === 'Foreign Language') {
-            studyForeignLanguage();
-        }
-    };
 
     return (
         <View style={styles.container}>
@@ -35,11 +31,11 @@ const SubjectListScreen = () => {
                         data={subjects}
                         renderItem={({ item }) => (
                             <View style={styles.item}>
-                                <Text style={styles.title}>{item.name}</Text>
+                                <Text style={styles.title}>{item}</Text>
                                 <IconButton icon={'book'} size={30} text={'Study'} onPress={() => study(item)} style={styles.button} />
                             </View>
                         )}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={(item) => item}
                         contentContainerStyle={{ paddingBottom: 20 }}
                         showsVerticalScrollIndicator={false}
                     />

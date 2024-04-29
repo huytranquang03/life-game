@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { intelStatsData, statsData, npcData, financeData, activityData, fulltimeJob, parttimeJob, departments } from '../data/data.js';
+import { Appearance } from 'react-native';
 
 
 const UserContext = createContext();
@@ -91,52 +92,108 @@ const UserProvider = ({ children }) => {
         setJob(null);
         setCurrentStatus(statuses.UNEMPLOYED);
         setPerformance(0);
-        setBalance(balance-job.wage);
+        setBalance(balance - job.wage);
     }
 
     // Study Subjects
-    const studyMath = () => {
-        const intelChanges = {
-            IQ: 10,
-            EQ: -1,
-        };
-        const statsChanges = {
-            Happiness: -2
-        };
+    const study = (subject) => {
+        let intelChanges;
+        let statsChanges;
+        switch (subject) {
+            case 'Math':
+                intelChanges = {
+                    IQ: 5,
+                    EQ: -2,
+                };
+                statsChanges = {
+                    Happiness: -2
+                };
+                break;
+            case 'Literature':
+                intelChanges = {
+                    IQ: -2,
+                    EQ: 2,
+                    Knowledge: 3,
+                };
+                statsChanges = {
+
+                };
+                break;
+            case 'Science':
+                intelChanges = {
+                    IQ: 3,
+                    EQ: -1,
+                    Knowledge: 3
+                };
+                statsChanges = {
+                    Happiness: 2
+                };
+                break;
+            case 'History':
+                intelChanges = {
+                    IQ: 2,
+                    EQ: -1,
+                    Knowledge: 5
+                };
+                statsChanges = {
+
+                };
+                break;
+            case 'Geography':
+                intelChanges = {
+                    IQ: 2,
+                    EQ: -1,
+                    Knowledge: 5
+                };
+                statsChanges = {
+
+                };
+                break;
+            case 'Art':
+                intelChanges = {
+                    EQ: 5,
+                    Knowledge: 3
+                };
+                statsChanges = {
+                    Happiness: 5
+                };
+                break;
+            case 'Information Technology':
+                intelChanges = {
+                    IQ: 3,
+                    Knowledge: 2,
+                };
+                statsChanges = {
+                    Happiness: 3
+                };
+                break;
+            case 'Physical Education':
+                intelChanges = {
+                    IQ: -1,
+                };
+                statsChanges = {
+                    Health: 5,
+                    Happiness: 2,
+                    Appearance: 4
+                };
+                break;
+            case 'Foreign Language':
+                intelChanges = {
+                    IQ: 1,
+                    EQ: 2,
+                    Knowledge: 3,
+                };
+                statsChanges = {
+                    Happiness: 1
+                };
+                break;
+        }
         updateIntelStats(intelChanges);
         updateStats(statsChanges)
         setGrade(grade + 5);
         setTime(time + 30);
     };
 
-    const studyLiterature = () => {
-        const intelChanges = {
-            IQ: -2,
-            EQ: 2,
-        };
-        const statsChanges = {
-            Happiness: -2
-        };
-        updateIntelStats(intelChanges);
-        updateStats(statsChanges);
-        setGrade(grade + 5);
-        setTime(time + 30);
-    };
-
-    const studyForeignLanguage = () => {
-        const intelChanges = {
-            IQ: 2,
-            EQ: -1,
-        };
-        const statsChanges = {
-            Happiness: -2,
-            Communication: 3,
-        };
-        updateIntelStats(intelChanges);
-        updateStats(statsChanges);
-        setGrade(grade + 5);
-        setTime(time + 30);
-    };
     const getHealth = () => stats[0].progress
     const getAppearance = () => stats[2].progress
     const getHappiness = () => stats[1].progress
@@ -154,7 +211,8 @@ const UserProvider = ({ children }) => {
             setTime(time + job.time);
         }
         else
-            alert(`You're not hired`);
+            setTime(time + 10);
+        alert(`Sorry...You're not hired`);
     };
     const applyForFulltimeJob = (job) => {
         if (department && department.id === job.require) {
@@ -174,11 +232,15 @@ const UserProvider = ({ children }) => {
                 alert(`You're hired`);
                 setAnnualWage(job.wage);
             }
-            else
-                alert(`You're not hired`);
+            else {
+                setTime(time + 10);
+                alert(`Sorry...You're not hired`);
+            }
         }
-        else
-            alert(`You're not hired`);
+        else {
+            setTime(time + 10);
+            alert(`You're not qualified for this job 💩`);
+        }
     };
 
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
@@ -516,9 +578,7 @@ const UserProvider = ({ children }) => {
             studyHarder,
             workHarder,
             quitJob,
-            studyMath,
-            studyLiterature,
-            studyForeignLanguage,
+            study,
             statuses, currentStatus, setCurrentStatus,
             applyForParttimeJob,
             applyForFulltimeJob,

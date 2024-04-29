@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
 import { UserContext } from '../../store/UserContext';
 
 
-const ParttimeJobListScreen = ({navigation}) => {
+const ParttimeJobListScreen = ({ navigation }) => {
     const { parttime, applyForParttimeJob } = useContext(UserContext);
 
     return (
@@ -20,7 +20,7 @@ const ParttimeJobListScreen = ({navigation}) => {
                             style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}>
                             <View style={styles.item}>
                                 <Text style={styles.name}>{item.name}</Text>
-                                <Text style={styles.name}>{item.wage}</Text>
+                                <Text style={styles.wage}>${item.wage}</Text>
                             </View>
                         </Pressable>
                     )}
@@ -31,7 +31,7 @@ const ParttimeJobListScreen = ({navigation}) => {
     );
 };
 
-const FulltimeJobListScreen = ({navigation}) => {
+const FulltimeJobListScreen = ({ navigation }) => {
     const { fulltime, applyForFulltimeJob } = useContext(UserContext);
     return (
         <View style={styles.container}>
@@ -39,14 +39,14 @@ const FulltimeJobListScreen = ({navigation}) => {
             <FlatList
                 data={fulltime}
                 renderItem={({ item }) => (
-                    <Pressable onPress={()  => {
-                            applyForFulltimeJob(item);
-                            navigation.navigate('SchoolJobScreen');
-                        }}
+                    <Pressable onPress={() => {
+                        applyForFulltimeJob(item);
+                        navigation.navigate('SchoolJobScreen');
+                    }}
                         style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}>
                         <View style={styles.item}>
                             <Text style={styles.name}>{item.name}</Text>
-                            <Text style={styles.wage}>{item.wage} $</Text>
+                            <Text style={styles.wage}>${item.wage}</Text>
                         </View>
                     </Pressable>
                 )}
@@ -88,9 +88,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#333', // Darker font for better readability
+        width: '58%'
     },
     wage: {
         fontSize: 16,
+        color: '#333', // Darker font for better readability
+        fontWeight: 'bold',
+        width: '45%',
+        textAlign: 'right'
     },
     pressed: {
         opacity: 0.85,

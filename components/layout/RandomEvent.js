@@ -1,40 +1,46 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { UserContext } from '../../store/UserContext';
+import { Modal, Button } from 'react-native'; // Import Modal and Button
 import { useNavigation } from '@react-navigation/native';
-const RandomEvent = () => {
+const RandomEvent = ({ navigation }) => {
     const { currentEvent, handleUserChoice } = useContext(UserContext);
-    const navigation = useNavigation();
-
-    if (!currentEvent || !currentEvent.visible) {
-        return null;
-    }
+    if (!currentEvent)
+        return (null);
     return (
-        <View style={styles.overlay}>
-            <View style={styles.popupContainer}>
-                <View style={styles.popup}>
-                    <Text style={styles.popupText}>{currentEvent.description}</Text>
-                    <View style={styles.buttonContainer}>
-                        {currentEvent.treatable && (
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={currentEvent.visible}
+        >
+            <View style={styles.overlay}>
+                <View style={styles.popupContainer}>
+                    <View style={styles.popup}>
+                        <Text style={styles.popupText}>{currentEvent.description}</Text>
+                        <View style={styles.buttonContainer}>
+                            {currentEvent.treatable && (
+                                <TouchableOpacity
+                                    style={[styles.button, styles.treatButton]}
+                                    onPress={() => {
+                                        handleUserChoice('treat');
+                                    }}
+                                >
+                                    <Text style={styles.buttonText}>Treat (${currentEvent.treatCost})</Text>
+                                </TouchableOpacity>
+                            )}
                             <TouchableOpacity
-                                style={[styles.button, styles.treatButton]}
-                                onPress={() => handleUserChoice('treat')}>
-                                <Text style={styles.buttonText}>Treat (${currentEvent.treatCost})</Text>
+                                style={[styles.button, styles.doNothingButton]}
+                                onPress={() => {
+                                    handleUserChoice(false);
+                                }}
+                            >
+                                <Text style={styles.buttonText}>Do Nothing</Text>
                             </TouchableOpacity>
-                        )}
-                        <TouchableOpacity
-                            style={[styles.button, styles.doNothingButton]}
-                            onPress={() => {
-                                handleUserChoice(false);
-                                if (!currentEvent.treatable)
-                                    navigation.navigate('SetupScreen')
-                            }}>
-                            <Text style={styles.buttonText}>Do Nothing</Text>
-                        </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </View>
-        </View>
+        </Modal>
     );
 };
 
@@ -79,7 +85,7 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 10,
-        width: "45%", // Ensures both buttons are of equal width
+        width: "46%", // Ensures both buttons are of equal width
         alignItems: "center",
     },
     treatButton: {

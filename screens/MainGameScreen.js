@@ -82,7 +82,6 @@ const MainGameScreen = ({ navigation }) => {
           onPress={() => navigation.navigate("PlayerStatsScreen")}
         />
       </View>
-	  <RandomEvent event={currentEvent} />
     </View>
   );
 };

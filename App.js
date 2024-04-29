@@ -19,6 +19,7 @@ import NPCDetailsScreen from './screens/NPCDetailsScreen';
 import { UserProvider } from './store/UserContext';
 import LoadingScreen from './screens/LoadingScreen';
 import DepartmentChoose from './components/layout/DepartmentChoose';
+import RandomEvent from './components/layout/RandomEvent';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
         <UserProvider>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Home">
-                    <Stack.Screen name = "LoadingScreen" component={LoadingScreen}/>
+                    <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
                     <Stack.Screen name="MainMenuScreen" component={MainMenuScreen} />
                     <Stack.Screen name="ContinueGameScreen" component={ContinueGameScreen} />
                     <Stack.Screen name="SetupScreen" component={SetupScreen} />
@@ -43,8 +44,11 @@ const App = () => {
                     <Stack.Screen name="NPCDetailsScreen" component={NPCDetailsScreen} />
 
                 </Stack.Navigator>
+                <DepartmentChoose />
+                <RandomEvent />
             </NavigationContainer>
-            <DepartmentChoose/>
+
+
         </UserProvider>
     );
 };
