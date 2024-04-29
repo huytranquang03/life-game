@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../store/UserContext";
 import ConfirmAlert from "../components/layout/ConfirmAlert";
-import { Alert } from "react-native";
+import { Alert, Appearance } from "react-native";
 import ListItem from "../components/layout/ListItem";
 
 const ActivitiesScreen = () => {
@@ -29,61 +29,56 @@ const ActivitiesScreen = () => {
 	const [confirmVisible, setConfirmVisible] = useState(false);
 	const [confirmMessage, setConfirmMessage] = useState("");
 
-	const generateConfirmMessage = (item) => {
-		// Define a default prefix
-		const defaultPrefix = "Are you sure you want to";
+    const generateConfirmMessage = (item) => {
+        // Define a default prefix
+        const defaultPrefix = "Are you sure you want to";
 
-		// Mapping of item IDs to specific actions or messages
-		const actionMap = {
-			1: "play sports?",
-			2: "read a book?",
-			3: "start playing video games now?",
-			4: `spend $${item.price} to go to the spa?`, // Handle price dynamically
-			5: "join this club?",
-		};
+        // Mapping of item IDs to specific actions or messages
+        const actionMap = {
+            1: "play sports?",
+            2: "read a book?",
+            3: "start playing video games now?",
+            4: `spend $${item.price} to go to the spa?`, // Handle price dynamically
+            5: "join this club?",
+        };
 
-		// Return the message based on the item ID, or a generic message if the ID isn't found
-		return `${defaultPrefix} ${actionMap[item.id] || "proceed?"}`;
-	};
+        // Return the message based on the item ID, or a generic message if the ID isn't found
+        return `${defaultPrefix} ${actionMap[item.id] || "proceed?"}`;
+    };
 
-	const useActivity = (id) => {
-		switch (id) {
-			case 1:
-				setTime(time + 15);
-				setHealth(getHealth() + 10);
-				setHappiness(getHappiness() + 10);
-				break;
-			case 2:
-				setTime(time + 15);
-				setKnowledge(getKnowledge() + 10);
-				setIQ(getIQ() + 10);
-				setEQ(getEQ() + 10);
-				break;
-			case 3:
-				setTime(time + 15);
-				setHappiness(getHappiness() + 20);
-				setIQ(getIQ() - 10);
-				setEQ(getEQ() - 10);
-				break;
-			case 4:
-				if (balance >= selectedItem.price) {
-					setBalance(balance - selectedItem.price); 
-					setTime(time + 15);
-					setAppearance(getAppearance() + 10);
-					return true;
-				} else {
-					Alert.alert("Notice", "Not enough money to go to the spa");
-					return false; 
-				}
-			case 5:
-				setTime(time + 20);
-				setEQ(getEQ() + 20);
-				setKnowledge(getKnowledge() + 20);
-				break;
-			default:
-				break;
-		}
-	};
+    const useActivity = (id) => {
+        switch (id) {
+            case 1:
+                setTime(time + 15);
+                updateStats({ Health: 10, getHappiness: 10 });
+                break;
+            case 2:
+                setTime(time + 15);
+                updateIntelStats({ IQ: 10, EQ: 10, Knowledge: 10 });
+                break;
+            case 3:
+                setTime(time + 15);
+                updateStats({ Happiness: 10 });
+                updateIntelStats({ IQ: -10, EQ: -10 });
+                break;
+            case 4:
+                if (balance >= selectedItem.price) {
+                    setBalance(balance - selectedItem.price);
+                    setTime(time + 15);
+                    updateStats({ Appearance: 10 });
+                    return true;
+                } else {
+                    Alert.alert("Notice", "Not enough money to go to the spa");
+                    return false;
+                }
+            case 5:
+                setTime(time + 20);
+                updateIntelStats({ EQ: 10, Knowledge: 10 });
+                break;
+            default:
+                break;
+        }
+    };
 
 	const handleConfirm = () => {
 		setConfirmVisible(false);
@@ -98,27 +93,27 @@ const ActivitiesScreen = () => {
 		// }
 	};
 
-	const handleCancel = () => {
-		setConfirmVisible(false); // Close the confirm modal
-	};
+    const handleCancel = () => {
+        setConfirmVisible(false); // Close the confirm modal
+    };
 
-	const handlePress = (item) => {
-		setSelectedItem(item);
-		setConfirmMessage(generateConfirmMessage(item)); // Set the message using the new function
-		setConfirmVisible(true);
-	};
+    const handlePress = (item) => {
+        setSelectedItem(item);
+        setConfirmMessage(generateConfirmMessage(item)); // Set the message using the new function
+        setConfirmVisible(true);
+    };
 
-	return (
-		<>
-			<ListItem data={activity} onPress={handlePress} />
-			<ConfirmAlert
-				visible={confirmVisible}
-				message={confirmMessage} // Use the dynamic message
-				onCancel={handleCancel}
-				onConfirm={handleConfirm}
-			/>
-		</>
-	);
+    return (
+        <>
+            <ListItem data={activity} onPress={handlePress} />
+            <ConfirmAlert
+                visible={confirmVisible}
+                message={confirmMessage} // Use the dynamic message
+                onCancel={handleCancel}
+                onConfirm={handleConfirm}
+            />
+        </>
+    );
 };
 
 export default ActivitiesScreen;

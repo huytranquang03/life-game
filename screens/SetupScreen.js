@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
-import { UserContext } from '../store/UserContext'; 
+import { UserContext } from '../store/UserContext';
 
 const SetupScreen = ({ navigation }) => {
-   
-    const { name, setName, gender, setGender } = useContext(UserContext);
 
-  
+    const { name, setName, setTimerActive } = useContext(UserContext);
+
+
     const handleSave = () => {
         console.log('Data saved successfully');
-       
+        setTimerActive(true)
         navigation.navigate('MainGameScreen');
     };
 
@@ -20,12 +20,6 @@ const SetupScreen = ({ navigation }) => {
                 placeholder="Enter your name"
                 value={name}
                 onChangeText={setName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your gender"
-                value={gender}
-                onChangeText={setGender}
             />
             <Button title="Save" onPress={handleSave} />
         </View>

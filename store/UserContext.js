@@ -1,41 +1,32 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { intelStatsData, statsData, npcData, } from '../data/data.js';
-
+import { intelStatsData, statsData, npcData, financeData, activityData, fulltimeJob, parttimeJob, departments } from '../data/data.js';
 
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [name, setName] = useState('Player');
-    const [gender, setGender] = useState('');
     const [age, setAge] = useState(0);
     const [balance, setBalance] = useState(0);
+    const [annualWage, setAnnualWage] = useState(0);
     const [time, setTime] = useState(0);
-    const [isGraduated, setGraduated] = useState(false);
     const [grade, setGrade] = useState(0);
     const [performance, setPerformance] = useState(0);
     const [diploma, setDiploma] = useState('None');
     const [intelStats, setIntelStats] = useState(intelStatsData);
     const [stats, setStats] = useState(statsData);
     const [npc, setNpc] = useState(npcData);
-    const [finance, setFinance] = useState([
-        { id: 1, icon: "checkbox-outline", item: 'Bike', price: 50, description: "Helps you work more efficiently" },
-        { id: 2, icon: "checkbox-outline", item: 'Motorbike', price: 2000, description: "Helps you work more efficiently" },
-        { id: 3, icon: "checkbox-outline", item: 'Car', price: 100000, description: "Helps you work more efficiently" },
-        { id: 4, icon: "checkbox-outline", item: 'Apartment', price: 21000, description: "Give you a shelter in exchange for an amount of rent every year. Having no shelter will make your health worse." },
-        { id: 5, icon: "checkbox-outline", item: 'House', price: 200000, description: "Give you a permanent shelter. Having no shelter will make your health worse." },
-        { id: 6, icon: "checkbox-outline", item: 'Gym subscription', price: 1000, description: "Helps improve your health every year." },
-        { id: 7, icon: "checkbox-outline", item: 'Luxurious clothes', price: 20000, description: "Improves on your appearance" },
-     ]);
-  
-      const [activity, setActivity] = useState([
-        { id: 1, icon: "checkbox-outline", item: 'Play sports'},
-        { id: 2, icon: "checkbox-outline", item: 'Read a book'},
-        { id: 3, icon: "checkbox-outline", item: 'Play video games'},
-        { id: 4, icon: "checkbox-outline", item: 'Go to a spa', price: 100},
-        { id: 5, icon: "checkbox-outline", item: 'Join a club'},
-     ]);   
-     const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
+    const [currentEvent, setCurrentEvent] = useState(null);
+    const [vehicleBonus, setVehicleBonus] = useState(0); // Thêm state vehicleBonus
+    const [finance, setFinance] = useState(financeData);
+    const [activity, setActivity] = useState(activityData);
+    const [timerActive, setTimerActive] = useState(true); // State to control timer activity
+    const [parttime, setParttime] = useState(parttimeJob);
+    const [fulltime, setFulltime] = useState(fulltimeJob);
+    const [department, setDepartment] = useState(null);
+    const [job, setJob] = useState(null);
+    const [universityDepartments, setUniversityDepartments] = useState(departments);
+    const [departmentPopupVisible, setDepartmentPopupVisible] = useState(false);
 
     const statuses = {
         INFANT: 'infant',
@@ -44,8 +35,9 @@ const UserProvider = ({ children }) => {
         UNEMPLOYED: 'unemployed',
         EMPLOYED: 'employed',
     };
+
     const [currentStatus, setCurrentStatus] = useState(statuses.INFANT); // Initialize with 'infant'
-    const [currentEvent, setCurrentEvent] = useState(null);
+
 
     // study harder
     const studyHarder = () => {
@@ -78,8 +70,9 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setTime(time + 90);
-        setGrade(grade + 10)
+        setTime(time + 30);
+        setGrade(Math.max(0, grade - 5));
+        console.log(grade)
     };
 
     // word harder
@@ -104,7 +97,7 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges)
-        setGrade(grade + 2);
+        setGrade(grade + 5);
         setTime(time + 30);
     };
 
@@ -118,7 +111,7 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setGrade(grade + 2);
+        setGrade(grade + 5);
         setTime(time + 30);
     };
 
@@ -133,7 +126,7 @@ const UserProvider = ({ children }) => {
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setGrade(grade + 2);
+        setGrade(grade + 5);
         setTime(time + 30);
     };
     const getHealth = () => stats[0].progress
@@ -144,32 +137,55 @@ const UserProvider = ({ children }) => {
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
- 
     const setHealth = (newHealth) => {
-       stats[0].progress=newHealth
+        stats[0].progress = newHealth
     }
     const setHappiness = (newHappiness) => {
-       stats[1].progress=newHappiness
+        stats[1].progress = newHappiness
     }
     const setAppearance = (newAppearance) => {
-       stats[2].progress=newAppearance
+        stats[2].progress = newAppearance
     }
- 
+
     const setIQ = (newIQ) => {
-       intelStats[1].progress=newIQ
+        intelStats[1].progress = newIQ
     }
-    const setEQ = (newEQ) => { 
-       intelStats[2].progress=newEQ
+    const setEQ = (newEQ) => {
+        intelStats[2].progress = newEQ
     }
     const setKnowledge = (newKnowledge) => {
-       intelStats[3].progress=newKnowledge
+        intelStats[3].progress = newKnowledge
     }
- 
-    const applyForFulltimeJob = () => {
-        setCurrentStatus(statuses.EMPLOYED);
-        console.log(`You're hired`);
-        console.log(`Current status updated to: ${currentStatus}`);
+    const applyForParttimeJob = (job) => {
+        if (percentageSimulator(job.chance)) {
+            alert(`You're hired as a part-time ${job.name}`);
+            updateStats(job);
+            updateIntelStats(job);
+            setBalance(balance + job.wage);
+            setTime(time + job.time);
+        }
+        else
+            alert(`You're not hired`);
+    };
+    const applyForFulltimeJob = (job) => {
+        let successRate = 10;
+        if (diploma === 'C')
+            successRate = 50;
+        if (diploma === 'B')
+            successRate = 70;
+        if (diploma === 'A')
+            successRate = 90;
+        if (diploma === 'A+')
+            successRate = 100;
 
+        if (percentageSimulator(successRate) && percentageSimulator(job.chance)) {
+            setJob(job.name);
+            setCurrentStatus(statuses.EMPLOYED);
+            alert(`You're hired`);
+            setAnnualWage(job.wage);
+        }
+        else
+            alert(`You're not hired`);
     };
 
     intelStats[0].progress = (intelStats[1].progress + intelStats[2].progress + intelStats[3].progress) / 3
@@ -179,7 +195,28 @@ const UserProvider = ({ children }) => {
         return Math.round(totalProgress / arr.length); // Round the average
     };
 
+    const meetsDepartmentRequirements = (department) => {
+        // Check if userStats and department objects are valid
+        if (!intelStats || !department || !department.requirements) {
+            return false;
+        }
 
+        // Extract user stats (IQ, EQ, Knowledge)
+        const progressMap = intelStats.map((stat) => stat.progress);
+        const IQ = progressMap[1];
+        const EQ = progressMap[2];
+        const Knowledge = progressMap[3];
+
+        // Extract department requirements
+        const requirements = department.requirements;
+
+        // Check if user stats meet or exceed each department requirement
+        return (
+            IQ >= requirements.IQ &&
+            EQ >= requirements.EQ &&
+            Knowledge >= requirements.Knowledge
+        );
+    }
 
     // update state
     const updateCurrentStatus = (age) => {
@@ -187,12 +224,29 @@ const UserProvider = ({ children }) => {
             setCurrentStatus(statuses.STUDENT);
         } else if (age === 18) {
             if (grade >= 50) {
-                setCurrentStatus(statuses.UNISTUDENT);
+                setDepartmentPopupVisible(true);
             }
             else {
                 setCurrentStatus(statuses.UNEMPLOYED);
             }
-        } else if (age === 22 && currentStatus===statuses.UNISTUDENT) {
+        } else if (age === 22 && currentStatus === statuses.UNISTUDENT) {
+            if (grade >= 70 && grade < 80) {
+                setDiploma('C');
+                alert(`You graduated from University with C diploma`);
+            }
+            if (grade >= 80 && grade < 90) {
+                setDiploma('B');
+                alert(`You graduated from University with B diploma`);
+            }
+            if (grade >= 90 && grade < 100) {
+                setDiploma('A');
+                alert(`You graduated from University with A diploma`);
+            }
+            if (grade === 100) {
+                setDiploma('A+');
+                alert(`You graduated from University with A+ diploma`);
+            }
+
             setCurrentStatus(statuses.UNEMPLOYED);
         }
         console.log(`Current status updated to: ${currentStatus}`);
@@ -206,7 +260,9 @@ const UserProvider = ({ children }) => {
             if (change) {
                 return { ...stat, progress: Math.min(Math.max(0, stat.progress + change), 100) };
             }
+            console.log(changes);
             return stat;
+
         });
         const averageIntelProgress = calculateAverageProgress(updatedIntelStats);
         updatedIntelStats[0].progress = averageIntelProgress;
@@ -220,6 +276,7 @@ const UserProvider = ({ children }) => {
             if (change) {
                 return { ...stat, progress: Math.min(Math.max(0, stat.progress + change), 100) };
             }
+            console.log(changes);
             return stat;
         });
         setStats(updatedStats);
@@ -247,49 +304,55 @@ const UserProvider = ({ children }) => {
 
         setIntelStats(calculatedIntelStats);
         setStats(calculatedStats); // Cập nhật state của stats với giá trị mới đã được tính toán
-        setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
+        // setGrade(Math.max(0, grade - Math.floor(Math.random() * 5) + 1))
     };
 
 
     const plusAge = () => {
         setTime(0);
-        console.log(age);
         setAge(age + 1);
         decreaseStats();
-        console.log(age);
         updateCurrentStatus(age + 1);
         handleEvents();
+        setBalance(balance + annualWage);
     };
+
+
+    // Call this function when you need to end the game and reset the game state
 
     //
     const percentageSimulator = (percentage) => {
         // Generate a random number from 1 to 100
         const randomNumber = Math.floor(Math.random() * 100) + 1;
-    
+
         // Check if the random number is less than or equal to the percentage
         return randomNumber <= percentage;
     }
-    const eventData = [
+    const events = [
         {
             id: 'oldAge',
             description: "You die of old age. Game Over.",
             ageTrigger: 70,
-            statsTrigger: true,
-            chance: 50,
+            statsTrigger: () => true,
+            chance: 20,
             treatCost: null,
-            effectIfNotTreat: () => { /* Game over logic */ },
+            effectIfTreat: () => {
+            },
+            effectIfNotTreat: () => { gameOver() },
             treatable: false
         },
         {
             id: 'acne',
             description: "You have acne. Treat it?",
             ageTrigger: 12,
-            statsTrigger: true,
-            chance: 30,
-            treatCost: 100,
+            statsTrigger: () => true,
+            chance: 20,
+            treatCost: 50,
+            effectIfTreat: () => {
+                updateStats({ Appearance: +5 });
+            },
             effectIfNotTreat: () => {
-                setHealth(getHealth() - 10);
-                setAppearance(getAppearance() - 10);
+                updateStats({ Health: -10, Appearance: -10 });
             },
             treatable: true
         },
@@ -297,116 +360,189 @@ const UserProvider = ({ children }) => {
             id: 'commonCold',
             description: "You have a common cold. Treat it?",
             ageTrigger: 0,
-            statsTrigger: ()=>getHealth<60,
+            statsTrigger: () => (getHealth() < 40),
             chance: 30,
             treatCost: 50,
+            effectIfTreat: () => {
+                updateStats({ Health: +30 });
+            },
             effectIfNotTreat: () => {
-                setHealth(getHealth() - 20);
+                updateStats({ Health: -20 });
             },
             treatable: true
         }, {
             id: 'carAccident',
             description: "You ran into a car accident and die. Poor thing. Game Over.",
-            ageTrigger: 10,
-            statsTrigger: true,
+            ageTrigger: 20,
+            statsTrigger: () => true,
             chance: 1,
             treatCost: null,
-            effectIfNotTreat: () => {
-
+            effectIfTreat: () => {
             },
-            treatable: null
+            effectIfNotTreat: () => {
+                gameOver()
+            },
+            treatable: false
         }, {
-            id: 'depresion',
+            id: 'depression',
             description: "You have depression. Treat it?",
             ageTrigger: 0,
-            statsTrigger: ()=>getHappiness<30,
+            statsTrigger: () => (getHappiness() < 30),
             chance: 80,
             treatCost: 1000,
+            effectIfTreat: () => {
+                updateStats({ Happiness: +35 });
+            },
             effectIfNotTreat: () => {
-
             },
             treatable: true
         },
         {
             id: 'suddenDeath',
             description: "Oops. Looks like God did a little trolling on you. R.I.P. Game Over.",
-            ageTrigger: 30,
-            statsTrigger: ()=>getHappiness<30,
-            chance: 1,
+            ageTrigger: 40,
+            statsTrigger: () => true,
+            chance: 2,
             treatCost: null,
-            effectIfNotTreat: () => {
+            effectIfTreat: () => {
 
+            },
+            effectIfNotTreat: () => {
+                gameOver()
             },
             treatable: false
         },
+        {
+            id: 'suicide',
+            description: "The depression was too much for you to handle. Game Over.",
+            ageTrigger: 0,
+            statsTrigger: () => false,
+            chance: 0,
+            treatCost: null,
+            effectIfTreat: () => {
+
+            },
+            effectIfNotTreat: () => {
+                gameOver()
+            },
+            treatable: false
+        },
+        {
+            id: 'gangAccident',
+            description: "You owe to much money! The boss you lent money from sent his goon to took care of you. Game Over.",
+            ageTrigger: 20,
+            statsTrigger: () => balance < -10000,
+            chance: 50,
+            treatCost: null,
+            effectIfTreat: () => {
+
+            },
+            effectIfNotTreat: () => {
+                gameOver()
+            },
+            treatable: false
+        }
+
 
     ];
+
+
     const handleEvents = () => {
         let eventTriggered = false;
-        eventData.forEach(event => {
-            if (!eventTriggered && age >= event.ageTrigger && percentageSimulator(event.chance) && event.statsTrigger) {
+        events.forEach(event => {
+            if (!eventTriggered && age >= event.ageTrigger && percentageSimulator(event.chance) && event.statsTrigger()) {
                 console.log(`Event triggered: ${event.description}`);  // Debug log
                 setCurrentEvent({
                     ...event,
                     visible: true,
                 });
+                setTimerActive(false); // Stop the timer
                 eventTriggered = true; // Ensure only one event can trigger per age increment
             }
         });
     };
 
-    // Handling user's choice directly in context
     const handleUserChoice = (choice) => {
-        if (choice === 'treat' && currentEvent && currentEvent.treatable) {
-            setBalance(balance - currentEvent.treatCost); // Ensure balance cannot go negative
-        }
-        else {
+        if (choice && currentEvent && currentEvent.treatable) {
+            setBalance(balance - currentEvent.treatCost);
+            currentEvent.effectIfTreat();
+            setTimerActive(true);
+        } else {
+            setTimerActive(true)
             currentEvent.effectIfNotTreat();
         }
-        setCurrentEvent(null); // Close the popup after handling
+
+        if (currentEvent.id == 'depression' && percentageSimulator(30))
+            setCurrentEvent({ ...events[6], visible: true });
+
+        else
+            setCurrentEvent(false)
     };
 
+
+    const gameOver = () => {
+        setName('Player');          // Resets name to 'Player'
+        setAge(0);                 // Resets age to 0
+        setBalance(0);             // Resets balance to 0
+        setTime(0);                // Resets time to 0
+        setGrade(0);               // Resets grade to 0
+        setPerformance(0);         // Resets performance to 0
+        setDiploma('None');        // Resets diploma to 'None'
+        setIntelStats(intelStatsData);  // Resets intellectual stats to their default data
+        setStats(statsData);       // Resets general stats to their default data
+        setNpc(npcData);           // Resets NPC data to default
+        setCurrentEvent(null);     // Clears any current events
+        setVehicleBonus(0);        // Resets vehicle bonus to 0
+        setFinance(financeData);     // Resets financial information to default store data
+        setActivity(activityData); // Resets activities to their default data
+        setCurrentStatus(statuses.INFANT)
+
+    };
     const setNpcProgress = (npcId, value, mode = 'increment') => {
-      setNpc(prevNpcs => {
-          return prevNpcs.map(npc => {
-              if (npc.id === npcId) {
-                  let newProgress;
-                  switch (mode) {
-                      case 'increment':
-                          newProgress = Math.min(100, npc.progress + value);  // Prevent exceeding 100
-                          break;
-                      case 'decrement':
-                          newProgress = Math.max(0, npc.progress - value);  // Prevent going below 0
-                          break;
-                      default:
-                          newProgress = npc.progress;  // No change if mode is unrecognized
-                          break;
-                  }
-                  return { ...npc, progress: newProgress };
-              }
-              return npc;
-          });
-      });
-  };
+        setNpc(prevNpcs => {
+            return prevNpcs.map(npc => {
+                if (npc.id === npcId) {
+                    let newProgress;
+                    switch (mode) {
+                        case 'increment':
+                            newProgress = Math.min(100, npc.progress + value);  // Prevent exceeding 100
+                            break;
+                        case 'decrement':
+                            newProgress = Math.max(0, npc.progress - value);  // Prevent going below 0
+                            break;
+                        default:
+                            newProgress = npc.progress;  // No change if mode is unrecognized
+                            break;
+                    }
+                    return { ...npc, progress: newProgress };
+                }
+                return npc;
+            });
+        });
+    };
 
     return (
         <UserContext.Provider value={{
             name, setName,
-            gender, setGender,
             intelStats,
-            stats,
-            grade,
+            stats, setStats,
+            grade, setGrade,
             age, setAge,
             balance, setBalance,
             time, setTime,
+            fulltime,
+            parttime,
+            job, setJob,
             updateStats,
+            updateIntelStats,
             skipClass,
             studyHarder,
             workHarder,
             studyMath,
             studyLiterature,
             studyForeignLanguage,
-            statuses, currentStatus,
+            statuses, currentStatus, setCurrentStatus,
+            applyForParttimeJob,
             applyForFulltimeJob,
             plusAge,
             performance, setPerformance,
@@ -415,9 +551,13 @@ const UserProvider = ({ children }) => {
             finance, setFinance,
             vehicleBonus, setVehicleBonus, // Thêm vehicleBonus vào context
             activity, setActivity,
-            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIntelligence, getIQ, getEQ, getKnowledge,percentageSimulator,
+            getHealth, getAppearance, getHappiness, getIQ, getEQ, getKnowledge, percentageSimulator,
             currentEvent, setCurrentEvent, handleUserChoice,
-            setNpcProgress,
+            timerActive, setTimerActive, gameOver,
+            universityDepartments, setUniversityDepartments,
+            meetsDepartmentRequirements,
+            department, setDepartment,
+            departmentPopupVisible, setDepartmentPopupVisible
         }}>
             {children}
         </UserContext.Provider>

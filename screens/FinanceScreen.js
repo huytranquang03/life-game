@@ -18,7 +18,6 @@ const FinanceScreen = ({ navigation }) => {
 
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [confirmVisible, setConfirmVisible] = useState(false);
-
 	const buyVehicle = (price) => {
 		if (balance >= price) {
 			setBalance((balance) => balance - price);

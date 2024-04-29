@@ -6,7 +6,25 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { UserContext } from '../../store/UserContext';
 
 const SchoolJobScreen = ({ navigation }) => {
-    const { grade, currentStatus, performance, skipClass, studyHarder, workHarder } = useContext(UserContext);
+    const { department, job, grade, currentStatus, performance, skipClass, studyHarder, workHarder } = useContext(UserContext);
+
+
+    const getCurrentStatusText = () => {
+        switch (currentStatus) {
+            case 'infant':
+                return 'Infant';
+            case 'student':
+                return 'Student';
+            case 'uniStudent':
+                return `Hanoi University - ${department}`;
+            case 'employed':
+                return `Full-time ${job}`; // Assuming full-time job details are retrieved elsewhere
+            case 'unemployed':
+                return 'Unemployed';
+            default:
+                return currentStatus; // Handle unexpected values
+        }
+    };
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -17,8 +35,8 @@ const SchoolJobScreen = ({ navigation }) => {
                             style={{ width: 80, height: 80, borderRadius: 50 }}
                         />
                     </View>
-                    <View style={{margin: 20}}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold', margin: 10}}>Curren Status: {currentStatus}</Text>
+                    <View style={{ width: 250, padding: 20 }}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', margin: 10 }}>{getCurrentStatusText()}</Text>
                     </View>
                 </View>
                 {currentStatus === 'student' && (

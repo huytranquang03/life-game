@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "icon": "checkbox-outline",
+        "item": "Play sports"
+    },
+    {
+        "id": 2,
+        "icon": "checkbox-outline",
+        "item": "Read a book"
+    },
+    {
+        "id": 3,
+        "icon": "checkbox-outline",
+        "item": "Play video games"
+    },
+    {
+        "id": 4,
+        "icon": "checkbox-outline",
+        "item": "Go to a spa",
+        "price": 100
+    },
+    {
+        "id": 5,
+        "icon": "checkbox-outline",
+        "item": "Join a club"
+    }
+]
