@@ -8,6 +8,15 @@ const PlayerStatsScreen = () => {
     const {intelStats,stats, name, age } = useContext(UserContext);
 
     const avatarUrl = 'https://picsum.photos/200/200'; // Replace with your avatar URL
+    const emojiMap = {
+        Health: '❤️',
+        Happiness: '😊',
+        Appearance: '💅',
+        Intelligence: '🧠',
+        IQ: '🧬', // Replace with appropriate emoji
+        EQ: '💖', // Replace with appropriate emoji
+        Knowledge: '📚'
+    };
 
     return (
         <View style={styles.container}>
@@ -23,18 +32,25 @@ const PlayerStatsScreen = () => {
             <View style={styles.istatsView}>
                 {intelStats.map((stat) => (
                     <View key={stat.name} style={styles.statBar}>
-                        <Text style={styles.statLabel}>{stat.name}</Text>
-                        <GameBar progress={stat.progress} color={stat.color} height={10} borderRadius={5} />
-                        <Text styles={styles.description}>{stat.description}</Text>
+                        <View style={styles.labelEmojiContainer}>
+                            <Text style={styles.statLabel}>{stat.name}</Text>
+                            <Text style={styles.emoji}>{emojiMap[stat.name]}</Text>
+                        </View>
+
+                        <GameBar progress={stat.progress} color={stat.color} height={20} borderRadius={10} />
+                      
                     </View>
                 ))}
             </View>
             <View style={styles.statsView}>
                 {stats.map((stat) => (
                     <View key={stat.name} style={styles.statBar}>
-                        <Text style={styles.statLabel}>{stat.name}</Text>
-                        <GameBar progress={stat.progress} color={stat.color} height={10} borderRadius={5} />
-                        <Text styles={styles.description}>{stat.description}</Text>
+                        <View style={styles.labelEmojiContainer}>
+                            <Text style={styles.statLabel}>{stat.name}</Text>
+                            <Text style={styles.emoji}>{emojiMap[stat.name]}</Text>
+                        </View>
+                        <GameBar progress={stat.progress} color={stat.color} height={20} borderRadius={10} />
+                        
                     </View>
                 ))}
             </View>
@@ -47,6 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // alignItems: 'center',
         padding: 20,
+        backgroundColor: '#FFFBE2',
     },
     topRow: {
         flexDirection: 'row',
@@ -54,36 +71,56 @@ const styles = StyleSheet.create({
     },
     avatarView: {
         margin: 20,
+      
     },
     avatar: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
         borderRadius: 50,
+        borderRadius: 40, // Half of width and height to make it round
+        borderWidth: 2,
+        borderColor: 'black', // There is a green border in the screenshot
     },
     infoView: {
         marginBottom: 10,
     },
     nameText: {
-        fontSize: 20,
+        fontSize: 23,
         fontWeight: 'bold',
     },
     ageText: {
         fontSize: 16,
-        color: '#888',
     },
     istatsView: {
         padding: 20,
+        backgroundColor:'#FFF379',
+        borderRadius:10,
+        marginTop:10,
+
     },
     statsView: {
         padding: 20,
+        backgroundColor:'#FFF379',
+        borderRadius:10,
+        marginTop:40,
+
     },
     statBar: {
         marginBottom: 5,
     },
     statLabel: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 2,
+        marginBottom: 3,
+    },
+    emoji: {
+        fontSize: 23,
+        marginHorizontal: 10,
+        marginBottom: 3,
+    },
+    labelEmojiContainer: {
+       flexDirection: 'row',
+        alignItems: 'center',
     },
     description: {
         margin: 10,

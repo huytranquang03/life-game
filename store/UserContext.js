@@ -215,6 +215,8 @@ const UserProvider = ({ children }) => {
                 setCurrentStatus(statuses.UNEMPLOYED);
             }
         } else if (age === 22 && currentStatus === statuses.UNISTUDENT) {
+            if (grade < 70)
+                alert(`You are expelled from school!`)
             if (grade >= 70 && grade < 80) {
                 setDiploma('C');
                 alert(`You graduated from University with C diploma`);
@@ -483,6 +485,7 @@ const UserProvider = ({ children }) => {
         setCurrentStatus(statuses.INFANT);
         setDepartment(null);
         setDepartmentPopupVisible(false);
+        setJob(null);
 
 
     };
