@@ -17,6 +17,7 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 		setNpcProgress,
 		getIntelligence,
 		percentageSimulator,
+		npc
 	} = useContext(UserContext); // Destructure the needed functions from the context
 
 	// Prepare data in the format that ListItem expects
@@ -27,18 +28,13 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 			item: action, // Text to display
 			icon: "checkbox-outline", // Assuming you use Ionicons and all actions use the same icon
 		}));
-
+	const npcById = npc.find(n => n.id === npcId)
 	// Function to handle press on an action
 	const handlePress = (item) => {
-		console.log("Action pressed:", item.item);
-		let successRate;
 		switch (item.item) {
 			case "Conversation":
 				setTime(time + 10);
-				successRate = percentageSimulator(
-					npcId * 0.5 + getIntelligence() * 0.3
-				);
-				if (successRate >= 0.5) {
+				if (percentageSimulator(npcById.progress * 0.5 + getIntelligence() * 0.3)) {
 					setHappiness(getHappiness() + 5);
 					setNpcProgress(npcId, 10, "increment");
 				} else {
@@ -48,10 +44,7 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 				break;
 			case "Ask For Money":
 				setTime(time + 5);
-				successRate = percentageSimulator(
-					npcId * 0.6 + getIntelligence() * 0.3
-				);
-				if (successRate >= 0.5) {
+				if (percentageSimulator(npcById.progress * 0.3 + 40)) {
 					setNpcProgress(npcId, 5, "decrement");
 					setBalance(balance + 100);
 				} else {
@@ -60,10 +53,7 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 				break;
 			case "Conmpliment":
 				setTime(time + 5);
-				percentageSimulator(
-					70 + getIntelligence() * 0.3
-				);
-				if (percentageSimulator(70 + getIntelligence() * 0.3)) {
+				if (percentageSimulator(70 + getIntelligence() * 0.2)) {
 					setHappiness(getHappiness() + 5);
 					setNpcProgress(npcId, 5, "increment");
 				} else {
@@ -71,10 +61,7 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 				break;
 			case "Insult":
 				setTime(time + 5);
-				successRate = percentageSimulator(
-					npcId * 0.3 + getIntelligence() * 0.5
-				);
-				if (successRate >= 0.5) {
+				if (percentageSimulator(30 + getIntelligence() * 0.5)) {
 					setHappiness(getHappiness() + 30);
 				} else {
 					setAppearance(getAppearance() - 10);
@@ -82,8 +69,7 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 				break;
 			case "Spend time":
 				setTime(time + 20);
-				successRate = percentageSimulator(npcId * 0.9);
-				if (successRate >= 0.5) {
+				if (percentageSimulator(npcById.progress * 0.9 + 20)) {
 					setHappiness(getHappiness() + 10);
 					setNpcProgress(npcId, 20, "increment");
 				} else {
@@ -93,7 +79,6 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 			default:
 				break;
 		}
-		console.log("Success rate:", successRate);
 		navigation.navigate("RelationshipScreen");
 	};
 
