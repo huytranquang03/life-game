@@ -60,10 +60,10 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 				break;
 			case "Conmpliment":
 				setTime(time + 5);
-				successRate = percentageSimulator(
-					npcId * 0.7 + getIntelligence() * 0.3
+				percentageSimulator(
+					70 + getIntelligence() * 0.3
 				);
-				if (successRate >= 0.5) {
+				if (percentageSimulator(70 + getIntelligence() * 0.3)) {
 					setHappiness(getHappiness() + 5);
 					setNpcProgress(npcId, 5, "increment");
 				} else {
@@ -93,7 +93,7 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 			default:
 				break;
 		}
-      console.log("Success rate:", successRate);
+		console.log("Success rate:", successRate);
 		navigation.navigate("RelationshipScreen");
 	};
 

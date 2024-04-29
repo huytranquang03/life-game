@@ -145,6 +145,25 @@ const UserProvider = ({ children }) => {
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
+    const setHealth = (newHealth) => {
+        stats[0].progress = newHealth
+    }
+    const setHappiness = (newHappiness) => {
+        stats[1].progress = newHappiness
+    }
+    const setAppearance = (newAppearance) => {
+        stats[2].progress = newAppearance
+    }
+
+    const setIQ = (newIQ) => {
+        intelStats[1].progress = newIQ
+    }
+    const setEQ = (newEQ) => {
+        intelStats[2].progress = newEQ
+    }
+    const setKnowledge = (newKnowledge) => {
+        intelStats[3].progress = newKnowledge
+    }
 
     const applyForParttimeJob = (job) => {
         if (percentageSimulator(job.chance)) {

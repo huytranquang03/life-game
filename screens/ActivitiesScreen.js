@@ -24,6 +24,8 @@ const ActivitiesScreen = () => {
 		getIQ,
 		getEQ,
 		getKnowledge,
+        updateStats, 
+        updateIntelStats
 	} = useContext(UserContext);
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [confirmVisible, setConfirmVisible] = useState(false);

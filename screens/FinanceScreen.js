@@ -73,9 +73,7 @@ const FinanceScreen = ({ navigation }) => {
 
 	return (
 		<>
-			<View onPress={() => navigation.navigate("MainGameScreen")}>
-				<Text>vehicleBonus: {vehicleBonus}</Text>
-			</View>
+
 			<StoreItem data={finance} onPress={handlePress} />
 			<ConfirmAlert
 				visible={confirmVisible}
