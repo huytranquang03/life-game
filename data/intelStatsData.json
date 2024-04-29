@@ -1,6 +1,32 @@
 [
-    { "name": "Intelligence", "progress": 0, "color": "yellow" },
-    { "name": "IQ", "progress": 80, "color": "red", "description": "Your problem solving ability\nNeeded for certain profession" },
-    { "name": "EQ", "progress": 50, "color": "blue", "description": "Your knowledge level\nNeeded for certain professions\nCan help with your relationships" },
-    { "name": "Knowledge", "progress": 70, "color": "green", "description": "Your knowledge level\nNeeded for certain professions\nCan help with your relationships" }
+    {
+        "name": "Intelligence",
+        "progress": 0,
+        "color": "#8C52FF",
+        "image": "../icon/Fire.png"
+
+    },
+    {
+        "name": "IQ",
+        "progress": 80,
+        "color": "#8C52FF",
+        "description": "Your problem solving ability\nNeeded for certain profession",
+        "image": "../icon/Fire.png"
+
+    },
+    {
+        "name": "EQ",
+        "progress": 50,
+        "color": "#8C52FF",
+        "description": "Your emotional intelligence\nNeeded for certain professions\nCan help with your relationships",
+        "image": "../icon/Fire.png"
+
+    },
+    {
+        "name": "Knowledge",
+        "progress": 70,
+        "color": "#8C52FF",
+        "description": "Your knowledge level\nNeeded for certain professions\nCan help with your relationships",
+        "image": "../icon/Fire.png"
+    }
 ]

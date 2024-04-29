@@ -16,15 +16,19 @@ const RandomEvent = () => {
                     <Text style={styles.popupText}>{currentEvent.description}</Text>
                     <View style={styles.buttonContainer}>
                         {currentEvent.treatable && (
-                            <TouchableOpacity style={styles.button} onPress={() => handleUserChoice(true)}>
+                            <TouchableOpacity
+                                style={[styles.button, styles.treatButton]}
+                                onPress={() => handleUserChoice('treat')}>
                                 <Text style={styles.buttonText}>Treat (${currentEvent.treatCost})</Text>
                             </TouchableOpacity>
                         )}
-                        <TouchableOpacity style={styles.button} onPress={() => {
-                            handleUserChoice(false);
-                            if (!currentEvent.treatable)
-                                navigation.navigate('SetupScreen')
-                        }}>
+                        <TouchableOpacity
+                            style={[styles.button, styles.doNothingButton]}
+                            onPress={() => {
+                                handleUserChoice(false);
+                                if (!currentEvent.treatable)
+                                    navigation.navigate('SetupScreen')
+                            }}>
                             <Text style={styles.buttonText}>Do Nothing</Text>
                         </TouchableOpacity>
                     </View>
@@ -34,55 +38,60 @@ const RandomEvent = () => {
     );
 };
 
-const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     overlay: {
         position: "absolute",
         top: 0,
         left: 0,
-        width: width,
-        height: height,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+        right: 0,
+        bottom: 0,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    popupContainer: {
-        width: '80%', // Adjust width as necessary
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        zIndex: 999,
     },
     popup: {
         backgroundColor: "white",
         padding: 20,
-        borderRadius: 10,
-        elevation: 5,
+        borderRadius: 15,
+        elevation: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 4,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowOpacity: 0.3,
+        shadowRadius: 6,
+        width: '90%', // Making the popup responsive to screen size
     },
     popupText: {
-        fontSize: 16,
+        fontSize: 18,
+        marginBottom: 20,
+        color: "#333",
+        textAlign: 'center', // Center align text for better readability
     },
     buttonContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        marginTop: 10,
+        justifyContent: "space-around", // Better spacing around buttons
     },
     button: {
-        backgroundColor: "#007BFF",
-        padding: 10,
-        borderRadius: 5,
-        width: "45%",
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+        width: "45%", // Ensures both buttons are of equal width
         alignItems: "center",
+    },
+    treatButton: {
+        backgroundColor: "#28a745", // Green button for positive action
+    },
+    doNothingButton: {
+        backgroundColor: "#dc3545", // Red button for negative or neutral action
     },
     buttonText: {
         color: "white",
         fontWeight: "bold",
+        fontSize: 16,
     },
 });
 

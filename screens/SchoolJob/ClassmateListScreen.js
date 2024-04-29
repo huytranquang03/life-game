@@ -7,8 +7,6 @@ const classmates = [
     { id: '3', name: 'Hien', image: 'https://picsum.photos/100/100' },
     { id: '4', name: 'Nguyen', image: 'https://picsum.photos/100/100' },
     { id: '5', name: 'Dang', image: 'https://picsum.photos/100/100' },
-
-    // ... add more classmates here
 ];
 
 const ClassmateListScreen = () => {
@@ -34,29 +32,39 @@ const ClassmateListScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 50,
+        backgroundColor: 'white',  // Light grey background for the whole screen
+        paddingTop: 20,
     },
     item: {
-        backgroundColor: 'beige',
-        padding: 20,
-        marginVertical: 8,
+        backgroundColor: '#FFF379',  // White background for items
+        padding: 16,
+        marginVertical: 10,
         marginHorizontal: 16,
-        borderRadius: 20,
-        flexDirection: 'row', // Arrange image and name horizontally
-        alignItems: 'center', // Align image and name vertically
+        borderRadius: 10,
+        borderWidth:3,
+        borderColor:'black',
+        flexDirection: 'row',
+        alignItems: 'center',
+        shadowColor: '#000',  // Shadow for 3D effect
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        elevation: 3,  
     },
     name: {
-        fontSize: 16,
-        marginLeft: 10, // Add some space between image and name
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#333',  
+        marginLeft: 20,  
     },
     image: {
-        width: 50,
-        height: 50,
-        borderRadius: 50,
+        width: 70,
+        height: 70,
+        borderRadius: 35,  
     },
     pressed: {
-        opacity: 0.75,
+        opacity: 0.85,
+        backgroundColor: '#ddd',  
     },
 });
 

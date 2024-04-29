@@ -11,7 +11,7 @@ const DepartmentChoose = () => {
         if (meetsDepartmentRequirements(department)) {
             setSelectedDepartment(department);
             setCurrentStatus(statuses.UNISTUDENT); // Update user department in context
-            setDepartment(department.name);
+            setDepartment(department);
             setDepartmentPopupVisible(false); // Close popup after successful enrollment
         } else {
             alert('Your stats do not meet the requirements for this department.');
