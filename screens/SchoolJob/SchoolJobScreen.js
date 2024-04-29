@@ -16,7 +16,7 @@ const SchoolJobScreen = ({ navigation }) => {
             case 'student':
                 return 'Student';
             case 'uniStudent':
-                return `Hanoi University - ${department}`;
+                return `Hanoi University - ${department.name}`;
             case 'employed':
                 return `Full-time ${job}`; // Assuming full-time job details are retrieved elsewhere
             case 'unemployed':
