@@ -18,6 +18,7 @@ import NPCDetailsScreen from './screens/NPCDetailsScreen';
 
 import { UserProvider } from './store/UserContext';
 import LoadingScreen from './screens/LoadingScreen';
+import DepartmentChoose from './components/layout/DepartmentChoose';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
 
                 </Stack.Navigator>
             </NavigationContainer>
+            <DepartmentChoose/>
         </UserProvider>
     );
 };
