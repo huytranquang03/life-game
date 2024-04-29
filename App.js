@@ -23,6 +23,8 @@ import SignupScreen from './screens/SignupScreen';
 import LoginScreen from './screens/LoginScreen';
 
 import DepartmentChoose from './components/layout/DepartmentChoose';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 const Stack = createNativeStackNavigator();
 
 function AuthStack() {
@@ -108,8 +110,12 @@ function Root() {
 
 export default function App() {
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+
     <AuthContextProvider>
       <Root />
     </AuthContextProvider>
+    </GestureHandlerRootView>
+
   );
 }
