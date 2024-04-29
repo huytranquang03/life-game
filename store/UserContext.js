@@ -132,7 +132,7 @@ const UserProvider = ({ children }) => {
     const getHealth = () => stats[0].progress
     const getAppearance = () => stats[2].progress
     const getHappiness = () => stats[1].progress
- 
+
     const getIntelligence = () => intelStats[0].progress
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
@@ -557,7 +557,10 @@ const UserProvider = ({ children }) => {
             universityDepartments, setUniversityDepartments,
             meetsDepartmentRequirements,
             department, setDepartment,
-            departmentPopupVisible, setDepartmentPopupVisible
+            departmentPopupVisible, setDepartmentPopupVisible,
+            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIntelligence, getIQ, getEQ, getKnowledge, percentageSimulator,
+            currentEvent, setCurrentEvent, handleUserChoice,
+            setNpcProgress,
         }}>
             {children}
         </UserContext.Provider>
