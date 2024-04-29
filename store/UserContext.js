@@ -86,6 +86,14 @@ const UserProvider = ({ children }) => {
         setPerformance(performance + 5)
     }
 
+    //quit job
+    const quitJob = () => {
+        setJob(null);
+        setCurrentStatus(statuses.UNEMPLOYED);
+        setPerformance(0);
+        setBalance(balance-job.wage);
+    }
+
     // Study Subjects
     const studyMath = () => {
         const intelChanges = {
@@ -137,25 +145,7 @@ const UserProvider = ({ children }) => {
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
-    const setHealth = (newHealth) => {
-        stats[0].progress = newHealth
-    }
-    const setHappiness = (newHappiness) => {
-        stats[1].progress = newHappiness
-    }
-    const setAppearance = (newAppearance) => {
-        stats[2].progress = newAppearance
-    }
 
-    const setIQ = (newIQ) => {
-        intelStats[1].progress = newIQ
-    }
-    const setEQ = (newEQ) => {
-        intelStats[2].progress = newEQ
-    }
-    const setKnowledge = (newKnowledge) => {
-        intelStats[3].progress = newKnowledge
-    }
     const applyForParttimeJob = (job) => {
         if (percentageSimulator(job.chance)) {
             alert(`You're hired as a part-time ${job.name}`);
@@ -168,21 +158,25 @@ const UserProvider = ({ children }) => {
             alert(`You're not hired`);
     };
     const applyForFulltimeJob = (job) => {
-        let successRate = 10;
-        if (diploma === 'C')
-            successRate = 50;
-        if (diploma === 'B')
-            successRate = 70;
-        if (diploma === 'A')
-            successRate = 90;
-        if (diploma === 'A+')
-            successRate = 100;
+        if (department && department.id === job.require) {
+            let successRate = 10;
+            if (diploma === 'C')
+                successRate = 50;
+            if (diploma === 'B')
+                successRate = 70;
+            if (diploma === 'A')
+                successRate = 90;
+            if (diploma === 'A+')
+                successRate = 100;
 
-        if (percentageSimulator(successRate) && percentageSimulator(job.chance)) {
-            setJob(job.name);
-            setCurrentStatus(statuses.EMPLOYED);
-            alert(`You're hired`);
-            setAnnualWage(job.wage);
+            if (percentageSimulator(successRate) && percentageSimulator(job.chance)) {
+                setJob(job.name);
+                setCurrentStatus(statuses.EMPLOYED);
+                alert(`You're hired`);
+                setAnnualWage(job.wage);
+            }
+            else
+                alert(`You're not hired`);
         }
         else
             alert(`You're not hired`);
@@ -230,6 +224,8 @@ const UserProvider = ({ children }) => {
                 setCurrentStatus(statuses.UNEMPLOYED);
             }
         } else if (age === 22 && currentStatus === statuses.UNISTUDENT) {
+            if (grade < 70)
+                alert(`You are expelled from school!`)
             if (grade >= 70 && grade < 80) {
                 setDiploma('C');
                 alert(`You graduated from University with C diploma`);
@@ -431,8 +427,23 @@ const UserProvider = ({ children }) => {
             id: 'gangAccident',
             description: "You owe to much money! The boss you lent money from sent his goon to took care of you. Game Over.",
             ageTrigger: 20,
-            statsTrigger: () => balance < -10000,
+            statsTrigger: () => balance < -1000,
             chance: 50,
+            treatCost: null,
+            effectIfTreat: () => {
+
+            },
+            effectIfNotTreat: () => {
+                gameOver()
+            },
+            treatable: false
+        },
+        {
+            id: 'healthProblem',
+            description: "Your unhealthy lifestyle has finally caught up to you! Game Over.",
+            ageTrigger: 0,
+            statsTrigger: () => (getHealth() <= 0),
+            chance: 100,
             treatCost: null,
             effectIfTreat: () => {
 
@@ -472,11 +483,13 @@ const UserProvider = ({ children }) => {
             currentEvent.effectIfNotTreat();
         }
 
-        if (currentEvent.id == 'depression' && percentageSimulator(30))
+        if (currentEvent.id == 'depression' && !choice && percentageSimulator(30)) {
             setCurrentEvent({ ...events[6], visible: true });
+            setTimerActive(false)
+        }
 
         else
-            setCurrentEvent(false)
+            setCurrentEvent(null)
     };
 
 
@@ -495,7 +508,11 @@ const UserProvider = ({ children }) => {
         setVehicleBonus(0);        // Resets vehicle bonus to 0
         setFinance(financeData);     // Resets financial information to default store data
         setActivity(activityData); // Resets activities to their default data
-        setCurrentStatus(statuses.INFANT)
+        setCurrentStatus(statuses.INFANT);
+        setDepartment(null);
+        setDepartmentPopupVisible(false);
+        setJob(null);
+        setTimerActive(false)
 
     };
     const setNpcProgress = (npcId, value, mode = 'increment') => {
@@ -538,6 +555,7 @@ const UserProvider = ({ children }) => {
             skipClass,
             studyHarder,
             workHarder,
+            quitJob,
             studyMath,
             studyLiterature,
             studyForeignLanguage,
