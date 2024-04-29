@@ -1,12 +1,16 @@
 import { View, Text, Image, Pressable, StyleSheet } from "react-native";
 
 const ImageButton = ({ image, text, onPress }) => (
-    <View style={styles.imageButtonContainer}>
-        <Pressable onPress={onPress} style={styles.pressableArea}>
-            <Image source={image} style={styles.image} resizeMode="contain" />
-        </Pressable>
+   <View style={styles.buttonWrapper}> 
+        <View style={styles.imageButtonContainer}>
+            <Pressable onPress={onPress} style={styles.pressableArea}>
+                <Image source={image} style={styles.image} resizeMode="contain" />
+            </Pressable>
+        </View>
         <Text style={styles.buttonText}>{text}</Text>
     </View>
+   
+
 );
 
 const styles = StyleSheet.create({
@@ -17,12 +21,15 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         padding: 10,
         alignItems: "center",
-        backgroundColor:'#5E17EB',
+        backgroundColor:'#FFF379',
+        borderColor:'black',
+        borderWidth:3,
     },
     pressableArea: {
         width: 45, // Adjust according to your design
         height: 45, // Adjust according to your design
         marginBottom: 1,
+        marginTop:3,
     },
     image: {
         width: "100%",
@@ -31,7 +38,8 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 10,
         fontWeight: "bold",
-        color:'white',
+        color:'black',
+        textAlign:'center',
     },
 });
 

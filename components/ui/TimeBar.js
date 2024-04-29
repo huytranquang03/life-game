@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     progressContainer: {
         width: '100%',
         overflow: 'hidden',
-        backgroundColor: '#e0e0e0',  // Adding a background color for the progress container to visualize the unfilled area.
+        backgroundColor: 'white',  // Adding a background color for the progress container to visualize the unfilled area.
     },
     progressBar: {
         height: '100%',

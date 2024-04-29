@@ -57,10 +57,10 @@ const MainGameScreen = ({ navigation }) => {
 
 			<View style={styles.buttonRow}>
 				<ImageButton image={require("../icon/School.png")} text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />
-				<ImageButton image={require("../icon/Money With Wings.png")} text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
-				<ImageButton image={require("../icon/cong.png")} text="Age" onPress={plusAge} />
-				<ImageButton image={require("../icon/heart.png")} text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
-				<ImageButton image={require("../icon/Person Running.png")} text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
+				<ImageButton image={require("../icon/Money Bag.png")} text="Finance" onPress={() => navigation.navigate("FinanceScreen")} />
+				<ImageButton image={require("../icon/Plus.png")} text="Age" onPress={plusAge} />
+				<ImageButton image={require("../icon/Green Heart.png")} text="Relationship" onPress={() => navigation.navigate("RelationshipScreen")} />
+				<ImageButton image={require("../icon/playhandball.png")} text="Activity" onPress={() => navigation.navigate("ActivitiesScreen")} />
 			</View>
 
 
@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
 		borderRadius:10,
 		borderBottomColor:'black',
 		borderColor:'black',
+		borderWidth:1,
 	},
 	text:{
 		color: 'white',
