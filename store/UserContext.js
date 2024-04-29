@@ -471,8 +471,10 @@ const UserProvider = ({ children }) => {
             currentEvent.effectIfNotTreat();
         }
 
-        if (currentEvent.id == 'depression' && percentageSimulator(30))
+        if (currentEvent.id == 'depression' && !choice && percentageSimulator(30)) {
             setCurrentEvent({ ...events[6], visible: true });
+            setTimerActive(false)
+        }
 
         else
             setCurrentEvent(false)
