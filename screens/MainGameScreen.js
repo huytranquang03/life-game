@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         width: "100%",
-        marginTop: 20,
+        marginTop: 10,
         padding: 0,
     },
     profileImageContainer: {
