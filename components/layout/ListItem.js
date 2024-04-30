@@ -7,8 +7,8 @@ function ListItem({ data, onPress }) {
   // Function to dynamically determine the image path based on the NPC's type
   const getImagePath = (itemType) => {
     switch (itemType) {
-      case "Parent": return require("../../icon/Plus.png");
-      case "Friend": return require("../../icon/Plus.png");
+      case "Parent": return require("../../icon/Family.png");
+      case "Friend": return require("../../icon/hand.png");
       case "Superior": return require("../../icon/Couple.png");
       case "Classmate": return require("../../icon/Plus.png");
       case "Sibling": return require("../../icon/Plus.png");
@@ -26,7 +26,6 @@ function ListItem({ data, onPress }) {
     >
       <View style={styles.itemContent}>
         <IconImage image={getImagePath(item.item)} />
-        <Ionicons name={item.icon} size={24} color="black" />
         <Text style={styles.text}>{item.item}</Text>
       </View>
     </Pressable>
