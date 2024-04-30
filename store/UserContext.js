@@ -397,7 +397,11 @@ const UserProvider = ({ children }) => {
         updateCurrentStatus(age + 1);
         handleEvents();
         setBalance(balance + annualWage);
-    };
+        setNpc(prevNpcs => prevNpcs.map(npc => ({
+            ...npc,
+            progress: Math.max(0, npc.progress - 10)
+            })));
+       };
 
     //
     const percentageSimulator = (percentage) => {

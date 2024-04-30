@@ -53,15 +53,6 @@ const SchoolJobScreen = ({ navigation }) => {
                             </View>
                             <GameBar progress={grade} color={'#5E17EB'} height={10} borderRadius={5} />
                         </Pressable>
-                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Image
-                                    source={require('../../icon/dauvat.png')} // Updated to use local image
-                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
-                                />
-                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Classmate</Text>
-                            </View>
-                        </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image
@@ -88,15 +79,6 @@ const SchoolJobScreen = ({ navigation }) => {
                             </View>
                             <GameBar progress={grade} color={'#5E17EB'} height={10} borderRadius={5} />
                         </View>
-                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Image
-                                    source={require('../../icon/hand.png')} // Updated to use local image
-                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
-                                />
-                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Classmate</Text>
-                            </View>
-                        </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image
@@ -148,15 +130,6 @@ const SchoolJobScreen = ({ navigation }) => {
                             </View>
                             <GameBar progress={performance} color={'#5E17EB'} height={10} borderRadius={5} />
                         </View>
-                        <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ClassmateListScreen') }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Image
-                                    source={require('../../icon/hand.png')} // Updated to use local image
-                                    style={{ width: 40, height: 40, marginRight: 10,marginBottom:5 }}
-                                />
-                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Colleague</Text>
-                            </View>                           
-                        </Pressable>
                         <Pressable style={styles.gradeBar} onPress={() => { navigation.navigate('ParttimeJobListScreen') }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image

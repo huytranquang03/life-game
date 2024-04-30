@@ -16,7 +16,6 @@ import RelationshipScreen from './screens/RelationshipScreen';
 import FinanceScreen from './screens/FinanceScreen';
 import ActivitiesScreen from './screens/ActivitiesScreen';
 import SubjectListScreen from './screens/SchoolJob/SubjectListScreen';
-import ClassmateListScreen from './screens/SchoolJob/ClassmateListScreen';
 import { ParttimeJobListScreen, FulltimeJobListScreen } from './screens/SchoolJob/JobListScreen';
 import NPCDetailsScreen from './screens/NPCDetailsScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -53,7 +52,6 @@ function AuthenticatedStack() {
           <Stack.Screen name="FinanceScreen" component={FinanceScreen} />
           <Stack.Screen name="ActivitiesScreen" component={ActivitiesScreen} />
           <Stack.Screen name="SubjectListScreen" component={SubjectListScreen} />
-          <Stack.Screen name="ClassmateListScreen" component={ClassmateListScreen} />
           <Stack.Screen name="ParttimeJobListScreen" component={ParttimeJobListScreen} />
           <Stack.Screen name="FulltimeJobListScreen" component={FulltimeJobListScreen} />
           <Stack.Screen name="NPCDetailsScreen" component={NPCDetailsScreen} />
