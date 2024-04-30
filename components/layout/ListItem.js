@@ -16,7 +16,7 @@ function ListItem({ data, onPress }) {
       case "Spend time": return require("../../icon/People Hugging.png");
       case "Compliment": return require("../../icon/compliment.png");
 
-      default: return require("../../icon/Plus.png"); // Default icon if none match
+      default: return require("../../icon/Plus.png");
     }
   };
 

@@ -58,7 +58,7 @@ const FulltimeJobListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white', // Light grey background for the whole screen
+        backgroundColor: 'white', 
         paddingTop: 20,
     },
     textjob: {
@@ -68,41 +68,40 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     item: {
-        backgroundColor: '#FFF379', // White background for items
+        backgroundColor: '#FFF379',
         padding: 25,
         marginVertical: 10,
         marginHorizontal: 16,
         borderRadius: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between', // Ensures space between job name and wage
+        justifyContent: 'space-between', 
         alignItems: 'center',
-        shadowColor: '#000', // Shadow for 3D effect
+        shadowColor: '#000', 
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 6,
-        elevation: 3, // Elevation for Android
+        elevation: 3, 
         borderColor: 'black',
-        borderWidth: 1, // Subtle border for better definition
+        borderWidth: 1, 
     },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#333', // Darker font for better readability
+        color: '#333', 
         width: '58%'
     },
     wage: {
         fontSize: 16,
-        color: '#333', // Darker font for better readability
+        color: '#333',
         fontWeight: 'bold',
         width: '45%',
         textAlign: 'right'
     },
     pressed: {
         opacity: 0.85,
-        backgroundColor: '#ddd', // Darken item on press for feedback
+        backgroundColor: '#ddd',
     },
     buttonContainer: {
-        // You might want to define this style if used
     },
 });
 

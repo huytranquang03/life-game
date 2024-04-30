@@ -19,19 +19,16 @@ const ActivitiesScreen = () => {
 	const [confirmMessage, setConfirmMessage] = useState("");
 
     const generateConfirmMessage = (item) => {
-        // Define a default prefix
         const defaultPrefix = "Are you sure you want to";
 
-        // Mapping of item IDs to specific actions or messages
         const actionMap = {
             1: "play sports?",
             2: "read a book?",
             3: "start playing video games now?",
-            4: `spend $${item.price} to go to the spa?`, // Handle price dynamically
+            4: `spend $${item.price} to go to the spa?`, 
             5: "join this club?",
         };
 
-        // Return the message based on the item ID, or a generic message if the ID isn't found
         return `${defaultPrefix} ${actionMap[item.id] || "proceed?"}`;
     };
 
@@ -71,24 +68,16 @@ const ActivitiesScreen = () => {
 
 	const handleConfirm = () => {
 		setConfirmVisible(false);
-		// const success = 
       useActivity(selectedItem.id);
-		// Only filter out the activity if it was successful or it's not the 'Go to a spa' activity.
-		// if (success || selectedItem.id !== 4) {
-		// 	const updatedActivity = activity.filter(
-		// 		(item) => item.id !== selectedItem.id
-		// 	);
-		// 	setActivity(updatedActivity);
-		// }
 	};
 
     const handleCancel = () => {
-        setConfirmVisible(false); // Close the confirm modal
+        setConfirmVisible(false); 
     };
 
     const handlePress = (item) => {
         setSelectedItem(item);
-        setConfirmMessage(generateConfirmMessage(item)); // Set the message using the new function
+        setConfirmMessage(generateConfirmMessage(item)); 
         setConfirmVisible(true);
     };
 
@@ -97,7 +86,7 @@ const ActivitiesScreen = () => {
             <ListItem data={activity} onPress={handlePress} />
             <ConfirmAlert
                 visible={confirmVisible}
-                message={confirmMessage} // Use the dynamic message
+                message={confirmMessage} 
                 onCancel={handleCancel}
                 onConfirm={handleConfirm}
             />

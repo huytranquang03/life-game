@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import GameBar from '../components/ui/GameBar'; // Assuming your GameBar component is in a separate file
+import { View, Text,  StyleSheet } from 'react-native';
+import GameBar from '../components/ui/GameBar'; 
 import { UserContext  } from '../store/UserContext'; 
 import Avatar from '../components/ui/Avatar';
 
@@ -13,8 +13,8 @@ const PlayerStatsScreen = () => {
         Happiness: '😊',
         Appearance: '💅',
         Intelligence: '🧠',
-        IQ: '🧬', // Replace with appropriate emoji
-        EQ: '💖', // Replace with appropriate emoji
+        IQ: '🧬', 
+        EQ: '💖', 
         Knowledge: '📚'
     };
 
@@ -64,7 +64,6 @@ const PlayerStatsScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // alignItems: 'center',
         padding: 20,
         backgroundColor: '#FFFBE2',
     },
@@ -80,9 +79,9 @@ const styles = StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 50,
-        borderRadius: 40, // Half of width and height to make it round
+        borderRadius: 40, 
         borderWidth: 2,
-        borderColor: 'black', // There is a green border in the screenshot
+        borderColor: 'black', 
     },
     infoView: {
         marginBottom: 10,

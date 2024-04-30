@@ -1,11 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Text, Pressable, Image } from "react-native";
 
-const Avatar = ({ source, name, onPress }) => (
+const Avatar = ({onPress }) => (
   <Pressable style={styles.container} onPress={onPress}>
     <View style={styles.profileImageContainer}>
         <Image source={require('../../assets/images/avatar.jpg')} style={styles.profileImage} />
-        <Text>{name}</Text>
     </View>
   </Pressable>
 );

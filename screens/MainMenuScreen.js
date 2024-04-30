@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     button: {
-        fontSize: 40, // Kích thước văn bản của nút
+        fontSize: 40,
     },
 });
 

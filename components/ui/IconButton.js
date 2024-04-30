@@ -8,7 +8,7 @@ function IconButton({ icon, size, color, onPress, text }) {
             onPress={onPress}
             style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}
             accessibilityRole="button"
-            accessibilityLabel={text} // Providing an accessibility label for the button
+            accessibilityLabel={text} 
         >
             <View style={styles.innerContainer}>
                 <Ionicons name={icon} size={size} color={color} />
@@ -30,8 +30,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     innerContainer: {
-        // width: 300,
-        // height: 100,
         padding: 10,
         flexDirection: 'row',
         alignItems: 'center',

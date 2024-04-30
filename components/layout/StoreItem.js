@@ -20,7 +20,7 @@ function StoreItem({ data, onPress }) {
             case "Gym subscription": return require("../../icon/Man Lifting.png");
             case "Luxurious clothes": return require("../../icon/Dress.png");
           
-            default: return require("../../icon/Fire.png"); // Default icon if none match
+            default: return require("../../icon/Fire.png");
         }
     };
 
@@ -30,7 +30,7 @@ function StoreItem({ data, onPress }) {
                 onPress={() => onPress(item)}
                 style={({ pressed }) => [
                     styles.item,
-                    { backgroundColor: getColorByType(item.item) }, // Set background color based on item type
+                    { backgroundColor: getColorByType(item.item) },
                     pressed && styles.pressed
                 ]}
             >
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        //paddingHorizontal: 5,
     },
     leftContainer: {
         flexDirection: "row",

@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     pressableArea: {
-        width: 55, // Adjust according to your design
-        height: 55, // Adjust according to your design
+        width: 55, 
+        height: 55, 
         marginBottom: 1,
     },
     image: {

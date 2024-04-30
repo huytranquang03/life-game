@@ -1,8 +1,6 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet, Text, Pressable, Alert, Image } from "react-native";
-import PrimaryButton from "../components/ui/PrimaryButton";
-import IconButton from "../components/ui/IconButton";
 import GameBar from "../components/ui/GameBar";
 import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
@@ -19,7 +17,6 @@ const MainGameScreen = ({ navigation }) => {
         age,
         balance,
         plusAge,
-        currentEvent,
         currentReward
     } = useContext(UserContext);
 
@@ -32,7 +29,6 @@ const MainGameScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate("PlayerStatsScreen")}
                 >
                     <Avatar
-                        name={name}
                         onPress={() => navigation.navigate("PlayerStatsScreen")}
                     />
                 </Pressable>
@@ -87,20 +83,7 @@ const MainGameScreen = ({ navigation }) => {
     );
 };
 
-const ActionButton = ({ icon, text, onPress }) => (
-    <View style={styles.actionButton}>
-        <PrimaryButton onPress={onPress} style={styles.primaryButton}>
-            <IconButton
-                onPress={onPress}
-                icon={icon}
-                size={16}
-                color="white"
-                style={styles.iconButton}
-            />
-        </PrimaryButton>
-        <Text style={styles.actionButtonText}>{text}</Text>
-    </View>
-);
+
 
 const emojiMap = {
     Health: '❤️',
@@ -132,7 +115,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         width: "100%",
-        marginTop: 10,
+        marginTop: 20,
         padding: 0,
     },
     profileImageContainer: {
@@ -172,16 +155,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         width: "100%",
     },
-    // imageView: {
-    //     width: "100%",
-    //     height: 320,
-    //     backgroundColor: "#F8FFE3",
-    //     marginTop: 0,
-    //     borderRadius: 10,
-    //     borderBottomColor: 'black',
-    //     borderColor: 'black',
-    //     borderWidth: 1,
-    // },
     text: {
         color: 'white',
     },

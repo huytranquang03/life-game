@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { UserContext } from '../../store/UserContext';
-import { Modal, Button } from 'react-native'; // Import Modal and Button
+import { Modal, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 const RandomEvent = () => {
     const navigation = useNavigation();
@@ -82,30 +82,30 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.3,
         shadowRadius: 6,
-        width: '90%', // Making the popup responsive to screen size
+        width: '90%',
     },
     popupText: {
         fontSize: 18,
         marginBottom: 20,
         color: "#333",
-        textAlign: 'center', // Center align text for better readability
+        textAlign: 'center',
     },
     buttonContainer: {
         flexDirection: "row",
-        justifyContent: "space-around", // Better spacing around buttons
+        justifyContent: "space-around",
     },
     button: {
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 10,
-        width: "46%", // Ensures both buttons are of equal width
+        width: "46%", 
         alignItems: "center",
     },
     treatButton: {
-        backgroundColor: "#28a745", // Green button for positive action
+        backgroundColor: "#28a745", 
     },
     doNothingButton: {
-        backgroundColor: "#dc3545", // Red button for negative or neutral action
+        backgroundColor: "#dc3545", 
     },
     buttonText: {
         color: "white",

@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 20, // Thay đổi kích thước của chữ
+    fontSize: 20,
     fontWeight: 'bold'
   },
 });

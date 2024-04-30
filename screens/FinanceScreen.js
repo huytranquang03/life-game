@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import StoreItem from "../components/layout/StoreItem";
 import { UserContext } from "../store/UserContext";
 import ConfirmAlert from "../components/layout/ConfirmAlert";
-import { Alert, View } from "react-native";
+import { Alert } from "react-native";
 
-const FinanceScreen = ({ navigation }) => {
+const FinanceScreen = ({  }) => {
 	const {
 		finance,
 		setFinance,
@@ -44,20 +44,18 @@ const FinanceScreen = ({ navigation }) => {
 					break;
 			}
 			setVehicleBonus(newVehicleBonus);
-			return true; // Purchase was successful
+			return true; 
 		} else {
 			Alert.alert("Notice", "Not enough money to buy the vehicle");
-			return false; // Purchase was not successful
+			return false;
 		}
 	};
 
 	const handleConfirm = () => {
-		// If the item is successfully purchased, then remove it from the finance list
 		if (buyVehicle(selectedItem.price)) {
 			const updatedFinance = finance.filter(item => item.id !== selectedItem.id);
 			setFinance(updatedFinance);
 		}
-		// Close the confirmation window in either case
 		setConfirmVisible(false);
 	};
 

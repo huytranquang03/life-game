@@ -72,7 +72,6 @@ const UserProvider = ({ children }) => {
         updateStats(statsChanges);
         setTime(time + 90);
         setGrade(Math.max(0, grade - 5));
-        console.log(grade)
     };
 
     // word harder
@@ -311,7 +310,6 @@ const UserProvider = ({ children }) => {
 
             setCurrentStatus(statuses.UNEMPLOYED);
         }
-        console.log(`Current status updated to: ${currentStatus}`);
     }
 
     const updateIntelStats = (changes) => {
@@ -322,7 +320,6 @@ const UserProvider = ({ children }) => {
             if (change) {
                 return { ...stat, progress: Math.min(Math.max(0, stat.progress + change), 100) };
             }
-            console.log(changes);
             return stat;
 
         });
@@ -338,7 +335,6 @@ const UserProvider = ({ children }) => {
             if (change) {
                 return { ...stat, progress: Math.min(Math.max(0, stat.progress + change), 100) };
             }
-            console.log(changes);
             return stat;
         });
         setStats(updatedStats);
@@ -372,7 +368,6 @@ const UserProvider = ({ children }) => {
 
     const plusAge = () => {
         setTime(0);
-        console.log(age);
         setAge(age + 1);
         decreaseStats();
         updateCurrentStatus(age + 1);
@@ -516,7 +511,6 @@ const UserProvider = ({ children }) => {
         let eventTriggered = false;
         events.forEach(event => {
             if (!eventTriggered && age >= event.ageTrigger && (event.ageStop ? age <= event.ageStop : true) && percentageSimulator(event.chance) && event.statsTrigger()) {
-                console.log(`Event triggered: ${event.description}`);  // Debug log
                 setCurrentEvent({
                     ...event,
                     visible: true,
@@ -557,20 +551,20 @@ const UserProvider = ({ children }) => {
 
 
     const gameOver = () => {
-        setName('Player');          // Resets name to 'Player'
-        setAge(0);                 // Resets age to 0
-        setBalance(0);             // Resets balance to 0
-        setTime(0);                // Resets time to 0
-        setGrade(0);               // Resets grade to 0
-        setPerformance(0);         // Resets performance to 0
-        setDiploma('None');        // Resets diploma to 'None'
-        setIntelStats(intelStatsData);  // Resets intellectual stats to their default data
-        setStats(statsData);       // Resets general stats to their default data
-        setNpc(npcData);           // Resets NPC data to default
-        setCurrentEvent(null);     // Clears any current events
-        setVehicleBonus(0);        // Resets vehicle bonus to 0
-        setFinance(financeData);     // Resets financial information to default store data
-        setActivity(activityData); // Resets activities to their default data
+        setName('Player');         
+        setAge(0);               
+        setBalance(0);             
+        setTime(0);               
+        setGrade(0);               
+        setPerformance(0);         
+        setDiploma('None');        
+        setIntelStats(intelStatsData);  
+        setStats(statsData);       
+        setNpc(npcData);           
+        setCurrentEvent(null);     
+        setVehicleBonus(0);        
+        setFinance(financeData);     
+        setActivity(activityData);
         quitJob();
         setCurrentStatus(statuses.INFANT);
         setDepartment(null);
@@ -578,28 +572,14 @@ const UserProvider = ({ children }) => {
         setTimerActive(false)
 
     };
-    const setNpcProgress = (npcId, value, mode = 'increment') => {
-        setNpc(prevNpcs => {
-            return prevNpcs.map(npc => {
-                if (npc.id === npcId) {
-                    let newProgress;
-                    switch (mode) {
-                        case 'increment':
-                            newProgress = Math.min(100, npc.progress + value);  // Prevent exceeding 100
-                            break;
-                        case 'decrement':
-                            newProgress = Math.max(0, npc.progress - value);  // Prevent going below 0
-                            break;
-                        default:
-                            newProgress = npc.progress;  // No change if mode is unrecognized
-                            break;
-                    }
-                    return { ...npc, progress: newProgress };
-                }
-                return npc;
-            });
-        });
+    const setNpcProgress = (npcId, value) => {
+        const updatedNpc = npc.find(npc => npc.id === npcId);
+        if (updatedNpc) {
+            updatedNpc.progress = Math.min(Math.max(0, updatedNpc.progress + value), 100);
+        }
+        return npc;
     };
+    
     const currentTime = moment();
     const dayOfWeekString = currentTime.format('dddd');
     const [currentReward, setCurrentReward] = useState(null);
@@ -644,7 +624,7 @@ const UserProvider = ({ children }) => {
     const handleRewards = () => {
         let rewardTriggered = false;
         rewardData.forEach(reward => {
-            if (!rewardTriggered && dayOfWeekString === reward.id.trim()) { // Also trim any whitespace
+            if (!rewardTriggered && dayOfWeekString === reward.id.trim()) { 
                 setCurrentReward({
                     ...reward,
                     visible: true,
@@ -654,8 +634,8 @@ const UserProvider = ({ children }) => {
         });
     };
     useEffect(() => {
-        handleRewards();  // Ensure it's called at component mount or when required
-    }, [dayOfWeekString]);  // Dependency array should include variables that trigger the update
+        handleRewards();  
+    }, [dayOfWeekString]); 
 
 
 

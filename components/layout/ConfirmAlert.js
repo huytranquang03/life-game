@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cancelButton: {
-    backgroundColor: '#d9534f', // Bootstrap's btn-danger color
+    backgroundColor: '#d9534f',
     marginRight: 10,
   },
   confirmButton: {
-    backgroundColor: '#5cb85c', // Bootstrap's btn-success color
+    backgroundColor: '#5cb85c',
   },
   buttonText: {
     color: 'white',

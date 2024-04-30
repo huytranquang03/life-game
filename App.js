@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AsyncStorage } from 'react-native';
-import { SplashScreen } from 'expo'; // Import SplashScreen from expo-splash-screen
 import AuthContextProvider, { AuthContext } from './store/auth-context';
 import { UserProvider } from './store/UserContext';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -42,7 +41,7 @@ function AuthenticatedStack() {
 
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="MainMenuScreen" component={MainMenuScreen} />
-          <Stack.Screen name="SetupScreen" component={SetupScreen} />
+          <Stack.Screen name="SetupScreen" component={SetupScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="MainGameScreen" component={MainGameScreen} />
           <Stack.Screen name="PlayerStatsScreen" component={PlayerStatsScreen} />
           <Stack.Screen name="SchoolJobScreen" component={SchoolJobScreen} />
@@ -88,11 +87,9 @@ function Root() {
         }
       } catch (error) {
 
-        // console.error("Error fetching token:", error);
 
       } finally {
         setIsTryingLogin(false);
-        // SplashScreen.hideAsync(); // Ẩn splash screen khi đã tải xong
       }
     }
 
@@ -101,7 +98,7 @@ function Root() {
 
 
   if (isTryingLogin) {
-    return null; // Return null instead of AppLoading
+    return null; 
   }
 
   return <Navigation />;

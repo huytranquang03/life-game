@@ -20,7 +20,7 @@ function NPCitem({ data }) {
             case "Husband/Wife": return require("../../icon/Couple.png");
            
           
-            default: return require("../../icon/Fire.png"); // Default icon if none match
+            default: return require("../../icon/Fire.png");
         }
     };
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     barWrapper: {
-        flex: 0.9, // Adjust this value to control the length of the GameBar
+        flex: 0.9,
     },
     statusText: {
       marginRight: 10,

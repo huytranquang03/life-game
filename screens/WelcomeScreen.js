@@ -5,9 +5,9 @@ import { useNavigation } from '@react-navigation/native'; // Thêm import này
 import { AuthContext } from '../store/auth-context';
 
 function SetupScreen() {
-  const [fetchedMessage, setFetchedMesssage] = useState(null); // Thêm state và setter
-  const navigation = useNavigation(); // Sử dụng useNavigation để truy cập navigation
-  const { token } = useContext(AuthContext); // Thêm import useContext
+  const [fetchedMessage, setFetchedMesssage] = useState(null); 
+  const navigation = useNavigation(); 
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -16,7 +16,7 @@ function SetupScreen() {
           token
       )
       .then((response) => {
-        setFetchedMesssage(response.data); // Sửa tên hàm này
+        setFetchedMesssage(response.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);

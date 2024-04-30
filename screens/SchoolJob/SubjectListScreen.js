@@ -51,14 +51,14 @@ const SubjectListScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f4f4f4', // Light grey background
+        backgroundColor: '#f4f4f4',
         paddingTop: 20,
     },
     gradeBar: {
         marginHorizontal: 20,
         marginBottom: 20,
         padding: 20,
-        backgroundColor: '#e6e6fa', // Lavender background for grade bar
+        backgroundColor: '#e6e6fa',
         borderRadius: 10,
         borderWidth: 2,
         marginTop: 10,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         color: '#333',
     },
     button: {
-        backgroundColor: '#add8e6', // Light blue
+        backgroundColor: '#add8e6', 
         paddingHorizontal: 15,
         paddingVertical: 8,
         borderRadius: 20,

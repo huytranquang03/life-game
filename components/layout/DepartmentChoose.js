@@ -7,12 +7,11 @@ const DepartmentChoose = () => {
     const [selectedDepartment, setSelectedDepartment] = useState(null);
 
     const handleDepartmentSelection = (department) => {
-        // Check if user stats meet department requirements
         if (meetsDepartmentRequirements(department)) {
             setSelectedDepartment(department);
-            setCurrentStatus(statuses.UNISTUDENT); // Update user department in context
+            setCurrentStatus(statuses.UNISTUDENT);
             setDepartment(department);
-            setDepartmentPopupVisible(false); // Close popup after successful enrollment
+            setDepartmentPopupVisible(false);
         } else {
             alert('Your stats do not meet the requirements for this department.');
         }
@@ -31,7 +30,7 @@ const DepartmentChoose = () => {
                     {universityDepartments.map((department, index) => (
                         <TouchableOpacity
                             key={index}
-                            disabled={selectedDepartment} // Disable button if a department is already selected
+                            disabled={selectedDepartment}
                             onPress={() => handleDepartmentSelection(department)}
                             style={{ padding: 10, marginVertical: 5, backgroundColor: '#eee', borderRadius: 5 }}
                         >

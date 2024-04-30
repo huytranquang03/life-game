@@ -72,19 +72,19 @@ export default AuthContent;
 
 const styles = StyleSheet.create({
   authContent: {
-    marginTop: 150, // Reduced top margin for better vertical spacing
-    marginHorizontal: 32, // Keep horizontal margin to align content well on screen
-    padding: 20, // Increased padding for better content spacing
-    borderRadius: 12, // More pronounced rounded corners for a softer look
-    backgroundColor: '#004AAD', // Lighter background for a modern look
-    elevation: 5, // Slightly raised elevation for a subtle shadow effect
+    marginTop: 150,
+    marginHorizontal: 32,
+    padding: 20,
+    borderRadius: 12,
+    backgroundColor: '#004AAD',
+    elevation: 5, 
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1, // Lighter shadow for a less harsh effect
+    shadowOpacity: 0.1,
     shadowRadius: 6,
   },
   buttons: {
-    marginTop: 16, // Increase spacing above the button
-    paddingHorizontal: 10, // Horizontal padding for better alignment of button inside the container
+    marginTop: 16,
+    paddingHorizontal: 10,
   },
 });
