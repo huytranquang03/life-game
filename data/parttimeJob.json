@@ -1,12 +1,12 @@
-[   
-    { "id": 1, "name": "Sell lottery tickets", "wage": 200, "chance": 90, "time": 100, "Health": -7, "Happiness": -3, "Appearance": -3, "IQ": 2, "EQ": 3, "Knowledge": 2},
-    { "id": 2, "name": "Look after pet", "wage": 300, "chance": 85, "time": 120, "Health": -3, "Happiness": 5, "Appearance": -1, "IQ": -1, "EQ": 5, "Knowledge": -3},
-    { "id": 3, "name": "Text Editor", "wage": 425, "chance": 80, "time": 180, "Health": -4, "Happiness": -1, "Appearance": -2, "IQ": 1, "EQ": -3, "Knowledge": 3},
-    { "id": 4, "name": "Construction worker", "wage": 550, "chance": 70, "time": 200, "Health": -10, "Happiness": -5, "Appearance": -2, "IQ": 3, "EQ": 3, "Knowledge": 2},
-    { "id": 5, "name": "Babysitter", "wage": 600, "chance": 60, "time": 200, "Health": -1, "Happiness": -3, "Appearance": 0, "IQ": -3, "EQ": 5, "Knowledge": -3},
-    { "id": 6, "name": "Beggar", "wage": 600, "chance": 50, "time": 250, "Health": -10, "Happiness": -3, "Appearance": -2, "IQ": 5, "EQ": 7, "Knowledge": 5},
-    { "id": 7, "name": "Teacher Assistant", "wage": 750, "chance": 280, "time": 360, "Health": -3, "Happiness": -3, "Appearance": 2, "IQ": 5, "EQ": 3, "Knowledge": 5},
-    { "id": 8, "name": "Selling matches", "wage": 850, "chance": 40, "time": 320, "Health": -12, "Happiness": 5, "Appearance": 5, "IQ": -3, "EQ": 4, "Knowledge": -5},
-    { "id": 9, "name": "Scammer", "wage": 1000, "chance": 35, "time": 450, "Health": -15, "Happiness": 7, "Appearance": -5, "IQ": 10, "EQ": -5, "Knowledge": 3},
-    { "id": 10, "name": "Smuggling", "wage": 1250, "chance": 10, "time": 500, "Health": -10, "Happiness": 7, "Appearance": -2, "IQ": 7, "EQ": 2, "Knowledge": 5}
+[
+    { "id": 1, "name": "Sell tickets 🎫", "wage": 200, "chance": 90, "time": 30, "Health": -7, "Happiness": -3, "Appearance": -3, "IQ": 2, "EQ": 3, "Knowledge": 2 },
+    { "id": 2, "name": "Look after pet 🐶", "wage": 300, "chance": 85, "time": 30, "Health": -3, "Happiness": 5, "Appearance": -1, "IQ": -1, "EQ": 5, "Knowledge": -3 },
+    { "id": 3, "name": "Text Editor ✍️", "wage": 425, "chance": 80, "time": 40, "Health": -4, "Happiness": -1, "Appearance": -2, "IQ": 1, "EQ": -3, "Knowledge": 3 },
+    { "id": 4, "name": "Construction Worker 💼", "wage": 550, "chance": 90, "time": 40, "Health": -10, "Happiness": -5, "Appearance": -2, "IQ": 3, "EQ": 3, "Knowledge": 2 },
+    { "id": 5, "name": "Babysitter 👶", "wage": 600, "chance": 60, "time": 60, "Health": -1, "Happiness": -3, "Appearance": 0, "IQ": -3, "EQ": 5, "Knowledge": -3 },
+    { "id": 6, "name": "Beggar 🙏", "wage": 720, "chance": 50, "time": 50, "Health": -10, "Happiness": -3, "Appearance": -2, "IQ": 5, "EQ": 7, "Knowledge": 5 },
+    { "id": 7, "name": "Private Tutor 📚", "wage": 750, "chance": 50, "time": 60, "Health": -3, "Happiness": -3, "Appearance": 2, "IQ": 5, "EQ": 3, "Knowledge": 5 },
+    { "id": 8, "name": "Money Exchanger 💸", "wage": 850, "chance": 40, "time": 60, "Health": -12, "Happiness": 5, "Appearance": 5, "IQ": -3, "EQ": 4, "Knowledge": -5 },
+    { "id": 9, "name": "Scammer 🕵️‍♂️", "wage": 1000, "chance": 35, "time": 80, "Health": -15, "Happiness": 7, "Appearance": -5, "IQ": 10, "EQ": -5, "Knowledge": 3 },
+    { "id": 10, "name": "Drug Dealer 💊", "wage": 1250, "chance": 10, "time": 90, "Health": -10, "Happiness": 7, "Appearance": -2, "IQ": 7, "EQ": 2, "Knowledge": 5 }
 ]

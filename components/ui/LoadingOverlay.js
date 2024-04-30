@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 32,
-  },
+    marginTop:300,
+},
   message: {
     fontSize: 16,
     marginBottom: 12,

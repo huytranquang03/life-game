@@ -9,7 +9,7 @@ const ParttimeJobListScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View>
-                <Text>Part-time jobs:</Text>
+            <Text style={styles.textjob}>Part-time jobs:</Text> 
                 <FlatList
                     data={parttime}
                     renderItem={({ item }) => (
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     textjob: {
-        fontSize: 18,
+        fontSize: 19,
         fontWeight: 'bold',
         marginLeft: 16,
         marginBottom: 10,

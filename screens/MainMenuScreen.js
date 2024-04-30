@@ -21,8 +21,10 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Button title="New Game" onPress={handleNewGamePress} />
-            <Button title="Continue" onPress={handleContinuePress} style={styles.button} />
+            <Button title="New Game" onPress={handleNewGamePress} style={styles.button} />
+            <View style={styles.buttonContainer}>
+                <Button title="Continue" onPress={handleContinuePress} style={styles.button} />
+            </View>
         </View>
     );
 };
@@ -30,11 +32,14 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 300,
+    },
+    buttonContainer: {
+        marginTop: 50,
     },
     button: {
-        marginTop: 10,
+        fontSize: 40, // Kích thước văn bản của nút
     },
 });
 
