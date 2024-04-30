@@ -12,13 +12,13 @@ function StoreItem({ data, onPress }) {
 
     const getImagePath = (itemType) => {
         switch (itemType) {
-            case "Bike": return require("../../icon/Family.png");
-            case "Motorbike": return require("../../icon/hand.png");
-            case "Car": return require("../../icon/Couple.png");
-            case "Apartment": return require("../../icon/Plus.png");
-            case "House": return require("../../icon/Plus.png");
-            case "Gym subscription": return require("../../icon/Plus.png");
-            case "Luxurious clothes": return require("../../icon/Plus.png");
+            case "Bike": return require("../../icon/Bicycle.png");
+            case "Motorbike": return require("../../icon/Motor.png");
+            case "Car": return require("../../icon/Car.png");
+            case "Apartment": return require("../../icon/apartment.png");
+            case "House": return require("../../icon/House.png");
+            case "Gym subscription": return require("../../icon/Man Lifting.png");
+            case "Luxurious clothes": return require("../../icon/Dress.png");
           
             default: return require("../../icon/Fire.png"); // Default icon if none match
         }

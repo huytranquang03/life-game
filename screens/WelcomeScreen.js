@@ -25,12 +25,12 @@ function SetupScreen() {
 
   return (
     <View style={styles.rootContainer}>
-      <Text>You authenticated successfully!</Text>
+      <Text style = {styles.text}>You authenticated successfully!</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('MainMenuScreen')}
       >
-        <Text style={styles.buttonText}>mainmenu</Text>
+        <Text style={styles.buttonText}>Main menu</Text>
       </TouchableOpacity>
     </View>
   );
@@ -39,6 +39,10 @@ function SetupScreen() {
 export default SetupScreen;
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize:23,
+
+  },
   rootContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -46,12 +50,12 @@ const styles = StyleSheet.create({
     padding: 32,
   },
   title: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 8,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#004AAD',
     padding: 10,
     borderRadius: 5,
     marginTop: 20,

@@ -5,12 +5,12 @@ import IconImage from '../ui/IconImage';
 function ListItem({ data, onPress }) {
   const getImagePath = (itemType) => {
     switch (itemType) {
-      case "Play sport": return require("../../icon/Family.png");
-      case "Read a book": return require("../../icon/hand.png");
-      case "Play video games": return require("../../icon/Couple.png");
-      case "Go to a spa": return require("../../icon/Plus.png");
-      case "Join a club": return require("../../icon/Plus.png");
-      default: return require("../../icon/Fire.png"); // Default icon if none match
+      case "Play sports": return require("../../icon/playsport.png");
+      case "Read a book": return require("../../icon/readbook.png");
+      case "Play video games": return require("../../icon/game.png");
+      case "Go to a spa": return require("../../icon/spa.png");
+      case "Join a club": return require("../../icon/club.png");
+      default: return require("../../icon/Plus.png"); // Default icon if none match
     }
   };
 
