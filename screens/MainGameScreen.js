@@ -55,7 +55,7 @@ const MainGameScreen = ({ navigation }) => {
         <Text style={styles.text}>This is text box</Text>
       </View>
 
-			<TimeBar duration={10} color="#7ED957" height={20}/>
+			<TimeBar duration={1000} color="#7ED957" height={20}/>
 
 			<View style={styles.buttonRow}>
 				<ImageButton image={require("../icon/School.png")} text="School" onPress={() => navigation.navigate("SchoolJobScreen")} />

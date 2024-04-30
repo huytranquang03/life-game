@@ -1,31 +1,18 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../store/UserContext";
 import ConfirmAlert from "../components/layout/ConfirmAlert";
-import { Alert, Appearance } from "react-native";
+import { Alert } from "react-native";
 import ListItem from "../components/layout/ListItem";
 
 const ActivitiesScreen = () => {
 	const {
 		activity,
-		// setActivity,
 		balance,
 		setBalance,
 		time,
 		setTime,
-		setHealth,
-		setHappiness,
-		setAppearance,
-		setIQ,
-		setEQ,
-		setKnowledge,
-		getHealth,
-		getAppearance,
-		getHappiness,
-		getIQ,
-		getEQ,
-		getKnowledge,
-        updateStats, 
-        updateIntelStats
+      updateStats, 
+      updateIntelStats
 	} = useContext(UserContext);
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [confirmVisible, setConfirmVisible] = useState(false);
@@ -52,7 +39,7 @@ const ActivitiesScreen = () => {
         switch (id) {
             case 1:
                 setTime(time + 15);
-                updateStats({ Health: 10, getHappiness: 10 });
+                updateStats({ Health: 10, Happiness: 10 });
                 break;
             case 2:
                 setTime(time + 15);

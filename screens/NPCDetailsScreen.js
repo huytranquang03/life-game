@@ -6,18 +6,15 @@ import { UserContext } from "../store/UserContext";
 const NPCDetailsScreen = ({ route, navigation }) => {
 	const { actions, npcId } = route.params;
 	const {
-		setHappiness,
-		getHappiness,
 		setBalance,
 		balance,
 		setTime,
 		time,
-		getAppearance,
-		setAppearance,
 		setNpcProgress,
 		getIntelligence,
 		percentageSimulator,
-		npc
+		npc,
+      updateStats,
 	} = useContext(UserContext); // Destructure the needed functions from the context
 
 	// Prepare data in the format that ListItem expects
@@ -35,10 +32,10 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 			case "Conversation":
 				setTime(time + 10);
 				if (percentageSimulator(npcById.progress * 0.5 + getIntelligence() * 0.3)) {
-					setHappiness(getHappiness() + 5);
+					updateStats({ Happiness: 5 });
 					setNpcProgress(npcId, 10, "increment");
 				} else {
-					setHappiness(getHappiness() - 10);
+					updateStats({ Happiness: -10 });
 					setNpcProgress(npcId, 10, "decrement");
 				}
 				break;
@@ -54,7 +51,7 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 			case "Conmpliment":
 				setTime(time + 5);
 				if (percentageSimulator(70 + getIntelligence() * 0.2)) {
-					setHappiness(getHappiness() + 5);
+					updateStats({ Happiness: 5 });
 					setNpcProgress(npcId, 5, "increment");
 				} else {
 				}
@@ -62,15 +59,15 @@ const NPCDetailsScreen = ({ route, navigation }) => {
 			case "Insult":
 				setTime(time + 5);
 				if (percentageSimulator(30 + getIntelligence() * 0.5)) {
-					setHappiness(getHappiness() + 30);
+					updateStats({ Happiness: 30 });
 				} else {
-					setAppearance(getAppearance() - 10);
+					updateStats({ Appearance: -10 });
 				}
 				break;
 			case "Spend time":
 				setTime(time + 20);
 				if (percentageSimulator(npcById.progress * 0.9 + 20)) {
-					setHappiness(getHappiness() + 10);
+					updateStats({ Happiness: 10 });
 					setNpcProgress(npcId, 20, "increment");
 				} else {
 					setNpcProgress(npcId, 10, "decrement");

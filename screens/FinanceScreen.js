@@ -3,7 +3,6 @@ import StoreItem from "../components/layout/StoreItem";
 import { UserContext } from "../store/UserContext";
 import ConfirmAlert from "../components/layout/ConfirmAlert";
 import { Alert, View } from "react-native";
-import { Text } from "react-native";
 
 const FinanceScreen = ({ navigation }) => {
 	const {
