@@ -406,6 +406,7 @@ const UserProvider = ({ children }) => {
         return randomNumber <= percentage;
     }
     const events = [
+        
         {
             id: 'oldAge',
             description: "You die of old age. Game Over.",
