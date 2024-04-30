@@ -94,9 +94,9 @@ const UserProvider = ({ children }) => {
     //quit job
     const quitJob = () => {
         setJob(null);
+        setAnnualWage(0);
         setCurrentStatus(statuses.UNEMPLOYED);
         setPerformance(0);
-        setBalance(balance - job.wage);
     }
 
     // Study Subjects
@@ -593,10 +593,10 @@ const UserProvider = ({ children }) => {
         setVehicleBonus(0);        // Resets vehicle bonus to 0
         setFinance(financeData);     // Resets financial information to default store data
         setActivity(activityData); // Resets activities to their default data
+        quitJob();
         setCurrentStatus(statuses.INFANT);
         setDepartment(null);
         setDepartmentPopupVisible(false);
-        setJob(null);
         setTimerActive(false)
 
     };

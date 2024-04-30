@@ -3,7 +3,7 @@ import { View, Button, StyleSheet } from 'react-native';
 import { UserContext } from '../store/UserContext';
 
 const HomeScreen = ({ navigation }) => {
-    const {gameOver, setTimerActive} = useContext(UserContext)
+    const {age, gameOver, setTimerActive} = useContext(UserContext)
     const handleNewGamePress = () => {
         gameOver()
         setTimerActive(false)
@@ -11,8 +11,12 @@ const HomeScreen = ({ navigation }) => {
     };
 
     const handleContinuePress = () => {
+    if (age > 0){
         navigation.navigate('MainGameScreen');
         setTimerActive(true)
+    }
+    else
+    alert('No current game process')
     };
 
     return (
