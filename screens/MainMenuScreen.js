@@ -26,11 +26,13 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
+
     },
     button: {
-        marginTop: 10,
+        marginTop:100,
+        marginHorizontal:10,
+        margin: 30,
     },
 });
 

@@ -44,9 +44,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     backgroundColor: Colors.primary100,
     borderRadius: 4,
-    fontSize: 16,
+    fontSize: 20,
   },
-  inputInvalid: {
-    backgroundColor: Colors.error100,
-  },
+ 
 });

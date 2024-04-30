@@ -1,21 +1,16 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
 import IconImage from '../ui/IconImage';
 
 function ListItem({ data, onPress }) {
-  // Function to dynamically determine the image path based on the NPC's type
   const getImagePath = (itemType) => {
     switch (itemType) {
-      case "Parent": return require("../../icon/Plus.png");
-      case "Friend": return require("../../icon/Plus.png");
-      case "Superior": return require("../../icon/Couple.png");
-      case "Classmate": return require("../../icon/Plus.png");
-      case "Sibling": return require("../../icon/Plus.png");
-      case "Teacher": return require("../../icon/Plus.png");
-      case "Lover": return require("../../icon/Plus.png");
-      case "Husband/Wife": return require("../../icon/Plus.png");
-      default: return require("../../icon/Fire.png"); // Default icon if none match
+      case "Play sports": return require("../../icon/playsport.png");
+      case "Read a book": return require("../../icon/readbook.png");
+      case "Play video games": return require("../../icon/game.png");
+      case "Go to a spa": return require("../../icon/spa.png");
+      case "Join a club": return require("../../icon/club.png");
+      default: return require("../../icon/Plus.png"); // Default icon if none match
     }
   };
 
@@ -26,7 +21,6 @@ function ListItem({ data, onPress }) {
     >
       <View style={styles.itemContent}>
         <IconImage image={getImagePath(item.item)} />
-        <Ionicons name={item.icon} size={24} color="black" />
         <Text style={styles.text}>{item.item}</Text>
       </View>
     </Pressable>
@@ -43,21 +37,31 @@ function ListItem({ data, onPress }) {
 
 const styles = StyleSheet.create({
   item: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomWidth: 2,
+    borderBottomColor: 'black',
+    width: '100%',
+    borderRadius: 10,
+    borderWidth: 1,
+    marginBottom: 2,
+    marginTop: 5,
+    backgroundColor:'#FFFBE2',
   },
   itemContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
   },
   text: {
-    marginLeft: 20,
-    fontSize: 30,
+    marginLeft: 2,
+    fontSize: 20,
+    color: '#333333',
+    fontWeight: 'bold',
   },
   pressed: {
+    backgroundColor: '#f0f0f0',
     opacity: 0.5,
   },
 });
+
+
 
 export default ListItem;

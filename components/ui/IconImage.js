@@ -17,11 +17,10 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         padding: 10,
         alignItems: "center",
-        backgroundColor:'white',
     },
     pressableArea: {
-        width: 45, // Adjust according to your design
-        height: 45, // Adjust according to your design
+        width: 55, // Adjust according to your design
+        height: 55, // Adjust according to your design
         marginBottom: 1,
     },
     image: {
