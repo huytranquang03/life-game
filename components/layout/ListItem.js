@@ -10,6 +10,12 @@ function ListItem({ data, onPress }) {
       case "Play video games": return require("../../icon/game.png");
       case "Go to a spa": return require("../../icon/spa.png");
       case "Join a club": return require("../../icon/club.png");
+      case "Conversation": return require("../../icon/conversation.png");
+      case "Insult": return require("../../icon/insult.png");
+      case "Ask For Money": return require("../../icon/askformoney.png");
+      case "Spend time": return require("../../icon/People Hugging.png");
+      case "Compliment": return require("../../icon/compliment.png");
+
       default: return require("../../icon/Plus.png"); // Default icon if none match
     }
   };

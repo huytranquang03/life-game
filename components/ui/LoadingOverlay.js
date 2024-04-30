@@ -13,14 +13,14 @@ export default LoadingOverlay;
 
 const styles = StyleSheet.create({
   rootContainer: {
-    //flex: 1,
-    //justifyContent: 'center',
-    //alignItems: 'center',
-    //padding: 32,
-    //marginTop:300,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 32,
+    marginTop:300,
 },
   message: {
-    //fontSize: 16,
-    //marginBottom: 12,
+    fontSize: 16,
+    marginBottom: 12,
   },
 });

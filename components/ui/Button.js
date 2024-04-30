@@ -1,5 +1,4 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-
 import { Colors } from '../../constants/styles';
 
 function Button({ children, onPress }) {
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 25,
+    fontSize: 20, // Thay đổi kích thước của chữ
     fontWeight: 'bold'
   },
 });
