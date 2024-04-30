@@ -35,7 +35,7 @@ const FinanceScreen = ({ navigation }) => {
 					stats[0].progress += 5;
 					break;
 				case 20000:
-					stats[2].progress += 20;
+					stats[2].progress += 12;
 					break;
 				case 200000:
 					stats[2].progress += 10;

@@ -3,7 +3,7 @@ import { View, Button, StyleSheet } from 'react-native';
 import { UserContext } from '../store/UserContext';
 
 const HomeScreen = ({ navigation }) => {
-    const {age, gameOver, setTimerActive} = useContext(UserContext)
+    const {time, gameOver, setTimerActive} = useContext(UserContext)
     const handleNewGamePress = () => {
         gameOver()
         setTimerActive(false)
@@ -11,7 +11,7 @@ const HomeScreen = ({ navigation }) => {
     };
 
     const handleContinuePress = () => {
-    if (age > 0){
+    if (time > 0){
         navigation.navigate('MainGameScreen');
         setTimerActive(true)
     }

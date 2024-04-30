@@ -44,50 +44,46 @@ const UserProvider = ({ children }) => {
     // study harder
     const studyHarder = () => {
         const intelChanges = {
-            IQ: 5,
+            IQ: 3,
             EQ: -1,
-            Knowledge: 5,
+            Knowledge: 3,
         };
         const statsChanges = {
-            Health: -10,
+            Health: -3,
             Happiness: -2,
-            Communication: -5,
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setTime(time + 90);
-        setGrade(grade + 10)
+        setTime(time + 180 - 10 * vehicleBonus);
+        setGrade(grade + 5)
     };
     //skip class
     const skipClass = () => {
         const intelChanges = {
             IQ: -2,
-            EQ: 5,
-            Knowledge: -5,
+            EQ: 3,
+            Knowledge: -2,
         };
         const statsChanges = {
-            Health: -10,
+            Health: -5,
             Happiness: 5,
-            Communication: 5,
         };
         updateIntelStats(intelChanges);
         updateStats(statsChanges);
-        setTime(time + 30);
+        setTime(time + 90);
         setGrade(Math.max(0, grade - 5));
         console.log(grade)
     };
 
     // word harder
     const workHarder = () => {
-
         updateStats(statsChanges);
         const statsChanges = {
-            Health: -10,
-            Happiness: -10,
+            Health: -5,
+            Happiness: -5,
         };
         updateStats(statsChanges);
-        setTime(time + 90);
-        setPerformance(performance + 5)
+        setTime(time + 300 - 15 * vehicleBonus);
         setPerformance(performance + 5)
     }
 
@@ -106,38 +102,39 @@ const UserProvider = ({ children }) => {
         switch (subject) {
             case 'Math':
                 intelChanges = {
-                    IQ: 5,
-                    EQ: -2,
+                    IQ: 3,
+                    EQ: -1,
+                    Knowledge: 1
                 };
                 statsChanges = {
-                    Happiness: -2
+                    Happiness: -1
                 };
                 break;
             case 'Literature':
                 intelChanges = {
                     IQ: -2,
                     EQ: 2,
-                    Knowledge: 3,
+                    Knowledge: 2,
                 };
                 statsChanges = {
-
+                    Happiness: -1
                 };
                 break;
             case 'Science':
                 intelChanges = {
-                    IQ: 3,
+                    IQ: 2,
                     EQ: -1,
-                    Knowledge: 3
+                    Knowledge: 2
                 };
                 statsChanges = {
-                    Happiness: 2
+                    Happiness: 1
                 };
                 break;
             case 'History':
                 intelChanges = {
-                    IQ: 2,
+                    IQ: 1,
                     EQ: -1,
-                    Knowledge: 5
+                    Knowledge: 3
                 };
                 statsChanges = {
 
@@ -145,9 +142,9 @@ const UserProvider = ({ children }) => {
                 break;
             case 'Geography':
                 intelChanges = {
-                    IQ: 2,
+                    IQ: 1,
                     EQ: -1,
-                    Knowledge: 5
+                    Knowledge: 3
                 };
                 statsChanges = {
 
@@ -155,17 +152,19 @@ const UserProvider = ({ children }) => {
                 break;
             case 'Art':
                 intelChanges = {
-                    EQ: 5,
-                    Knowledge: 3
+                    IQ: -1,
+                    EQ: 3,
+                    Knowledge: 1
                 };
                 statsChanges = {
-                    Happiness: 5
+                    Happiness: 2
                 };
                 break;
             case 'Information Technology':
                 intelChanges = {
                     IQ: 3,
-                    Knowledge: 2,
+                    EQ: -2,
+                    Knowledge: 1,
                 };
                 statsChanges = {
                     Happiness: 3
@@ -173,19 +172,19 @@ const UserProvider = ({ children }) => {
                 break;
             case 'Physical Education':
                 intelChanges = {
-                    IQ: -1,
+                    IQ: -2,
                 };
                 statsChanges = {
                     Health: 5,
                     Happiness: 2,
-                    Appearance: 4
+                    Appearance: 3
                 };
                 break;
             case 'Foreign Language':
                 intelChanges = {
-                    IQ: 1,
+                    IQ: -1,
                     EQ: 2,
-                    Knowledge: 3,
+                    Knowledge: 2,
                 };
                 statsChanges = {
                     Happiness: 1
@@ -194,37 +193,18 @@ const UserProvider = ({ children }) => {
         }
         updateIntelStats(intelChanges);
         updateStats(statsChanges)
-        setGrade(grade + 5);
-        setTime(time + 30);
+        setGrade(grade + 2);
+        setTime(time + 180);
     };
 
     const getHealth = () => stats[0].progress
-    const getAppearance = () => stats[2].progress
     const getHappiness = () => stats[1].progress
+    const getAppearance = () => stats[2].progress
 
     const getIntelligence = () => intelStats[0].progress
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
-    const setHealth = (newHealth) => {
-        stats[0].progress = newHealth
-    }
-    const setHappiness = (newHappiness) => {
-        stats[1].progress = newHappiness
-    }
-    const setAppearance = (newAppearance) => {
-        stats[2].progress = newAppearance
-    }
-
-    const setIQ = (newIQ) => {
-        intelStats[1].progress = newIQ
-    }
-    const setEQ = (newEQ) => {
-        intelStats[2].progress = newEQ
-    }
-    const setKnowledge = (newKnowledge) => {
-        intelStats[3].progress = newKnowledge
-    }
 
     const applyForParttimeJob = (job) => {
         if (percentageSimulator(job.chance)) {
@@ -234,9 +214,10 @@ const UserProvider = ({ children }) => {
             setBalance(balance + job.wage);
             setTime(time + job.time);
         }
-        else
-            setTime(time + 10);
-        alert(`Sorry...You're not hired`);
+        else {
+            setTime(time + 60);
+            alert(`Sorry...You're not hired`);
+        }
     };
     const applyForFulltimeJob = (job) => {
         if (department && department.id === job.require) {
@@ -257,12 +238,12 @@ const UserProvider = ({ children }) => {
                 setAnnualWage(job.wage);
             }
             else {
-                setTime(time + 10);
+                setTime(time + 60);
                 alert(`Sorry...You're not hired`);
             }
         }
         else {
-            setTime(time + 10);
+            setTime(time + 60);
             alert(`You're not qualified for this job 💩`);
         }
     };
@@ -399,26 +380,25 @@ const UserProvider = ({ children }) => {
         setBalance(balance + annualWage);
         setNpc(prevNpcs => prevNpcs.map(npc => ({
             ...npc,
-            progress: Math.max(0, npc.progress - 10)
-            })));
-       };
+            progress: Math.max(0, npc.progress - 3)
+        })));
+    };
 
     //
     const percentageSimulator = (percentage) => {
         // Generate a random number from 1 to 100
         const randomNumber = Math.floor(Math.random() * 100) + 1;
-
         // Check if the random number is less than or equal to the percentage
         return randomNumber <= percentage;
     }
     const events = [
-        
+
         {
             id: 'oldAge',
             description: "You die of old age. Game Over.",
             ageTrigger: 70,
             statsTrigger: () => true,
-            chance: 20,
+            chance: (age - 70) * 2,
             treatCost: null,
             effectIfTreat: () => {
             },
@@ -429,6 +409,7 @@ const UserProvider = ({ children }) => {
             id: 'acne',
             description: "You have acne. Treat it?",
             ageTrigger: 12,
+            ageStop: 30,
             statsTrigger: () => true,
             chance: 20,
             treatCost: 50,
@@ -436,7 +417,7 @@ const UserProvider = ({ children }) => {
                 updateStats({ Appearance: +5 });
             },
             effectIfNotTreat: () => {
-                updateStats({ Health: -10, Appearance: -10 });
+                updateStats({ Health: -5, Appearance: -5, Happiness: -5 });
             },
             treatable: true
         },
@@ -444,14 +425,14 @@ const UserProvider = ({ children }) => {
             id: 'commonCold',
             description: "You have a common cold. Treat it?",
             ageTrigger: 0,
-            statsTrigger: () => (getHealth() < 40),
+            statsTrigger: () => (getHealth() < 50),
             chance: 30,
             treatCost: 50,
             effectIfTreat: () => {
-                updateStats({ Health: +30 });
+                updateStats({ Health: +15 });
             },
             effectIfNotTreat: () => {
-                updateStats({ Health: -20 });
+                updateStats({ Health: -15 });
             },
             treatable: true
         }, {
@@ -472,10 +453,10 @@ const UserProvider = ({ children }) => {
             description: "You have depression. Treat it?",
             ageTrigger: 0,
             statsTrigger: () => (getHappiness() < 30),
-            chance: 80,
+            chance: 60,
             treatCost: 1000,
             effectIfTreat: () => {
-                updateStats({ Happiness: +35 });
+                updateStats({ Happiness: +25 });
             },
             effectIfNotTreat: () => {
             },
@@ -497,25 +478,10 @@ const UserProvider = ({ children }) => {
             treatable: false
         },
         {
-            id: 'suicide',
-            description: "The depression was too much for you to handle. Game Over.",
-            ageTrigger: 0,
-            statsTrigger: () => false,
-            chance: 0,
-            treatCost: null,
-            effectIfTreat: () => {
-
-            },
-            effectIfNotTreat: () => {
-                gameOver()
-            },
-            treatable: false
-        },
-        {
             id: 'gangAccident',
             description: "You owe to much money! The boss you lent money from sent his goon to took care of you. Game Over.",
             ageTrigger: 20,
-            statsTrigger: () => balance < -1000,
+            statsTrigger: () => balance < -10000,
             chance: 50,
             treatCost: null,
             effectIfTreat: () => {
@@ -549,7 +515,7 @@ const UserProvider = ({ children }) => {
     const handleEvents = () => {
         let eventTriggered = false;
         events.forEach(event => {
-            if (!eventTriggered && age >= event.ageTrigger && percentageSimulator(event.chance) && event.statsTrigger()) {
+            if (!eventTriggered && age >= event.ageTrigger && (event.ageStop ? age <= event.ageStop : true) && percentageSimulator(event.chance) && event.statsTrigger()) {
                 console.log(`Event triggered: ${event.description}`);  // Debug log
                 setCurrentEvent({
                     ...event,
@@ -573,7 +539,15 @@ const UserProvider = ({ children }) => {
         }
 
         if (currentEvent.id == 'depression' && !choice && percentageSimulator(30)) {
-            setCurrentEvent({ ...events[6], visible: true });
+            setCurrentEvent({
+                id: 'suicide',
+                description: "The depression was too much for you to handle. Game Over.",
+                effectIfNotTreat: () => {
+                    gameOver()
+                },
+                treatable: false,
+                visible: true
+            });
             setTimerActive(false)
         }
 
@@ -627,72 +601,72 @@ const UserProvider = ({ children }) => {
         });
     };
     const currentTime = moment();
-    const dayOfWeekString = currentTime.format('dddd'); 
+    const dayOfWeekString = currentTime.format('dddd');
     const [currentReward, setCurrentReward] = useState(null);
     const rewardData = [
-            {
-                id: 'Monday',
-                getReward: 100,
-            },
-            {
-                id: 'Tuesday',
-                getReward: 200
-    
-            },
-            {
-    
-                id: 'Wednesday',
-                getReward:300
-    
-            },
-            {
-                id: 'Thursday',
-                getReward: 400
-    
-            },
-            {
-                id: 'Friday',
-                getReward: 500
-    
-            },
-            {
-                id: 'Saturday',
-                getReward: 600
-    
-            },
-            {
-                id: 'Sunday =',
-                getReward: 700
-    
-            },
-            ];
-                // 
-                const handleRewards = () => {
-                  let rewardTriggered = false;
-                  rewardData.forEach(reward => {
-                      if (!rewardTriggered && dayOfWeekString === reward.id.trim()) { // Also trim any whitespace
-                          setCurrentReward({
-                              ...reward,
-                              visible: true,
-                          });
-                          rewardTriggered = true;
-                      }
-                  });
-              };
-              useEffect(() => {
-               handleRewards();  // Ensure it's called at component mount or when required
-           }, [dayOfWeekString]);  // Dependency array should include variables that trigger the update
-           
-    
+        {
+            id: 'Monday',
+            getReward: 100,
+        },
+        {
+            id: 'Tuesday',
+            getReward: 200
+
+        },
+        {
+
+            id: 'Wednesday',
+            getReward: 300
+
+        },
+        {
+            id: 'Thursday',
+            getReward: 400
+
+        },
+        {
+            id: 'Friday',
+            getReward: 500
+
+        },
+        {
+            id: 'Saturday',
+            getReward: 600
+
+        },
+        {
+            id: 'Sunday =',
+            getReward: 700
+
+        },
+    ];
+    // 
+    const handleRewards = () => {
+        let rewardTriggered = false;
+        rewardData.forEach(reward => {
+            if (!rewardTriggered && dayOfWeekString === reward.id.trim()) { // Also trim any whitespace
+                setCurrentReward({
+                    ...reward,
+                    visible: true,
+                });
+                rewardTriggered = true;
+            }
+        });
+    };
+    useEffect(() => {
+        handleRewards();  // Ensure it's called at component mount or when required
+    }, [dayOfWeekString]);  // Dependency array should include variables that trigger the update
+
+
 
 
     // 
     const handleRewardChoice = (choice) => {
-      if (choice === 'get' && currentReward) {
-         setBalance(balance + currentReward.getReward); 
-      }
-      setCurrentReward(null); 
-    }; 
+        if (choice === 'get' && currentReward) {
+            setBalance(balance + currentReward.getReward);
+        }
+        setCurrentReward(null);
+    };
 
     return (
         <UserContext.Provider value={{
@@ -730,9 +704,9 @@ const UserProvider = ({ children }) => {
             meetsDepartmentRequirements,
             department, setDepartment,
             departmentPopupVisible, setDepartmentPopupVisible,
-            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIntelligence, getIQ, getEQ, getKnowledge, percentageSimulator,
+            getHealth, getAppearance, getHappiness, getIntelligence, getIQ, getEQ, getKnowledge, percentageSimulator,
             currentEvent, setCurrentEvent, handleUserChoice,
-            currentReward,setCurrentReward, handleRewards,handleRewardChoice,
+            currentReward, setCurrentReward, handleRewards, handleRewardChoice,
             setNpcProgress,
         }}>
             {children}

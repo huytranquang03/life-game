@@ -7,6 +7,8 @@ function IconButton({ icon, size, color, onPress, text }) {
         <Pressable
             onPress={onPress}
             style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}
+            accessibilityRole="button"
+            accessibilityLabel={text} // Providing an accessibility label for the button
         >
             <View style={styles.innerContainer}>
                 <Ionicons name={icon} size={size} color={color} />

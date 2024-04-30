@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../store/UserContext";
 import ConfirmAlert from "../components/layout/ConfirmAlert";
-import { Alert } from "react-native";
+import { Alert, Appearance } from "react-native";
 import ListItem from "../components/layout/ListItem";
 
 const ActivitiesScreen = () => {
@@ -38,22 +38,22 @@ const ActivitiesScreen = () => {
     const useActivity = (id) => {
         switch (id) {
             case 1:
-                setTime(time + 15);
-                updateStats({ Health: 10, Happiness: 10 });
+                setTime(time + 90);
+                updateStats({ Health: 5, Happiness: 5, Appearance: 5 });
                 break;
             case 2:
-                setTime(time + 15);
-                updateIntelStats({ IQ: 10, EQ: 10, Knowledge: 10 });
+                setTime(time + 90);
+                updateIntelStats({ IQ: 5, EQ: 2, Knowledge: 5 });
                 break;
             case 3:
-                setTime(time + 15);
-                updateStats({ Happiness: 10 });
-                updateIntelStats({ IQ: -10, EQ: -10 });
+                setTime(time + 90);
+                updateStats({ Happiness: 5 });
+                updateIntelStats({ IQ: -5, EQ: -5 });
                 break;
             case 4:
                 if (balance >= selectedItem.price) {
                     setBalance(balance - selectedItem.price);
-                    setTime(time + 15);
+                    setTime(time + 90);
                     updateStats({ Appearance: 10 });
                     return true;
                 } else {
@@ -61,8 +61,8 @@ const ActivitiesScreen = () => {
                     return false;
                 }
             case 5:
-                setTime(time + 20);
-                updateIntelStats({ EQ: 10, Knowledge: 10 });
+                setTime(time + 120);
+                updateIntelStats({ EQ: 5, Knowledge: 5 });
                 break;
             default:
                 break;
