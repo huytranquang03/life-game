@@ -1,8 +1,52 @@
 [
-    { "id": 1, "icon": "checkbox-outline", "item": "Parent",    "imageName": "Family",
-    "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spendtime": true, "Compliment": true, "Flirt": false, "Ask out": false, "Propose": false, "Be friend": false, "Bribe": false, "Have child": false, "Promote/Raise": false } },
-    { "id": 2, "icon": "checkbox-outline", "item": "Friend", "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spendtime": true, "Compliment": true, "Flirt": true, "Ask out": true, "Propose": false, "Be friend": false, "Bribe": false, "Have child": false, "Promote/Raise": false } },
-    { "id": 4, "icon": "checkbox-outline", "item": "Classmate", "actions": { "Conversation": true, "Insult": true, "Ask For Money": false, "Spendtime": true, "Compliment": true, "Flirt": true, "Ask out": true, "Propose": false, "Be friend": true, "Bribe": false, "Have child": false, "Promote/Raise": false } },
-    { "id": 7, "icon": "checkbox-outline", "item": "Lover", "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spendtime": true, "Compliment": true, "Flirt": false, "Ask out": false, "Propose": true, "Be friend": false, "Bribe": false, "Have child": false, "Promote/Raise": false } },
-    { "id": 8, "icon": "checkbox-outline", "item": "Husband/Wife", "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spendtime": true, "Compliment": true, "Flirt": false, "Ask out": false, "Propose": false, "Be friend": false, "Bribe": false, "Have child": true, "Promote/Raise": false } }
+   {
+       "id": 1,
+       "name": "Parent",
+       "progress": 50,
+       "color": "red",
+       "height": 10,
+       "borderRadius": 5,
+       "icon": "person",
+       "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spend time": true, "Compliment": true }
+   },
+   {
+       "id": 2,
+       "name": "Friend",
+       "progress": 50,
+       "color": "red",
+       "height": 10,
+       "borderRadius": 5,
+       "icon": "person",
+       "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spend time": true, "Compliment": true }
+   },
+   {
+       "id": 3,
+       "name": "Classmate",
+       "progress": 50,
+       "color": "red",
+       "height": 10,
+       "borderRadius": 5,
+       "icon": "person",
+       "actions": { "Conversation": true, "Insult": true, "Ask For Money": false, "Spend time": true, "Compliment": true }
+   },
+   {
+       "id": 4,
+       "name": "Lover",
+       "progress": 50,
+       "color": "red",
+       "height": 10,
+       "borderRadius": 5,
+       "icon": "person",
+       "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spend time": true, "Compliment": true }
+   },
+   {
+       "id": 5,
+       "name": "Husband/Wife",
+       "progress": 50,
+       "color": "red",
+       "height": 10,
+       "borderRadius": 5,
+       "icon": "person",
+       "actions": { "Conversation": true, "Insult": true, "Ask For Money": true, "Spend time": true, "Compliment": true }
+   }
 ]

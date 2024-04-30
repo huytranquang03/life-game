@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { intelStatsData, statsData, npcData, financeData, activityData, fulltimeJob, parttimeJob, departments } from '../data/data.js';
-import { Appearance } from 'react-native';
 
 
 const UserContext = createContext();
@@ -83,7 +82,13 @@ const UserProvider = ({ children }) => {
             Happiness: -10,
         };
         updateStats(statsChanges);
+        const statsChanges = {
+            Health: -10,
+            Happiness: -10,
+        };
+        updateStats(statsChanges);
         setTime(time + 90);
+        setPerformance(performance + 5)
         setPerformance(performance + 5)
     }
 
@@ -198,9 +203,29 @@ const UserProvider = ({ children }) => {
     const getAppearance = () => stats[2].progress
     const getHappiness = () => stats[1].progress
 
+    const getIntelligence = () => intelStats[0].progress
     const getIQ = () => intelStats[1].progress
     const getEQ = () => intelStats[2].progress
     const getKnowledge = () => intelStats[3].progress
+    const setHealth = (newHealth) => {
+        stats[0].progress = newHealth
+    }
+    const setHappiness = (newHappiness) => {
+        stats[1].progress = newHappiness
+    }
+    const setAppearance = (newAppearance) => {
+        stats[2].progress = newAppearance
+    }
+
+    const setIQ = (newIQ) => {
+        intelStats[1].progress = newIQ
+    }
+    const setEQ = (newEQ) => {
+        intelStats[2].progress = newEQ
+    }
+    const setKnowledge = (newKnowledge) => {
+        intelStats[3].progress = newKnowledge
+    }
 
     const applyForParttimeJob = (job) => {
         if (percentageSimulator(job.chance)) {
@@ -367,15 +392,13 @@ const UserProvider = ({ children }) => {
 
     const plusAge = () => {
         setTime(0);
+        console.log(age);
         setAge(age + 1);
         decreaseStats();
         updateCurrentStatus(age + 1);
         handleEvents();
         setBalance(balance + annualWage);
     };
-
-
-    // Call this function when you need to end the game and reset the game state
 
     //
     const percentageSimulator = (percentage) => {
@@ -488,8 +511,23 @@ const UserProvider = ({ children }) => {
             id: 'gangAccident',
             description: "You owe to much money! The boss you lent money from sent his goon to took care of you. Game Over.",
             ageTrigger: 20,
-            statsTrigger: () => balance < -10000,
+            statsTrigger: () => balance < -1000,
             chance: 50,
+            treatCost: null,
+            effectIfTreat: () => {
+
+            },
+            effectIfNotTreat: () => {
+                gameOver()
+            },
+            treatable: false
+        },
+        {
+            id: 'healthProblem',
+            description: "Your unhealthy lifestyle has finally caught up to you! Game Over.",
+            ageTrigger: 0,
+            statsTrigger: () => (getHealth() <= 0),
+            chance: 100,
             treatCost: null,
             effectIfTreat: () => {
 
@@ -519,6 +557,7 @@ const UserProvider = ({ children }) => {
         });
     };
 
+    // Handling user's choice directly in context
     const handleUserChoice = (choice) => {
         if (choice && currentEvent && currentEvent.treatable) {
             setBalance(balance - currentEvent.treatCost);
@@ -529,11 +568,13 @@ const UserProvider = ({ children }) => {
             currentEvent.effectIfNotTreat();
         }
 
-        if (currentEvent.id == 'depression' && percentageSimulator(30))
+        if (currentEvent.id == 'depression' && !choice && percentageSimulator(30)) {
             setCurrentEvent({ ...events[6], visible: true });
+            setTimerActive(false)
+        }
 
         else
-            setCurrentEvent(false)
+            setCurrentEvent(null)
     };
 
 
@@ -556,8 +597,30 @@ const UserProvider = ({ children }) => {
         setDepartment(null);
         setDepartmentPopupVisible(false);
         setJob(null);
+        setTimerActive(false)
 
-
+    };
+    const setNpcProgress = (npcId, value, mode = 'increment') => {
+        setNpc(prevNpcs => {
+            return prevNpcs.map(npc => {
+                if (npc.id === npcId) {
+                    let newProgress;
+                    switch (mode) {
+                        case 'increment':
+                            newProgress = Math.min(100, npc.progress + value);  // Prevent exceeding 100
+                            break;
+                        case 'decrement':
+                            newProgress = Math.max(0, npc.progress - value);  // Prevent going below 0
+                            break;
+                        default:
+                            newProgress = npc.progress;  // No change if mode is unrecognized
+                            break;
+                    }
+                    return { ...npc, progress: newProgress };
+                }
+                return npc;
+            });
+        });
     };
 
     return (
@@ -595,7 +658,10 @@ const UserProvider = ({ children }) => {
             universityDepartments, setUniversityDepartments,
             meetsDepartmentRequirements,
             department, setDepartment,
-            departmentPopupVisible, setDepartmentPopupVisible
+            departmentPopupVisible, setDepartmentPopupVisible,
+            setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIntelligence, getIQ, getEQ, getKnowledge, percentageSimulator,
+            currentEvent, setCurrentEvent, handleUserChoice,
+            setNpcProgress,
         }}>
             {children}
         </UserContext.Provider>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import StoreItem from "../components/layout/StoreItem";
 import { UserContext } from "../store/UserContext";
 import ConfirmAlert from "../components/layout/ConfirmAlert";
-import { Alert, Appearance, View } from "react-native";
+import { Alert, View } from "react-native";
 import { Text } from "react-native";
 
 const FinanceScreen = ({ navigation }) => {
@@ -14,7 +14,7 @@ const FinanceScreen = ({ navigation }) => {
 		vehicleBonus,
 		setVehicleBonus,
 		stats,
-	} = useContext(UserContext); // Sử dụng setFinance để cập nhật dữ liệu
+	} = useContext(UserContext);
 
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [confirmVisible, setConfirmVisible] = useState(false);
@@ -45,26 +45,24 @@ const FinanceScreen = ({ navigation }) => {
 					break;
 			}
 			setVehicleBonus(newVehicleBonus);
+			return true; // Purchase was successful
 		} else {
 			Alert.alert("Notice", "Not enough money to buy the vehicle");
+			return false; // Purchase was not successful
 		}
 	};
 
-
 	const handleConfirm = () => {
-		// Nếu item là xe thì mua xe
-		buyVehicle(selectedItem.price);
-		// Nếu không phải là xe, ẩn đi mục đã chọn bằng cách cập nhật dữ liệu finance
-		const updatedFinance = finance.filter(
-			(item) => item.id !== selectedItem.id
-		);
-		setFinance(updatedFinance);
-		// Đóng cửa sổ xác nhận
+		// If the item is successfully purchased, then remove it from the finance list
+		if (buyVehicle(selectedItem.price)) {
+			const updatedFinance = finance.filter(item => item.id !== selectedItem.id);
+			setFinance(updatedFinance);
+		}
+		// Close the confirmation window in either case
 		setConfirmVisible(false);
 	};
 
 	const handleCancel = () => {
-		// Đóng cửa sổ xác nhận
 		setConfirmVisible(false);
 	};
 
@@ -75,9 +73,7 @@ const FinanceScreen = ({ navigation }) => {
 
 	return (
 		<>
-			<View onPress={() => navigation.navigate("MainGameScreen")}>
-				<Text>vehicleBonus: {vehicleBonus}</Text>
-			</View>
+
 			<StoreItem data={finance} onPress={handlePress} />
 			<ConfirmAlert
 				visible={confirmVisible}

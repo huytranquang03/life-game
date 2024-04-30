@@ -5,25 +5,31 @@ import { Alert, Appearance } from "react-native";
 import ListItem from "../components/layout/ListItem";
 
 const ActivitiesScreen = () => {
-    const {
-        activity,
-        setActivity,
-        balance,
-        setBalance,
-        time,
-        setTime,
-        updateStats,
-        updateIntelStats,
-        getHealth,
-        getAppearance,
-        getHappiness,
-        getIQ,
-        getEQ,
-        getKnowledge,
-    } = useContext(UserContext);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [confirmVisible, setConfirmVisible] = useState(false);
-    const [confirmMessage, setConfirmMessage] = useState("");
+	const {
+		activity,
+		// setActivity,
+		balance,
+		setBalance,
+		time,
+		setTime,
+		setHealth,
+		setHappiness,
+		setAppearance,
+		setIQ,
+		setEQ,
+		setKnowledge,
+		getHealth,
+		getAppearance,
+		getHappiness,
+		getIQ,
+		getEQ,
+		getKnowledge,
+        updateStats, 
+        updateIntelStats
+	} = useContext(UserContext);
+	const [selectedItem, setSelectedItem] = useState(null);
+	const [confirmVisible, setConfirmVisible] = useState(false);
+	const [confirmMessage, setConfirmMessage] = useState("");
 
     const generateConfirmMessage = (item) => {
         // Define a default prefix
@@ -76,17 +82,18 @@ const ActivitiesScreen = () => {
         }
     };
 
-    const handleConfirm = () => {
-        setConfirmVisible(false);
-        const success = useActivity(selectedItem.id);
-        // Only filter out the activity if it was successful or it's not the 'Go to a spa' activity.
-        if (success || selectedItem.id !== 4) {
-            const updatedActivity = activity.filter(
-                (item) => item.id !== selectedItem.id
-            );
-            setActivity(updatedActivity);
-        }
-    };
+	const handleConfirm = () => {
+		setConfirmVisible(false);
+		// const success = 
+      useActivity(selectedItem.id);
+		// Only filter out the activity if it was successful or it's not the 'Go to a spa' activity.
+		// if (success || selectedItem.id !== 4) {
+		// 	const updatedActivity = activity.filter(
+		// 		(item) => item.id !== selectedItem.id
+		// 	);
+		// 	setActivity(updatedActivity);
+		// }
+	};
 
     const handleCancel = () => {
         setConfirmVisible(false); // Close the confirm modal
