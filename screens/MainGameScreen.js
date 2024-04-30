@@ -32,7 +32,6 @@ const MainGameScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate("PlayerStatsScreen")}
                 >
                     <Avatar
-                        source={{ uri: "https://picsum.photos/100/100" }}
                         name={name}
                         onPress={() => navigation.navigate("PlayerStatsScreen")}
                     />

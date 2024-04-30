@@ -4,11 +4,8 @@ import { View, StyleSheet, Text, Pressable, Image } from "react-native";
 const Avatar = ({ source, name, onPress }) => (
   <Pressable style={styles.container} onPress={onPress}>
     <View style={styles.profileImageContainer}>
-      {source ? (
-        <Image source={source} style={styles.profileImage} />
-      ) : (
-        <Text>{name.charAt(0)}</Text>
-      )}
+        <Image source={require('../../assets/images/avatar.jpg')} style={styles.profileImage} />
+        <Text>{name}</Text>
     </View>
   </Pressable>
 );

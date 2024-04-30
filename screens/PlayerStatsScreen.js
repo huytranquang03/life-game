@@ -2,12 +2,12 @@ import React, {useContext} from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import GameBar from '../components/ui/GameBar'; // Assuming your GameBar component is in a separate file
 import { UserContext  } from '../store/UserContext'; 
+import Avatar from '../components/ui/Avatar';
 
 
 const PlayerStatsScreen = () => {
     const {intelStats,stats, name, age } = useContext(UserContext);
 
-    const avatarUrl = 'https://picsum.photos/200/200'; // Replace with your avatar URL
     const emojiMap = {
         Health: '❤️',
         Happiness: '😊',
@@ -22,7 +22,10 @@ const PlayerStatsScreen = () => {
         <View style={styles.container}>
             <View style={styles.topRow}>
                 <View style={styles.avatarView}>
-                    <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+                    <Avatar
+                        name={name}
+                        onPress={() => navigation.navigate("PlayerStatsScreen")}
+                    />
                 </View>
                 <View style={styles.infoView}>
                     <Text style={styles.nameText}>{name}</Text>
