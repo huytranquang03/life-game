@@ -12,7 +12,7 @@ function SetupScreen() {
   useEffect(() => {
     axios
       .get(
-        'https://react-native-course-3cceb-default-rtdb.firebaseio.com/message.json?auth=' +
+        'https://react-native-course-ad6f8-default-rtdb.asia-southeast1.firebasedatabase.app/message.json?auth=' +
           token
       )
       .then((response) => {

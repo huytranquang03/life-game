@@ -7,7 +7,6 @@ import AuthContextProvider, { AuthContext } from './store/auth-context';
 import { UserProvider } from './store/UserContext';
 import WelcomeScreen from './screens/WelcomeScreen';
 import MainMenuScreen from './screens/MainMenuScreen';
-import ContinueGameScreen from './screens/ContinueGameScreen';
 import SetupScreen from './screens/SetupScreen';
 import MainGameScreen from './screens/MainGameScreen';
 import PlayerStatsScreen from './screens/PlayerStatsScreen';
@@ -43,7 +42,6 @@ function AuthenticatedStack() {
 
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="MainMenuScreen" component={MainMenuScreen} />
-          <Stack.Screen name="ContinueGameScreen" component={ContinueGameScreen} />
           <Stack.Screen name="SetupScreen" component={SetupScreen} />
           <Stack.Screen name="MainGameScreen" component={MainGameScreen} />
           <Stack.Screen name="PlayerStatsScreen" component={PlayerStatsScreen} />

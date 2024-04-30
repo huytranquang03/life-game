@@ -16,10 +16,7 @@ async function authenticate(mode, email, password) {
 
     return token;
   } catch (error) {
-    // Xử lý lỗi ở đây
-    // Ví dụ:
-    console.error('Error fetching data:', error);
-    throw new Error('Error fetching data');
+    throw new Error('Authentication failed. Please check your credentials.');
   }
 }
 
