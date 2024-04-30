@@ -6,7 +6,25 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { UserContext } from '../../store/UserContext';
 
 const SchoolJobScreen = ({ navigation }) => {
-    const { grade, currentStatus, performance, skipClass, studyHarder, workHarder } = useContext(UserContext);
+    const { department, job, grade, currentStatus, performance, skipClass, studyHarder, workHarder, quitJob } = useContext(UserContext);
+
+
+    const getCurrentStatusText = () => {
+        switch (currentStatus) {
+            case 'infant':
+                return 'Infant';
+            case 'student':
+                return 'Student';
+            case 'uniStudent':
+                return `Hanoi University - ${department.name}`;
+            case 'employed':
+                return `Full-time ${job}`; // Assuming full-time job details are retrieved elsewhere
+            case 'unemployed':
+                return 'Unemployed';
+            default:
+                return currentStatus; // Handle unexpected values
+        }
+    };
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -19,7 +37,7 @@ const SchoolJobScreen = ({ navigation }) => {
                     </View>
                     <View style={{margin: 20}}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 0,padding:0,color:'black'}}>Current Status: </Text>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 0,padding:0,color:'black',textAlign:'center'}}>{currentStatus} </Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 0,padding:0,color:'black',textAlign:'center'}}>{getCurrentStatusText()} </Text>
 
                     </View>
                 </View>
@@ -150,6 +168,9 @@ const SchoolJobScreen = ({ navigation }) => {
                         </Pressable>
                         <View style={styles.functionButton}>
                             <IconButton icon={'briefcase'} size={50} color={'black'} text={'Work Harder'} onPress={workHarder} />
+                        </View>
+                        <View style={styles.functionButton}>
+                            <IconButton icon={'close'} size={50} color={'black'} text={'Quit Job'} onPress={quitJob} />
                         </View>
                     </View>
                 )}

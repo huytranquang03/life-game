@@ -8,6 +8,7 @@ import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
 import Avatar from "../components/ui/Avatar"; // Import Avatar component
 import RandomEvent from "../components/layout/RandomEvent";
+import DailyReward from "../components/layout/DailyReward";
 import ImageButton from "../components/ui/ImageButton";
 
 const MainGameScreen = ({ navigation }) => {
@@ -18,7 +19,8 @@ const MainGameScreen = ({ navigation }) => {
     age,
     balance,
     plusAge,
-	currentEvent
+	currentEvent,
+  currentReward
   } = useContext(UserContext);
 
   
@@ -82,6 +84,7 @@ const MainGameScreen = ({ navigation }) => {
           onPress={() => navigation.navigate("PlayerStatsScreen")}
         />
       </View>
+    <DailyReward reward={currentReward}/>
 	  <RandomEvent event={currentEvent} />
     </View>
   );

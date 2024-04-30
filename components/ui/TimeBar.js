@@ -3,32 +3,32 @@ import { View, StyleSheet } from 'react-native';
 import { UserContext } from '../../store/UserContext';
 
 const TimeBar = ({ duration, color, height }) => {
-    const { time, setTime, plusAge } = useContext(UserContext);
+    const { time, setTime, plusAge, timerActive } = useContext(UserContext); // Get timerActive from context
 
     useEffect(() => {
-        // This sets the timer to update every second.
-        const interval = setInterval(() => {
-            setTime(prevTime => {
-                if (prevTime < duration) {
-                    return prevTime + 1;  // Increment time by one second until the duration is reached.
-                } else {
-                    clearInterval(interval);  // Stop the interval when the duration is reached.
-                    return prevTime;  // Keep at duration until reset in the next effect block.
-                }
-            });
-        }, 1000);
+        // Check if the timer is active before starting it
+        if (timerActive) {
+            const interval = setInterval(() => {
+                setTime(prevTime => {
+                    if (prevTime < duration) {
+                        return prevTime + 1;
+                    } else {
+                        clearInterval(interval);
+                        return prevTime;
+                    }
+                });
+            }, 1000);
 
-        return () => clearInterval(interval);
-    }, [duration, setTime]);
+            return () => clearInterval(interval);
+        }
+    }, [duration, setTime, timerActive]);
 
     useEffect(() => {
         if (time >= duration) {
-            plusAge();        // Run the plusAge function when duration is reached.
-            setTime(0);       // Reset the time to 0 after reaching the duration.
+            plusAge();
         }
-    }, [time, duration, setTime, plusAge]);  // Include all dependencies used in the effect.
+    }, [time, duration, setTime, plusAge]);
 
-    // Calculate the width of the progress bar as a percentage.
     const progressPercentage = time > duration ? 100 : (time / duration) * 100;
 
     return (
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     progressContainer: {
         width: '100%',
         overflow: 'hidden',
-        backgroundColor: 'white',  // Adding a background color for the progress container to visualize the unfilled area.
+        backgroundColor: '#e0e0e0',
     },
     progressBar: {
         height: '100%',

@@ -1,0 +1,6 @@
+[
+    {"id": "FIT", "name": "Faculty of Information Technology", "requirements": {"IQ": 0, "EQ": 0,"Knowledge": 0}},
+    {"id": "FMT", "name": "Faculty of Management and Tourism", "requirements": {"IQ": 40, "EQ": 60,"Knowledge": 60}},
+    {"id": "FIS", "name": "Faculty of International Study", "requirements": {"IQ": 30, "EQ": 60,"Knowledge": 70}},
+    {"id": "LDS", "name": "Language Departments", "requirements": {"IQ": 20, "EQ": 70,"Knowledge": 20}}
+]

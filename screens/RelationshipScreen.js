@@ -1,18 +1,11 @@
 import React, { useContext } from "react";
-import ListItem from "../components/layout/ListItem";
 import { UserContext } from "../store/UserContext";
+import NPCitem from "../components/layout/NPCitem"; // Ensure correct path
 
 const RelationshipScreen = ({ navigation }) => {
-   const { npc, setNpc } = useContext(UserContext);
+    const { npc } = useContext(UserContext);
 
-	const handlePress = (item) => {
-		console.log("Pressed item with ID:", item.id);
-		navigation.navigate("NPCDetailsScreen", {
-			actions: item.actions,
-		});
-	};
-
-	return <ListItem data={npc} onPress={handlePress} />;
+    return <NPCitem data={npc} />;
 };
 
 export default RelationshipScreen;

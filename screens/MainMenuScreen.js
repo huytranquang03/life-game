@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Button, StyleSheet } from 'react-native';
+import { UserContext } from '../store/UserContext';
 
 const HomeScreen = ({ navigation }) => {
-    const handleMainGamePress = () => {
-       
+    const {gameOver, setTimerActive} = useContext(UserContext)
+    const handleNewGamePress = () => {
+        gameOver()
+        setTimerActive(false)
         navigation.navigate('SetupScreen');
     };
 
     const handleContinuePress = () => {
         navigation.navigate('MainGameScreen');
+        setTimerActive(true)
     };
 
     return (
         <View style={styles.container}>
-            <Button title="New Game" onPress={handleMainGamePress} />
+            <Button title="New Game" onPress={handleNewGamePress} />
             <Button title="Continue" onPress={handleContinuePress} style={styles.button} />
         </View>
     );

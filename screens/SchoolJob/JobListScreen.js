@@ -2,56 +2,51 @@ import React, { useContext } from 'react';
 import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native';
 import { UserContext } from '../../store/UserContext';
 
-const partTime = [
-    { id: '1', name: 'Fuho', wage: '200' },
-    { id: '2', name: 'Ban Diem', wage: '750' },
-    { id: '3', name: 'Buon Lau', wage: '1250' },
-];
-const fullTime = [
-    { id: '1', name: 'Fuho', wage: '400' },
-    { id: '2', name: 'Ban Diem Fulltime', wage: '1500' },
-    { id: '3', name: 'Buon Lau Fulltime', wage: '2500' },
-    { id: '4', name: 'Van Phong Ho Tro Tai Chinh', wage: '3000' },
-    { id: '5', name: 'Hai tac', wage: '6000000000000000' },
-];
 
-const ParttimeJobListScreen = () => {
-    const { applyForParttimeJob } = useContext(UserContext); // Assuming a similar function exists for part-time jobs.
+const ParttimeJobListScreen = ({ navigation }) => {
+    const { parttime, applyForParttimeJob } = useContext(UserContext);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.textjob}>Part-time jobs:</Text>
-            <FlatList
-                data={partTime}
-                renderItem={({ item }) => (
-                    <Pressable onPress={() => { }}
-                        style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}>
-                        <View style={styles.item}>
-                            <Text style={styles.name}>{item.name}</Text>
-                            <Text style={styles.wage}>{item.wage} $</Text>
-                        </View>
-                    </Pressable>
-                )}
-                keyExtractor={item => item.id}
-            />
+            <View>
+                <Text>Part-time jobs:</Text>
+                <FlatList
+                    data={parttime}
+                    renderItem={({ item }) => (
+                        <Pressable onPress={() => {
+                            applyForParttimeJob(item);
+                            navigation.navigate('SchoolJobScreen');
+                        }}
+                            style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}>
+                            <View style={styles.item}>
+                                <Text style={styles.name}>{item.name}</Text>
+                                <Text style={styles.wage}>${item.wage}</Text>
+                            </View>
+                        </Pressable>
+                    )}
+                    keyExtractor={item => item.id}
+                />
+            </View>
         </View>
     );
 };
 
-const FulltimeJobListScreen = () => {
-    const { applyForFulltimeJob } = useContext(UserContext);
-
+const FulltimeJobListScreen = ({ navigation }) => {
+    const { fulltime, applyForFulltimeJob } = useContext(UserContext);
     return (
         <View style={styles.container}>
             <Text style={styles.textjob}>Full-time jobs:</Text>
             <FlatList
-                data={fullTime}
+                data={fulltime}
                 renderItem={({ item }) => (
-                    <Pressable onPress={() => applyForFulltimeJob(item)}
+                    <Pressable onPress={() => {
+                        applyForFulltimeJob(item);
+                        navigation.navigate('SchoolJobScreen');
+                    }}
                         style={({ pressed }) => pressed ? [styles.buttonContainer, styles.pressed] : styles.buttonContainer}>
                         <View style={styles.item}>
                             <Text style={styles.name}>{item.name}</Text>
-                            <Text style={styles.wage}>{item.wage} $</Text>
+                            <Text style={styles.wage}>${item.wage}</Text>
                         </View>
                     </Pressable>
                 )}
@@ -93,9 +88,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#333', // Darker font for better readability
+        width: '58%'
     },
     wage: {
         fontSize: 16,
+        color: '#333', // Darker font for better readability
+        fontWeight: 'bold',
+        width: '45%',
+        textAlign: 'right'
     },
     pressed: {
         opacity: 0.85,
