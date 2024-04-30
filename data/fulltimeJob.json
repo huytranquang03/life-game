@@ -1,11 +1,11 @@
 [   
-    { "id": 1, "name": "Fuho", "wage": 500, "chance": 90, "require": "FIT"},
+    { "id": 1, "name": "Technology Driver", "wage": 200, "chance": 90, "require": "FIT"},
     { "id": 2, "name": "Junior Developer", "wage": 800, "chance": 75, "require": "FIT"},
     { "id": 3, "name": "Senior Developer", "wage": 1100, "chance": 70, "require": "FIT"},
     { "id": 4, "name": "Project Manager", "wage": 2000, "chance": 60, "require": "FIT"},
     { "id": 5, "name": "Business Analyst", "wage": 1500, "chance": 75, "require": "FIT"},
     { "id": 6, "name": "Data Analyst", "wage": 1700, "chance": 70, "require": "FIT"},
-    { "id": 7, "name": "Hacker Lỏ", "wage": 500000, "chance": 1, "require": "FIT"},
+    { "id": 7, "name": "Hacker", "wage": 500000, "chance": 1, "require": "FIT"},
     { "id": 8, "name": "Minister of Foreign Affairs", "wage": 5000000, "chance": 5, "require": "LDS"},
     { "id": 9, "name": "Pirate", "wage": 6000000000000, "chance": 1, "require": "FMT"},
     { "id": 10, "name": "Secretary-General of the United Nations", "wage": 80000000000000, "chance": 5, "require": "FIS"}
