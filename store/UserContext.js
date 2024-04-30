@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { intelStatsData, statsData, npcData, financeData, activityData, fulltimeJob, parttimeJob, departments } from '../data/data.js';
+import moment from 'moment';
 
 
 const UserContext = createContext();
@@ -27,6 +28,7 @@ const UserProvider = ({ children }) => {
     const [job, setJob] = useState(null);
     const [universityDepartments, setUniversityDepartments] = useState(departments);
     const [departmentPopupVisible, setDepartmentPopupVisible] = useState(false);
+
 
     const statuses = {
         INFANT: 'infant',
@@ -620,6 +622,73 @@ const UserProvider = ({ children }) => {
             });
         });
     };
+    const currentTime = moment();
+    const dayOfWeekString = currentTime.format('dddd'); 
+    const [currentReward, setCurrentReward] = useState(null);
+    const rewardData = [
+            {
+                id: 'Monday',
+                getReward: 100,
+            },
+            {
+                id: 'Tuesday',
+                getReward: 200
+    
+            },
+            {
+    
+                id: 'Wednesday',
+                getReward:300
+    
+            },
+            {
+                id: 'Thursday',
+                getReward: 400
+    
+            },
+            {
+                id: 'Friday',
+                getReward: 500
+    
+            },
+            {
+                id: 'Saturday',
+                getReward: 600
+    
+            },
+            {
+                id: 'Sunday =',
+                getReward: 700
+    
+            },
+            ];
+                // 
+                const handleRewards = () => {
+                  let rewardTriggered = false;
+                  rewardData.forEach(reward => {
+                      if (!rewardTriggered && dayOfWeekString === reward.id.trim()) { // Also trim any whitespace
+                          setCurrentReward({
+                              ...reward,
+                              visible: true,
+                          });
+                          rewardTriggered = true;
+                      }
+                  });
+              };
+              useEffect(() => {
+               handleRewards();  // Ensure it's called at component mount or when required
+           }, [dayOfWeekString]);  // Dependency array should include variables that trigger the update
+           
+    
+
+
+    // 
+    const handleRewardChoice = (choice) => {
+      if (choice === 'get' && currentReward) {
+         setBalance(balance + currentReward.getReward); 
+      }
+      setCurrentReward(null); 
+    }; 
 
     return (
         <UserContext.Provider value={{
@@ -659,6 +728,7 @@ const UserProvider = ({ children }) => {
             departmentPopupVisible, setDepartmentPopupVisible,
             setHealth, setHappiness, setAppearance, setIQ, setEQ, setKnowledge, getHealth, getAppearance, getHappiness, getIntelligence, getIQ, getEQ, getKnowledge, percentageSimulator,
             currentEvent, setCurrentEvent, handleUserChoice,
+            currentReward,setCurrentReward, handleRewards,handleRewardChoice,
             setNpcProgress,
         }}>
             {children}
