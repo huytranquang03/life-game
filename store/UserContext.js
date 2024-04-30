@@ -77,10 +77,7 @@ const UserProvider = ({ children }) => {
 
     // word harder
     const workHarder = () => {
-        const statsChanges = {
-            Health: -10,
-            Happiness: -10,
-        };
+
         updateStats(statsChanges);
         const statsChanges = {
             Health: -10,
