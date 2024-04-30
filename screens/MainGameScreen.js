@@ -85,7 +85,6 @@ const MainGameScreen = ({ navigation }) => {
         />
       </View>
     <DailyReward reward={currentReward}/>
-	  <RandomEvent event={currentEvent} />
     </View>
   );
 };
