@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { intelStatsData, statsData, npcData, financeData, activityData, fulltimeJob, parttimeJob, departments } from '../data/data.js';
+import moment from 'moment';
 
 
 const UserContext = createContext();
@@ -82,7 +83,13 @@ const UserProvider = ({ children }) => {
             Happiness: -10,
         };
         updateStats(statsChanges);
+        const statsChanges = {
+            Health: -10,
+            Happiness: -10,
+        };
+        updateStats(statsChanges);
         setTime(time + 90);
+        setPerformance(performance + 5)
         setPerformance(performance + 5)
     }
 
@@ -325,15 +332,13 @@ const UserProvider = ({ children }) => {
 
     const plusAge = () => {
         setTime(0);
+        console.log(age);
         setAge(age + 1);
         decreaseStats();
         updateCurrentStatus(age + 1);
         handleEvents();
         setBalance(balance + annualWage);
     };
-
-
-    // Call this function when you need to end the game and reset the game state
 
     //
     const percentageSimulator = (percentage) => {
@@ -492,6 +497,7 @@ const UserProvider = ({ children }) => {
         });
     };
 
+    // Handling user's choice directly in context
     const handleUserChoice = (choice) => {
         if (choice && currentEvent && currentEvent.treatable) {
             setBalance(balance - currentEvent.treatCost);
