@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { View, Text,  StyleSheet } from 'react-native';
+import { View, Text,  StyleSheet, ScrollView } from 'react-native';
 import GameBar from '../components/ui/GameBar'; 
 import { UserContext  } from '../store/UserContext'; 
 import Avatar from '../components/ui/Avatar';
@@ -20,6 +20,7 @@ const PlayerStatsScreen = () => {
 
     return (
         <View style={styles.container}>
+         <ScrollView>
             <View style={styles.topRow}>
                 <View style={styles.avatarView}>
                     <Avatar
@@ -57,6 +58,7 @@ const PlayerStatsScreen = () => {
                     </View>
                 ))}
             </View>
+            </ScrollView>
         </View>
     );
 };

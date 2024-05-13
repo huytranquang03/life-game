@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Text, Pressable, Alert, Image } from "react-native";
+import { View, StyleSheet, Text, Pressable, Alert, Image, ScrollView } from "react-native";
 import GameBar from "../components/ui/GameBar";
 import TimeBar from "../components/ui/TimeBar";
 import { UserContext } from "../store/UserContext";
@@ -23,6 +23,7 @@ const MainGameScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+         <ScrollView>
             <View style={styles.topRow}>
                 <Pressable
                     style={styles.profileImageContainer}
@@ -79,6 +80,7 @@ const MainGameScreen = ({ navigation }) => {
                 />
             </View>
             <DailyReward reward={currentReward} />
+            </ScrollView>
         </View>
     );
 };
